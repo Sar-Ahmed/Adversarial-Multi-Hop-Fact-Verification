@@ -52,9 +52,7 @@ def main() -> None:
                 view: dict[str, Any] = {}
                 for k, v in row.items():
                     if isinstance(v, list):
-                        view[k] = (
-                            f"<list len={len(v)} sample={v[:1]}>" if v else "<list len=0>"
-                        )
+                        view[k] = f"<list len={len(v)} sample={v[:1]}>" if v else "<list len=0>"
                     elif isinstance(v, dict):
                         view[k] = f"<dict keys={list(v.keys())}>"
                     elif isinstance(v, str):

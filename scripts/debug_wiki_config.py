@@ -28,7 +28,10 @@ def main() -> None:
                 for k, v in row.items():
                     tv = type(v).__name__
                     rv = repr(v)
-                    print(f"  {k}: type={tv}, len={len(v) if hasattr(v, '__len__') else 'NA'}, sample={rv[:200]}", flush=True)
+                    print(
+                        f"  {k}: type={tv}, len={len(v) if hasattr(v, '__len__') else 'NA'}, sample={rv[:200]}",
+                        flush=True,
+                    )
             if i >= 2:
                 break
 

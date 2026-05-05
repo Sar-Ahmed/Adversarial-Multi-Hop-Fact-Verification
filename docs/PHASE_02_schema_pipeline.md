@@ -76,6 +76,34 @@ We also commit to "every component takes `PipelineConfig` as a constructor arg" 
 - Do not introduce `MagicMock` in tests/test_smoke.py — it must run real components (real corpus encoder, real FAISS read). Phase 03+ swap stubs for real models without changing the test.
 - Do not commit `configs/default.yaml` with real model paths yet — those land in their owning phases.
 
-## Outcome (filled at end of phase)
+## Outcome (Phase 02 closed 2026-05-06)
 
-> Append: smoke test wall-clock time, any pydantic v2 quirks, total LOC of the schema module (target: <300).
+**Wall time.** ~3 hours design + write + lint + verify (no model training; just schema + glue).
+
+**Test results.**
+
+- `pytest tests/test_schema.py`: **13 passed in 0.06 s** (no model loading). Includes the explicit V2 `SubClaim(sub_claim_id=...)` regression test that asserts the field is `id` and that the V2 keyword raises `TypeError`.
+- `pytest -m smoke` on `tests/test_smoke.py`: **7 passed in 79.7 s** (target <5 min). 5 parametrized end-to-end claims + 1 retriever-quality regression (Inception article must appear in retrieved set) + 1 render-doesn't-crash check.
+- `python -m src.cli verify "Christopher Nolan directed Inception."`: works in both human-readable and `--json` modes. Top-3 retrieved are Inception article, Tom Hardy (Nolan-film actor), The Dark Knight — illustrating the keyword-overlap pattern Phase 04's reranker is designed to fix.
+
+**Schema module size.** `src/schema.py` is 159 LOC including docstrings (target was <300).
+
+**Deviations from plan.**
+
+- Phase doc described `src/retrieval/stub.py`. Renamed to `src/retrieval/dense.py` because Phase 02's dense retriever is the *real* Phase 04 component (using bge-small base + Phase 01 FAISS index). It is not a stub. Same logic for the file location — Phase 04 will iterate this file in place.
+- `tests/test_smoke.py` is marked both `smoke` and `slow` (loads bge-small + 260 MB FAISS index). `make smoke` runs both unconditionally; `make test` (which excludes `slow`) skips it. This matches the docs/PHASE_00 contract.
+- typer's `Argument`/`Option` pattern requires function calls in argument defaults; ruff `B008` warnings are silenced with explicit `# noqa: B008` rather than refactored. Standard practice in the typer ecosystem.
+
+**Verified pipeline architecture.**
+
+- `Pipeline` takes Protocol-typed components (`_Decomposer`, `_Retriever`, `_Reranker`, `_Verifier`) — no concrete-class imports. `build_pipeline(cfg)` does the wiring; future phases swap implementations without touching `Pipeline` itself.
+- `PipelineConfig` is a frozen pydantic v2 BaseModel; mutation attempts raise `ValidationError`. Confirmed via spot test.
+- All structures in `src/schema.py` are frozen dataclasses; sequence fields normalize list inputs to tuples in `__post_init__` for true immutability.
+
+**Open follow-ups.**
+
+- `tests/test_smoke_placeholder.py` was deleted — replaced by `tests/test_smoke.py`.
+- Phase 03 will replace `StubDecomposer` with the Qwen2.5-3B-Q4 few-shot decomposer; the smoke test should continue to pass without modification.
+- Phase 04 will replace `StubReranker` with the cross-encoder; same.
+- Phase 07 will replace `StubVerifier` with LLM + NLI veto; same.
+- Phase 10 will extend `EvidenceChain.render_text()` with the structured-chain renderer (citation indices, dependency paths) — current rendering is the Phase 02 baseline.

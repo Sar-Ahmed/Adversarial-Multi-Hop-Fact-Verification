@@ -40,6 +40,7 @@ ClaimVerification-v3/
 |---|---|
 | 00 — project setup + smoke harness | **closed** (2026-05-05) — `make smoke` 1 passed / 1 skipped, ruff + black clean, JSON log sink verified |
 | 01 — data + corpus | **closed** (2026-05-05) — 177,317 passages from HoVer + FEVER gold titles (98.3% coverage); FAISS index + embeddings on disk; Inception sanity-check returns the right article at top-1 |
-| 02–15 | not started; see [`docs/README.md`](docs/README.md) |
+| 02 — schema + pipeline scaffolding | **closed** (2026-05-06) — `src/schema.py`, frozen `PipelineConfig`, end-to-end `Pipeline.verify`, `python -m src.cli verify`; 13 schema tests pass in 60 ms, 7 smoke tests in 80 s |
+| 03–15 | not started; see [`docs/README.md`](docs/README.md) |
 
 Each phase has a binding doc in `docs/PHASE_NN_*.md` with goal, deliverables, exit criteria, and risks.
