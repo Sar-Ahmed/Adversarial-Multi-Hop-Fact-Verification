@@ -133,15 +133,38 @@ class Pipeline:
 
 
 def build_pipeline(cfg: PipelineConfig) -> Pipeline:
-    """Default factory: stubs for decomposer/reranker/verifier, real dense retriever."""
-    from src.decomposer.stub import StubDecomposer
+    """Default factory.
+
+    Decomposer: real Qwen-backed Decomposer if `cfg.decomposer.llm_path` is set,
+    else `StubDecomposer`. The choice is config-driven, not silent — null in
+    YAML means "use the stub".
+
+    Retriever: always real (Phase 01 corpus).
+    Reranker / Verifier: stubs until Phase 04 / Phase 07 land.
+    """
     from src.reranker.stub import StubReranker
     from src.retrieval.dense import DenseRetriever
     from src.verifier.stub import StubVerifier
 
+    decomposer: _Decomposer
+    if cfg.decomposer.llm_path:
+        from src.decomposer.decomposer import Decomposer
+
+        decomposer = Decomposer(
+            llm_path=cfg.decomposer.llm_path,
+            n_ctx=cfg.decomposer.n_ctx,
+            max_tokens=cfg.decomposer.max_tokens,
+            temperature=cfg.decomposer.temperature,
+            seed=cfg.eval.seed,
+        )
+    else:
+        from src.decomposer.stub import StubDecomposer
+
+        decomposer = StubDecomposer()
+
     return Pipeline(
         cfg=cfg,
-        decomposer=StubDecomposer(),
+        decomposer=decomposer,
         retriever=DenseRetriever(cfg.retriever, cfg.corpus),
         reranker=StubReranker(top_k=cfg.reranker.top_k),
         verifier=StubVerifier(),

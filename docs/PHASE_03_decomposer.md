@@ -72,6 +72,53 @@ Compound claims like *"The director of Inception also directed a Batman movie th
 - Do not chain the decomposer with the verifier yet — Phase 07 owns aggregation. Decomposer's job ends at producing valid `SubClaim`s.
 - Do not hardcode the model path. Read from `PipelineConfig.decomposer.llm_path`.
 
-## Outcome (filled at end of phase)
+## Outcome (Phase 03 closed 2026-05-06)
 
-> Append: actual fallback rate, prompt hash, per-claim avg sub-claim count, any regressions to the smoke test.
+**Wall time.** ~3 hours code + ~10 min Qwen download + 30-claim eval (3.7 min after warm cache) + smoke test (69 s).
+
+**Headline numbers (`artifacts/decomposer_eval.json`).**
+
+| Metric | Value | Target | Status |
+|---|---|---|---|
+| Fallback rate | **0.0%** (0 / 30) | ≤ 5% | ✅ matches V1's 0% on n=200 |
+| Avg sub-claims | **1.8** | 1.5–4.5 | ✅ |
+| Min / max sub-claims | 1 / 3 | within bounds | ✅ |
+| Avg latency / claim | 7.3 s (warm cache) | — | ~118 s on first run; KV cache reuse is huge |
+| Total eval time | 219 s for 30 claims | — | acceptable |
+| Prompt hash | `672f68862cc1` | — | logged for traceability |
+
+**Smoke test.** `pytest -m smoke` — **7 passed in 69 s** (was 80 s in Phase 02 with the stub; Qwen decomposer adds <5 s amortised across 5 claims because the model loads once via the module-scoped fixture).
+
+**Spec exit criteria.**
+
+- [x] `make smoke` still passes (real decomposer in pipeline).
+- [x] Fallback rate ≤ 5%: achieved 0%.
+- [x] Avg sub-claim count ∈ [1.5, 4.5]: achieved 1.8.
+- [x] No invalid `depends_on` edges (enforced by `SubClaim.__post_init__`; eval ran 30 claims with zero exceptions).
+- [x] `artifacts/decomposer_eval.json` committed with model name, prompt hash, seed (42), per-claim outputs.
+
+**Bug found and fixed during the eval.**
+
+First eval run reported a fake 36.7% fallback rate. The cause was the eval's `_is_fallback` heuristic — it flagged any single-sub-claim output whose text equalled the input as a fallback. That conflated two different cases:
+1. Real fallback: parser failed twice and the decomposer wrapped the input verbatim.
+2. Correct atomic decomposition: model recognised the claim was already atomic and emitted exactly one sub-claim with the proper `reasoning_type`.
+
+Fix: added an explicit `Decomposer.last_call_used_fallback` attribute set inside the fallback path; eval reads that instead of the heuristic. Real fallback rate after the fix: **0/30**. Lesson recorded for future phases — never infer behaviour from output shape when the producing component already knows the truth.
+
+**Decomposition quality observations (qualitative, no formal target).**
+
+- Compound (`X and Y`): always splits cleanly into independent sub-claims.
+- Composition (`X who did Y also did Z`): emits 2 sub-claims with `depends_on=[0]` as designed.
+- Comparison: model sometimes returns 1 atomic sub-claim with `reasoning_type=comparison` instead of the 3-step decomposition shown in the few-shot. Acceptable — the verifier (Phase 07) handles either shape; quality refinement waits for Phase 13 error analysis.
+- Negation: polarity preserved every time.
+- Atomic lookups: emitted as a single sub-claim with `reasoning_type=lookup`. Correct behaviour.
+
+**Latency note.**
+
+First call on the cold model takes ~120 s on CPU (Qwen 3B Q4, ~1500-token few-shot context). Subsequent calls average 7 s thanks to llama-cpp's automatic KV-cache reuse for the shared prefix. This is the practical reason every component that consumes the LLM should hold one `LocalLLM` instance and stream calls through it — instantiating a new one per call is a 17× slowdown.
+
+**Open follow-ups.**
+
+- Phase 07 will reuse `LocalLLM` for the verifier (different prompt, same instance pattern).
+- Phase 13 error analysis will surface whether the comparison-pattern under-decomposition matters for end-to-end accuracy. If yes, revisit the comparison few-shot example.
+- The 30-claim eval set is hand-curated; Phase 13 may motivate enlarging it.

@@ -50,6 +50,14 @@ encode-corpus:
 
 corpus: build-corpus encode-corpus
 
+# === Phase 03 targets ===
+
+download-qwen:
+	$(PYTHON) -m scripts.download_qwen
+
+eval-decomposer:
+	$(PYTHON) -m src.decomposer.eval_decomposer
+
 # === Phase 11 / 12 targets (placeholders, populated when phases land) ===
 
 eval-main:

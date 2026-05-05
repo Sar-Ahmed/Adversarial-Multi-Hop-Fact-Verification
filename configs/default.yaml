@@ -17,7 +17,7 @@ corpus:
 
 # === Phase 03: claim decomposer ===
 decomposer:
-  llm_path: null                  # phase 03 -> checkpoints/qwen2.5-3b-instruct-q4_k_m.gguf
+  llm_path: checkpoints/qwen2.5-3b-instruct-q4_k_m.gguf
   n_ctx: 4096
   max_tokens: 512
   temperature: 0.0

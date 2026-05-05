@@ -1,0 +1,674 @@
+{
+  "summary": {
+    "model": "Qwen/Qwen2.5-3B-Instruct-GGUF Q4_K_M",
+    "model_path": "checkpoints/qwen2.5-3b-instruct-q4_k_m.gguf",
+    "prompt_hash": "672f68862cc1",
+    "seed": 42,
+    "max_tokens": 512,
+    "temperature": 0.0,
+    "n_claims": 30,
+    "fallback_count": 0,
+    "fallback_rate": 0.0,
+    "avg_sub_claims": 1.8,
+    "min_sub_claims": 1,
+    "max_sub_claims": 3,
+    "avg_elapsed_s": 7.31,
+    "total_elapsed_s": 219.29
+  },
+  "results": [
+    {
+      "id": 0,
+      "claim": "The Eiffel Tower is located in Paris.",
+      "category": "lookup",
+      "n_sub_claims": 1,
+      "is_fallback": false,
+      "elapsed_s": 23.7,
+      "decomposition": [
+        {
+          "id": 0,
+          "text": "The Eiffel Tower is located in Paris.",
+          "depends_on": [],
+          "reasoning_type": "lookup"
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "claim": "Inception is a 2010 science fiction film directed by Christopher Nolan.",
+      "category": "compound",
+      "n_sub_claims": 3,
+      "is_fallback": false,
+      "elapsed_s": 9.92,
+      "decomposition": [
+        {
+          "id": 0,
+          "text": "Inception is a 2010 film.",
+          "depends_on": [],
+          "reasoning_type": "lookup"
+        },
+        {
+          "id": 1,
+          "text": "Inception is a science fiction film.",
+          "depends_on": [
+            0
+          ],
+          "reasoning_type": "composition"
+        },
+        {
+          "id": 2,
+          "text": "Inception was directed by Christopher Nolan.",
+          "depends_on": [
+            0
+          ],
+          "reasoning_type": "lookup"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "claim": "The Pacific Ocean is the largest ocean on Earth.",
+      "category": "lookup",
+      "n_sub_claims": 1,
+      "is_fallback": false,
+      "elapsed_s": 3.59,
+      "decomposition": [
+        {
+          "id": 0,
+          "text": "The Pacific Ocean is the largest ocean on Earth.",
+          "depends_on": [],
+          "reasoning_type": "lookup"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "claim": "William Shakespeare wrote Hamlet and Romeo and Juliet.",
+      "category": "compound",
+      "n_sub_claims": 2,
+      "is_fallback": false,
+      "elapsed_s": 5.89,
+      "decomposition": [
+        {
+          "id": 0,
+          "text": "William Shakespeare wrote Hamlet.",
+          "depends_on": [],
+          "reasoning_type": "lookup"
+        },
+        {
+          "id": 1,
+          "text": "William Shakespeare wrote Romeo and Juliet.",
+          "depends_on": [],
+          "reasoning_type": "lookup"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "claim": "Tom Cruise has never won an Academy Award for Best Actor.",
+      "category": "negation",
+      "n_sub_claims": 1,
+      "is_fallback": false,
+      "elapsed_s": 3.97,
+      "decomposition": [
+        {
+          "id": 0,
+          "text": "Tom Cruise has never won an Academy Award for Best Actor.",
+          "depends_on": [],
+          "reasoning_type": "negation"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "claim": "The director of Inception also directed The Dark Knight Rises.",
+      "category": "composition",
+      "n_sub_claims": 3,
+      "is_fallback": false,
+      "elapsed_s": 9.9,
+      "decomposition": [
+        {
+          "id": 0,
+          "text": "Inception's director also directed The Dark Knight Rises.",
+          "depends_on": [],
+          "reasoning_type": "composition"
+        },
+        {
+          "id": 1,
+          "text": "Inception's director is a specific person.",
+          "depends_on": [],
+          "reasoning_type": "lookup"
+        },
+        {
+          "id": 2,
+          "text": "That specific person directed The Dark Knight Rises.",
+          "depends_on": [
+            1
+          ],
+          "reasoning_type": "composition"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "claim": "The Dark Knight grossed more than Inception worldwide.",
+      "category": "comparison",
+      "n_sub_claims": 3,
+      "is_fallback": false,
+      "elapsed_s": 9.86,
+      "decomposition": [
+        {
+          "id": 0,
+          "text": "The Dark Knight has a known worldwide gross.",
+          "depends_on": [],
+          "reasoning_type": "lookup"
+        },
+        {
+          "id": 1,
+          "text": "Inception has a known worldwide gross.",
+          "depends_on": [],
+          "reasoning_type": "lookup"
+        },
+        {
+          "id": 2,
+          "text": "The Dark Knight worldwide gross exceeds Inception worldwide gross.",
+          "depends_on": [
+            0,
+            1
+          ],
+          "reasoning_type": "comparison"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "claim": "The 2008 Olympic Games were held in Beijing.",
+      "category": "temporal",
+      "n_sub_claims": 1,
+      "is_fallback": false,
+      "elapsed_s": 4.03,
+      "decomposition": [
+        {
+          "id": 0,
+          "text": "The 2008 Olympic Games were held in Beijing.",
+          "depends_on": [],
+          "reasoning_type": "lookup"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "claim": "Christopher Nolan was born in London in 1970.",
+      "category": "compound_temporal",
+      "n_sub_claims": 2,
+      "is_fallback": false,
+      "elapsed_s": 6.8,
+      "decomposition": [
+        {
+          "id": 0,
+          "text": "Christopher Nolan was born in London.",
+          "depends_on": [],
+          "reasoning_type": "lookup"
+        },
+        {
+          "id": 1,
+          "text": "Christopher Nolan was born in 1970.",
+          "depends_on": [
+            0
+          ],
+          "reasoning_type": "composition"
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "claim": "Skagen Painter Peder Severin Kroyer favored naturalism along with Theodor Esbern Philipsen.",
+      "category": "compound",
+      "n_sub_claims": 2,
+      "is_fallback": false,
+      "elapsed_s": 7.53,
+      "decomposition": [
+        {
+          "id": 0,
+          "text": "Skagen Painter Peder Severin Kroyer favored naturalism.",
+          "depends_on": [],
+          "reasoning_type": "lookup"
+        },
+        {
+          "id": 1,
+          "text": "Theodor Esbern Philipsen favored naturalism.",
+          "depends_on": [],
+          "reasoning_type": "lookup"
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "claim": "The actor who played Bane in The Dark Knight Rises also starred in Inception.",
+      "category": "composition",
+      "n_sub_claims": 2,
+      "is_fallback": false,
+      "elapsed_s": 7.61,
+      "decomposition": [
+        {
+          "id": 0,
+          "text": "The actor who played Bane in The Dark Knight Rises is known.",
+          "depends_on": [],
+          "reasoning_type": "lookup"
+        },
+        {
+          "id": 1,
+          "text": "That actor also starred in Inception.",
+          "depends_on": [
+            0
+          ],
+          "reasoning_type": "composition"
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "claim": "Mount Everest is taller than K2.",
+      "category": "comparison",
+      "n_sub_claims": 1,
+      "is_fallback": false,
+      "elapsed_s": 3.6,
+      "decomposition": [
+        {
+          "id": 0,
+          "text": "Mount Everest is taller than K2.",
+          "depends_on": [],
+          "reasoning_type": "comparison"
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "claim": "Albert Einstein was a German-born theoretical physicist who developed the theory of relativity.",
+      "category": "compound",
+      "n_sub_claims": 2,
+      "is_fallback": false,
+      "elapsed_s": 6.62,
+      "decomposition": [
+        {
+          "id": 0,
+          "text": "Albert Einstein was born in Germany.",
+          "depends_on": [],
+          "reasoning_type": "lookup"
+        },
+        {
+          "id": 1,
+          "text": "Albert Einstein developed the theory of relativity.",
+          "depends_on": [],
+          "reasoning_type": "lookup"
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "claim": "Apple Inc. was founded in 1976 by Steve Jobs and Steve Wozniak.",
+      "category": "compound_temporal",
+      "n_sub_claims": 3,
+      "is_fallback": false,
+      "elapsed_s": 10.21,
+      "decomposition": [
+        {
+          "id": 0,
+          "text": "Apple Inc. was founded in 1976.",
+          "depends_on": [],
+          "reasoning_type": "lookup"
+        },
+        {
+          "id": 1,
+          "text": "Steve Jobs was involved in founding Apple Inc.",
+          "depends_on": [],
+          "reasoning_type": "lookup"
+        },
+        {
+          "id": 2,
+          "text": "Steve Wozniak was involved in founding Apple Inc.",
+          "depends_on": [],
+          "reasoning_type": "lookup"
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "claim": "The Great Wall of China is not visible from the Moon with the naked eye.",
+      "category": "negation",
+      "n_sub_claims": 1,
+      "is_fallback": false,
+      "elapsed_s": 4.46,
+      "decomposition": [
+        {
+          "id": 0,
+          "text": "The Great Wall of China is not visible from the Moon with the naked eye.",
+          "depends_on": [],
+          "reasoning_type": "lookup"
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "claim": "The Beatles were a British rock band that formed in Liverpool in 1960.",
+      "category": "compound_temporal",
+      "n_sub_claims": 3,
+      "is_fallback": false,
+      "elapsed_s": 9.76,
+      "decomposition": [
+        {
+          "id": 0,
+          "text": "The Beatles were a British rock band.",
+          "depends_on": [],
+          "reasoning_type": "lookup"
+        },
+        {
+          "id": 1,
+          "text": "The Beatles formed in Liverpool.",
+          "depends_on": [],
+          "reasoning_type": "lookup"
+        },
+        {
+          "id": 2,
+          "text": "The Beatles formed in 1960.",
+          "depends_on": [
+            1
+          ],
+          "reasoning_type": "temporal"
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "claim": "Marie Curie was the first person to win two Nobel Prizes in different sciences.",
+      "category": "lookup",
+      "n_sub_claims": 2,
+      "is_fallback": false,
+      "elapsed_s": 7.67,
+      "decomposition": [
+        {
+          "id": 0,
+          "text": "Marie Curie won two Nobel Prizes.",
+          "depends_on": [],
+          "reasoning_type": "lookup"
+        },
+        {
+          "id": 1,
+          "text": "Marie Curie won one Nobel Prize in Physics and one in Chemistry.",
+          "depends_on": [
+            0
+          ],
+          "reasoning_type": "composition"
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "claim": "Mars has more moons than Earth.",
+      "category": "comparison",
+      "n_sub_claims": 1,
+      "is_fallback": false,
+      "elapsed_s": 3.47,
+      "decomposition": [
+        {
+          "id": 0,
+          "text": "Mars has more moons than Earth.",
+          "depends_on": [],
+          "reasoning_type": "comparison"
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "claim": "The author of 1984 also wrote Animal Farm.",
+      "category": "composition",
+      "n_sub_claims": 3,
+      "is_fallback": false,
+      "elapsed_s": 10.79,
+      "decomposition": [
+        {
+          "id": 0,
+          "text": "The author of 1984 also wrote Animal Farm.",
+          "depends_on": [],
+          "reasoning_type": "lookup"
+        },
+        {
+          "id": 1,
+          "text": "The author of 1984 is a specific person.",
+          "depends_on": [],
+          "reasoning_type": "lookup"
+        },
+        {
+          "id": 2,
+          "text": "That same person wrote Animal Farm.",
+          "depends_on": [
+            0,
+            1
+          ],
+          "reasoning_type": "composition"
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "claim": "The Wright brothers made the first powered flight in 1903 at Kitty Hawk.",
+      "category": "compound_temporal",
+      "n_sub_claims": 2,
+      "is_fallback": false,
+      "elapsed_s": 7.55,
+      "decomposition": [
+        {
+          "id": 0,
+          "text": "The Wright brothers made the first powered flight in 1903.",
+          "depends_on": [],
+          "reasoning_type": "lookup"
+        },
+        {
+          "id": 1,
+          "text": "The flight took place at Kitty Hawk.",
+          "depends_on": [
+            0
+          ],
+          "reasoning_type": "lookup"
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "claim": "Leonardo DiCaprio starred in a film directed by Martin Scorsese that won Best Picture.",
+      "category": "composition",
+      "n_sub_claims": 2,
+      "is_fallback": false,
+      "elapsed_s": 7.57,
+      "decomposition": [
+        {
+          "id": 0,
+          "text": "Leonardo DiCaprio starred in a film directed by Martin Scorsese.",
+          "depends_on": [],
+          "reasoning_type": "lookup"
+        },
+        {
+          "id": 1,
+          "text": "That film won Best Picture.",
+          "depends_on": [
+            0
+          ],
+          "reasoning_type": "composition"
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "claim": "The Roman Empire reached its greatest territorial extent under Emperor Trajan in the 2nd century AD.",
+      "category": "compound_temporal",
+      "n_sub_claims": 2,
+      "is_fallback": false,
+      "elapsed_s": 7.88,
+      "decomposition": [
+        {
+          "id": 0,
+          "text": "The Roman Empire reached its greatest territorial extent under Emperor Trajan.",
+          "depends_on": [],
+          "reasoning_type": "lookup"
+        },
+        {
+          "id": 1,
+          "text": "This occurred in the 2nd century AD.",
+          "depends_on": [
+            0
+          ],
+          "reasoning_type": "temporal"
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "claim": "Saturn has more moons than Jupiter.",
+      "category": "comparison",
+      "n_sub_claims": 1,
+      "is_fallback": false,
+      "elapsed_s": 3.57,
+      "decomposition": [
+        {
+          "id": 0,
+          "text": "Saturn has more moons than Jupiter.",
+          "depends_on": [],
+          "reasoning_type": "comparison"
+        }
+      ]
+    },
+    {
+      "id": 23,
+      "claim": "Barack Obama was the 44th President of the United States and a Nobel Peace Prize laureate.",
+      "category": "compound",
+      "n_sub_claims": 2,
+      "is_fallback": false,
+      "elapsed_s": 8.06,
+      "decomposition": [
+        {
+          "id": 0,
+          "text": "Barack Obama was the 44th President of the United States.",
+          "depends_on": [],
+          "reasoning_type": "lookup"
+        },
+        {
+          "id": 1,
+          "text": "Barack Obama was a Nobel Peace Prize laureate.",
+          "depends_on": [],
+          "reasoning_type": "lookup"
+        }
+      ]
+    },
+    {
+      "id": 24,
+      "claim": "The actor who portrayed Iron Man in the Marvel Cinematic Universe was born in 1965.",
+      "category": "composition_temporal",
+      "n_sub_claims": 1,
+      "is_fallback": false,
+      "elapsed_s": 5.36,
+      "decomposition": [
+        {
+          "id": 0,
+          "text": "The actor who portrayed Iron Man in the Marvel Cinematic Universe was born in 1965.",
+          "depends_on": [],
+          "reasoning_type": "lookup"
+        }
+      ]
+    },
+    {
+      "id": 25,
+      "claim": "Charles Darwin published On the Origin of Species in 1859, proposing the theory of evolution by natural selection.",
+      "category": "compound_temporal",
+      "n_sub_claims": 2,
+      "is_fallback": false,
+      "elapsed_s": 8.69,
+      "decomposition": [
+        {
+          "id": 0,
+          "text": "Charles Darwin published On the Origin of Species in 1859.",
+          "depends_on": [],
+          "reasoning_type": "lookup"
+        },
+        {
+          "id": 1,
+          "text": "On the Origin of Species proposed the theory of evolution by natural selection.",
+          "depends_on": [
+            0
+          ],
+          "reasoning_type": "composition"
+        }
+      ]
+    },
+    {
+      "id": 26,
+      "claim": "The Mona Lisa was not painted by Michelangelo.",
+      "category": "negation",
+      "n_sub_claims": 1,
+      "is_fallback": false,
+      "elapsed_s": 4.03,
+      "decomposition": [
+        {
+          "id": 0,
+          "text": "The Mona Lisa was not painted by Michelangelo.",
+          "depends_on": [],
+          "reasoning_type": "negation"
+        }
+      ]
+    },
+    {
+      "id": 27,
+      "claim": "Tokyo has a larger population than New York City.",
+      "category": "comparison",
+      "n_sub_claims": 1,
+      "is_fallback": false,
+      "elapsed_s": 4.0,
+      "decomposition": [
+        {
+          "id": 0,
+          "text": "Tokyo has a larger population than New York City.",
+          "depends_on": [],
+          "reasoning_type": "comparison"
+        }
+      ]
+    },
+    {
+      "id": 28,
+      "claim": "The 1969 moon landing was followed by five additional successful Apollo missions to the lunar surface.",
+      "category": "compound_temporal",
+      "n_sub_claims": 2,
+      "is_fallback": false,
+      "elapsed_s": 8.66,
+      "decomposition": [
+        {
+          "id": 0,
+          "text": "The 1969 moon landing was successful.",
+          "depends_on": [],
+          "reasoning_type": "lookup"
+        },
+        {
+          "id": 1,
+          "text": "Five additional Apollo missions to the lunar surface followed the 1969 moon landing.",
+          "depends_on": [
+            0
+          ],
+          "reasoning_type": "composition"
+        }
+      ]
+    },
+    {
+      "id": 29,
+      "claim": "The composer who wrote The Four Seasons was an Italian Baroque-era musician.",
+      "category": "composition",
+      "n_sub_claims": 1,
+      "is_fallback": false,
+      "elapsed_s": 4.53,
+      "decomposition": [
+        {
+          "id": 0,
+          "text": "The composer of The Four Seasons was an Italian Baroque-era musician.",
+          "depends_on": [],
+          "reasoning_type": "lookup"
+        }
+      ]
+    }
+  ]
+}
