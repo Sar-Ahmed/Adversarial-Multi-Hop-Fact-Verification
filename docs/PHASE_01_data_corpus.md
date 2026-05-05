@@ -74,6 +74,33 @@ Spec requires retrieval over 2–4 Wikipedia passages per claim. We do not need 
 - Do not encode-as-you-retrieve. Pre-encode once.
 - Do not include the dev gold passages in the corpus *only* — the corpus must include distractor candidates (other titles) too, otherwise retrieval is trivially perfect.
 
-## Outcome (filled at end of phase)
+## Outcome (Phase 01 closed 2026-05-05)
 
-> Append: final passage count, encoding wall time, sanity-check retrieval result, any title-encoding quirks.
+**Wall time.** ~51 min total — corpus build ~5 min (download 1.71 GB + stream 218 shards), encode ~46 min on CPU.
+
+**Final corpus.**
+
+- `artifacts/corpus.parquet`: **177,317 passages** (12 MB, zstd parquet)
+- `artifacts/corpus_embeddings.npy`: float32 [177317, 384], L2-normalized (260 MB)
+- `artifacts/corpus.faiss`: `IndexFlatIP`, `ntotal=177317` (260 MB)
+- `artifacts/corpus_stats.json`: 24,595 unique titles · **98.3% title coverage** · avg passage 138 chars · median 126 chars
+- `artifacts/gold_titles.txt`: 25,038 FEVER-encoded titles collected from HoVer + FEVER train+dev
+
+**Sanity check (Inception query).** Top-1 = Inception article itself at cos 0.8613. Top-5 also includes Tom Hardy (Nolan-film actor), The Dark Knight, The Dark Knight Rises, and Dunkirk — i.e., a textbook keyword-overlap retrieval pattern that the Phase 04 reranker will sharpen. Exactly what the spec's failure mode #1 warns about.
+
+**Two unplanned fixes during this phase.**
+
+1. **FEVER schema mismatch.** The plan assumed V1's nested-evidence-list shape. HF's `fever/v1.0` actually returns a flat one-row-per-evidence-sentence schema with columns `evidence_annotation_id`, `evidence_id`, `evidence_wiki_url`, `evidence_sentence_id`. Rewrote `_aggregate_fever_split` in `src/data/load.py` to group by claim `id`. Verified counts match the FEVER paper (145,449 unique train claims from 311,431 evidence rows).
+2. **UTF-8 in the wiki dump.** First build crashed at byte 37 of shard 1 with `UnicodeDecodeError: invalid start byte 0xb0`. FEVER's dump contains stray non-UTF-8 bytes from the original Wikipedia processing. Added `errors='replace'` to the `TextIOWrapper` in `stream_wiki_to_corpus` so corrupt bytes become U+FFFD instead of crashing the pipeline. Fidelity loss is negligible (one bad byte per ~50 MB of text in spot checks).
+
+**Other deviations from plan.**
+
+- HoVer dataset is just `hover` on HF (the spec's `hover_fever` namespace doesn't exist). The plan's loader-candidate list already accounted for both.
+- HF's `fever/wiki_pages` config returns empty rows (broken script). Confirmed in `scripts/debug_wiki_config.py`. Falling back to direct download from `https://fever.ai/download/fever/wiki-pages.zip` (V1's approach) was the right call.
+- Two schema-discovery debug scripts plus a re-runnable health check (`scripts/probe_datasets.py`) were committed because the dataset schemas can shift over time and these help if loaders need re-debugging.
+
+**Open follow-ups.**
+
+- Phase 02 will adopt these dataclasses into the unified `src/schema.py` (`Label` enum normalises across both datasets).
+- Phase 04 will validate the keyword-overlap pattern and measure how much the reranker reduces it.
+- The sanity-check claim ("Christopher Nolan directed Inception.") becomes one of the 5 fixed claims in Phase 02's smoke test.

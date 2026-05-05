@@ -40,6 +40,16 @@ clean:
 fetch-models:
 	bash scripts/fetch_models.sh
 
+# === Phase 01 targets ===
+
+build-corpus:
+	$(PYTHON) -m src.data.build_corpus
+
+encode-corpus:
+	$(PYTHON) -m src.data.encode_corpus
+
+corpus: build-corpus encode-corpus
+
 # === Phase 11 / 12 targets (placeholders, populated when phases land) ===
 
 eval-main:

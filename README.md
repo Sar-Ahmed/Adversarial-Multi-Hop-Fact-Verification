@@ -39,6 +39,7 @@ ClaimVerification-v3/
 | Phase | State |
 |---|---|
 | 00 — project setup + smoke harness | **closed** (2026-05-05) — `make smoke` 1 passed / 1 skipped, ruff + black clean, JSON log sink verified |
-| 01–15 | not started; see [`docs/README.md`](docs/README.md) |
+| 01 — data + corpus | **closed** (2026-05-05) — 177,317 passages from HoVer + FEVER gold titles (98.3% coverage); FAISS index + embeddings on disk; Inception sanity-check returns the right article at top-1 |
+| 02–15 | not started; see [`docs/README.md`](docs/README.md) |
 
 Each phase has a binding doc in `docs/PHASE_NN_*.md` with goal, deliverables, exit criteria, and risks.
