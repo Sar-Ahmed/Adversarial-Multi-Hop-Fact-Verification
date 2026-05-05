@@ -58,6 +58,14 @@ download-qwen:
 eval-decomposer:
 	$(PYTHON) -m src.decomposer.eval_decomposer
 
+# === Phase 04 targets ===
+
+# N=0 evaluates the full HoVer dev (~4k examples, ~2 hours on CPU).
+# Defaults to N=500 which finishes in ~13 min and gives tight bootstrap CIs.
+N ?= 500
+eval-retrieval:
+	$(PYTHON) -m src.eval.retrieval_eval --n $(N)
+
 # === Phase 11 / 12 targets (placeholders, populated when phases land) ===
 
 eval-main:

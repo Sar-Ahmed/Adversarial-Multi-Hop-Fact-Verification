@@ -142,7 +142,7 @@ def build_pipeline(cfg: PipelineConfig) -> Pipeline:
     Retriever: always real (Phase 01 corpus).
     Reranker / Verifier: stubs until Phase 04 / Phase 07 land.
     """
-    from src.reranker.stub import StubReranker
+    from src.reranker.cross_encoder import CrossEncoderReranker
     from src.retrieval.dense import DenseRetriever
     from src.verifier.stub import StubVerifier
 
@@ -166,6 +166,6 @@ def build_pipeline(cfg: PipelineConfig) -> Pipeline:
         cfg=cfg,
         decomposer=decomposer,
         retriever=DenseRetriever(cfg.retriever, cfg.corpus),
-        reranker=StubReranker(top_k=cfg.reranker.top_k),
+        reranker=CrossEncoderReranker(cfg.reranker),
         verifier=StubVerifier(),
     )

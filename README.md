@@ -42,6 +42,7 @@ ClaimVerification-v3/
 | 01 — data + corpus | **closed** (2026-05-05) — 177,317 passages from HoVer + FEVER gold titles (98.3% coverage); FAISS index + embeddings on disk; Inception sanity-check returns the right article at top-1 |
 | 02 — schema + pipeline scaffolding | **closed** (2026-05-06) — `src/schema.py`, frozen `PipelineConfig`, end-to-end `Pipeline.verify`, `python -m src.cli verify`; 13 schema tests pass in 60 ms, 7 smoke tests in 80 s |
 | 03 — claim decomposer | **closed** (2026-05-06) — Qwen2.5-3B-Q4 GGUF few-shot decomposer with retry + safe fallback; 30-claim eval shows **0% fallback rate**, avg 1.8 sub-claims; smoke test passes in 69 s with the real decomposer wired in |
-| 04–15 | not started; see [`docs/README.md`](docs/README.md) |
+| 04 — retrieval baseline | **closed** (2026-05-06) — BM25 + Dense + cross-encoder rerank, with bootstrap 95% CIs on R@K and H@K (n=200 HoVer dev). Dense+rerank: **H@10 = 0.960**, R@10 = 0.556; beats V1's reported H@10 = 0.92. Smoke test 7/7 in 110 s |
+| 05–15 | not started; see [`docs/README.md`](docs/README.md) |
 
 Each phase has a binding doc in `docs/PHASE_NN_*.md` with goal, deliverables, exit criteria, and risks.

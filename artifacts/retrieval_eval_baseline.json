@@ -1,0 +1,114 @@
+{
+  "summary": {
+    "n_examples_evaluated": 200,
+    "seed": 42,
+    "models": {
+      "dense_encoder": "BAAI/bge-small-en-v1.5",
+      "reranker": "BAAI/bge-reranker-base"
+    }
+  },
+  "results": {
+    "bm25": {
+      "n_examples_with_gold": 200,
+      "elapsed_s": 184.9,
+      "recall_at_5": {
+        "point": 0.3907,
+        "ci_lo": 0.3496,
+        "ci_hi": 0.4347
+      },
+      "recall_at_10": {
+        "point": 0.4491,
+        "ci_lo": 0.4062,
+        "ci_hi": 0.4926
+      },
+      "recall_at_20": {
+        "point": 0.4953,
+        "ci_lo": 0.453,
+        "ci_hi": 0.5385
+      },
+      "hit_at_5": {
+        "point": 0.775,
+        "ci_lo": 0.72,
+        "ci_hi": 0.8301
+      },
+      "hit_at_10": {
+        "point": 0.84,
+        "ci_lo": 0.79,
+        "ci_hi": 0.89
+      },
+      "hit_at_20": {
+        "point": 0.88,
+        "ci_lo": 0.84,
+        "ci_hi": 0.925
+      }
+    },
+    "dense": {
+      "n_examples_with_gold": 200,
+      "elapsed_s": 16.1,
+      "recall_at_5": {
+        "point": 0.4516,
+        "ci_lo": 0.4123,
+        "ci_hi": 0.4934
+      },
+      "recall_at_10": {
+        "point": 0.5237,
+        "ci_lo": 0.4838,
+        "ci_hi": 0.565
+      },
+      "recall_at_20": {
+        "point": 0.5731,
+        "ci_lo": 0.5339,
+        "ci_hi": 0.6133
+      },
+      "hit_at_5": {
+        "point": 0.89,
+        "ci_lo": 0.845,
+        "ci_hi": 0.93
+      },
+      "hit_at_10": {
+        "point": 0.925,
+        "ci_lo": 0.89,
+        "ci_hi": 0.96
+      },
+      "hit_at_20": {
+        "point": 0.95,
+        "ci_lo": 0.92,
+        "ci_hi": 0.98
+      }
+    },
+    "dense+rerank": {
+      "n_examples_with_gold": 200,
+      "elapsed_s": 1143.8,
+      "recall_at_5": {
+        "point": 0.4801,
+        "ci_lo": 0.4423,
+        "ci_hi": 0.5201
+      },
+      "recall_at_10": {
+        "point": 0.5563,
+        "ci_lo": 0.5182,
+        "ci_hi": 0.5946
+      },
+      "recall_at_20": {
+        "point": 0.588,
+        "ci_lo": 0.5474,
+        "ci_hi": 0.6268
+      },
+      "hit_at_5": {
+        "point": 0.92,
+        "ci_lo": 0.88,
+        "ci_hi": 0.955
+      },
+      "hit_at_10": {
+        "point": 0.96,
+        "ci_lo": 0.93,
+        "ci_hi": 0.985
+      },
+      "hit_at_20": {
+        "point": 0.965,
+        "ci_lo": 0.935,
+        "ci_hi": 0.99
+      }
+    }
+  }
+}
