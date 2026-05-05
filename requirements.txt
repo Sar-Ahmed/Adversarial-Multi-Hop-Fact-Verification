@@ -1,0 +1,22 @@
+# Phase 00–02 base dependencies. No ranges.
+# Heavy ML libs (torch, transformers, llama-cpp-python, faiss-cpu, sentence-transformers,
+# datasets, spacy, scikit-learn) live in requirements-ml.txt and are installed by their
+# owning phase. This lets `make setup` complete fast and without a C++ toolchain.
+
+# === Data / IO ===
+pandas==2.2.2
+pyarrow==17.0.0
+numpy==1.26.4
+joblib==1.4.2
+
+# === App / config ===
+pyyaml==6.0.2
+pydantic==2.9.2
+typer==0.12.5
+loguru==0.7.2
+tqdm==4.66.5
+
+# === Dev ===
+pytest==8.3.3
+ruff==0.6.9
+black==24.10.0

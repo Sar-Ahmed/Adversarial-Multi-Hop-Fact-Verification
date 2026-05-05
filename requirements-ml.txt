@@ -1,0 +1,26 @@
+# Heavy ML dependencies, installed by `make setup-ml` in the phases that need them.
+# Phases 04, 05 require: torch, sentence-transformers, faiss-cpu.
+# Phase 03, 07 require: llama-cpp-python (prebuilt CPU wheel via abetlen index).
+# Phase 06, 07, 08 require: transformers (NLI cross-encoder).
+# Phase 13, 09(A) require: spacy.
+#
+# Two extra wheel indexes:
+#   - PyTorch CPU wheels
+#   - llama-cpp-python prebuilt CPU wheels (avoids the Windows MSVC build requirement)
+
+--extra-index-url https://download.pytorch.org/whl/cpu
+--extra-index-url https://abetlen.github.io/llama-cpp-python/whl/cpu
+
+# Core ML
+torch==2.6.0
+transformers==4.49.0
+sentence-transformers==3.4.1
+faiss-cpu==1.10.0
+llama-cpp-python==0.3.2
+
+# Datasets + retrieval + NLP
+datasets==2.20.0
+rank-bm25==0.2.2
+scikit-learn==1.5.2
+spacy==3.8.0
+dateparser==1.2.0

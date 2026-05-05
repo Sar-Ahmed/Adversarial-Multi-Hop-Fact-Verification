@@ -1,0 +1,15 @@
+# Colab-only overrides. Used by:
+#   - notebooks/phase05_finetune_retriever.ipynb (T4 GPU)
+#   - notebooks/phase07_verifier_sweep.ipynb (T4/A100, optional)
+#
+# Colab runtimes already ship with torch+cuda; we override only the libs that
+# need to match. Heavy GPU-specific libs (vLLM) are added per-notebook with
+# !pip install at the top to avoid resolver conflicts on import.
+
+transformers==4.49.0
+sentence-transformers==3.4.1
+datasets==2.20.0
+pyyaml==6.0.2
+pydantic==2.9.2
+loguru==0.7.2
+tqdm==4.66.5

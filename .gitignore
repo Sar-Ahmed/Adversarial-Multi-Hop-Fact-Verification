@@ -1,0 +1,49 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+env/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+
+# IDE / OS
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# v3-specific large files (regenerable from scripts)
+checkpoints/
+artifacts/
+data/raw/
+*.faiss
+*.npy
+*.gguf
+*.parquet
+*.joblib
+wandb/
+mlruns/
+.cache/
+
+# Logs
+*.log
+logs/
+artifacts/logs/
+
+# Notebooks
+.ipynb_checkpoints/
+
+# Keep empty dir markers
+!**/.gitkeep

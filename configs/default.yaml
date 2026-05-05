@@ -1,0 +1,62 @@
+# V3 pipeline config — single source of truth.
+#
+# Every module reads this file via PipelineConfig (Phase 02). No module is
+# permitted to hard-code a path, threshold, or model name. Values left `null`
+# below are populated by the phase that owns the relevant component.
+
+eval:
+  seed: 42
+  n_bootstrap: 1000
+  default_split: hover_dev_n200   # phase 11 may switch to hover_dev_full
+
+# === Phase 01: data + corpus ===
+corpus:
+  parquet_path: artifacts/corpus.parquet
+  faiss_path: artifacts/corpus.faiss
+  embeddings_path: artifacts/corpus_embeddings.npy
+
+# === Phase 03: claim decomposer ===
+decomposer:
+  llm_path: null                  # phase 03 -> checkpoints/qwen2.5-3b-instruct-q4_k_m.gguf
+  n_ctx: 4096
+  max_tokens: 512
+  temperature: 0.0
+  prompt_examples: 6
+
+# === Phase 04 / 05: retrieval ===
+retriever:
+  encoder: BAAI/bge-small-en-v1.5
+  finetune_path: null             # phase 05 sets this iff fine-tune wins on HoVer dev R@10
+  top_k: 50
+  query_prefix: "Represent this sentence for searching relevant passages: "
+
+reranker:
+  model: BAAI/bge-reranker-base
+  top_k: 10
+
+# === Phase 06: adversarial distractor mining ===
+adversarial:
+  distractors_path: artifacts/distractors_v3.json
+  cos_threshold: 0.85
+  nli_contra_threshold: 0.8
+  inject_mode: mix                # mix | replace_bottom | replace_random
+  k: 5
+
+# === Phase 07: cross-document verifier ===
+verifier:
+  llm_path: null                  # phase 07 mirrors decomposer.llm_path
+  nli_model: cross-encoder/nli-deberta-v3-base
+  mode: llm_plus_nli_veto         # llm_only | llm_plus_nli_veto | per_subclaim_cot
+  contra_veto_threshold: 0.95
+  entail_threshold: 0.7
+
+# === Phase 08: NEI calibration ===
+calibration:
+  nei_classifier_path: null       # phase 08 -> checkpoints/nei_classifier.joblib
+  scaler_path: null
+  decision_threshold: 0.5
+
+# === Phase 09: temporal (gated) ===
+# This section is intentionally absent until Phase 13 triggers Path A.
+# Adding a `temporal:` block silently here would re-create V2's silent-fallback
+# bug (see docs/DECISIONS.md, "Remove entirely").
