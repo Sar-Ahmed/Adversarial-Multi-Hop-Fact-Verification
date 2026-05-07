@@ -20,9 +20,20 @@ if TYPE_CHECKING:
 class DenseRetriever:
     """Encoder-and-FAISS retriever. Lazy-loads to keep test_schema.py fast."""
 
-    def __init__(self, retriever_cfg: RetrieverConfig, corpus_cfg: CorpusConfig) -> None:
+    def __init__(
+        self,
+        retriever_cfg: RetrieverConfig,
+        corpus_cfg: CorpusConfig,
+        *,
+        model_override: str | None = None,
+        index_override: str | None = None,
+    ) -> None:
+        """`model_override` / `index_override` let Phase 05 evaluate base vs
+        fine-tune side-by-side without mutating `PipelineConfig`."""
         self.cfg = retriever_cfg
         self.corpus_cfg = corpus_cfg
+        self._model_override = model_override
+        self._index_override = index_override
         self._model = None
         self._index = None
         self._df = None
@@ -34,13 +45,15 @@ class DenseRetriever:
         import pandas as pd
         from sentence_transformers import SentenceTransformer
 
-        encoder_path = self.cfg.finetune_path or self.cfg.encoder
+        encoder_path = self._model_override or self.cfg.finetune_path or self.cfg.encoder
+        index_path = self._index_override or self.corpus_cfg.faiss_path
+
         logger.info("loading dense encoder: {}", encoder_path)
         self._model = SentenceTransformer(encoder_path, device="cpu")
         self._model.max_seq_length = 256
 
-        logger.info("loading FAISS index: {}", self.corpus_cfg.faiss_path)
-        self._index = faiss.read_index(self.corpus_cfg.faiss_path)
+        logger.info("loading FAISS index: {}", index_path)
+        self._index = faiss.read_index(index_path)
 
         logger.info("loading corpus parquet: {}", self.corpus_cfg.parquet_path)
         self._df = pd.read_parquet(self.corpus_cfg.parquet_path)

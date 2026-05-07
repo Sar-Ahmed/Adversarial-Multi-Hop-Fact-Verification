@@ -50,7 +50,7 @@ def main() -> None:
                     print(f"      title found at: {candidates}", flush=True)
                 else:
                     # Try without title encoding
-                    print(f"      title NOT in corpus; checking partial title match", flush=True)
+                    print("      title NOT in corpus; checking partial title match", flush=True)
                     title_words = title.split("_")
                     if title_words:
                         first = title_words[0]

@@ -66,6 +66,14 @@ N ?= 500
 eval-retrieval:
 	$(PYTHON) -m src.eval.retrieval_eval --n $(N)
 
+# === Phase 05 targets ===
+
+mine-hard-negatives:
+	$(PYTHON) -m src.retrieval.finetune.mine_hard_negatives
+
+train-bge:
+	$(PYTHON) -m src.retrieval.finetune.train_bge
+
 # === Phase 11 / 12 targets (placeholders, populated when phases land) ===
 
 eval-main:
