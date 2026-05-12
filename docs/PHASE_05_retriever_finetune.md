@@ -87,6 +87,53 @@ This phase has a binding decision rule at the end: **ship the model that wins on
 - Do not fine-tune for more than 1 epoch initially. Overfitting on the hard negatives is a real failure mode, especially with small models.
 - Do not skip the postmortem if the fine-tune loses. That document is a deliverable.
 
-## Outcome (filled at end of phase)
+## Outcome (Phase 05 closed 2026-05-13)
 
-> Append: triplet count, training wall time on Colab, base vs fine-tune R@10 with CIs, decision (ship which), prod config diff.
+**Decision: ship `base`. Fine-tune preserved on disk for Phase 12 ablation. Full writeup in [docs/PHASE_05_DECISION.md](PHASE_05_DECISION.md).**
+
+**Mining (local, CPU).**
+
+- 6,000 HoVer + 4,000 FEVER train claims sampled (seed=42)
+- 9,968 claims yielded valid triplets (32 skipped for no recoverable gold)
+- **39,872 hard-negative triplets** → `artifacts/hard_negatives_v3.jsonl` (18 MB, force-committed)
+- 5,995 HoVer + 3,973 FEVER unique claims → HoVer-weighted mix as designed
+- Mining wall time: ~25 hours (CPU). Slower than estimated because the gold-positive lookup uses `df[df.doc_id.isin(...)]` which is O(N=177k) per claim. Logged for follow-up; would be ~100× faster with a doc_id→row dict.
+
+**Training (Colab T4, fp16).**
+
+- Model: `BAAI/bge-small-en-v1.5` base, `MultipleNegativesRankingLoss`
+- Hyperparams: 1 epoch, batch_size=64, lr=2e-5, warmup_ratio=0.1, seed=42, max_seq_length=256
+- 623 steps, **~7.4 min** wall time on T4 (actual training: 221 s; remainder was the wandb prompt before the cell was restarted with `WANDB_DISABLED=true`)
+- Re-encoded 177k passages → `corpus_embeddings_ft.npy` + `corpus_ft.faiss` on T4 in ~3 min (`max_seq_length=256`, `batch_size=256`)
+
+**Comparison eval (HoVer dev n=200, seed=42, 95% bootstrap CI).**
+
+| Metric | Base | Fine-tune | Δ | CI overlap |
+|---|---|---|---|---|
+| R@5 | 0.452 [0.412, 0.493] | 0.463 [0.424, 0.506] | +0.011 | ⚠ yes |
+| **R@10** | **0.524** [0.484, 0.565] | **0.533** [0.491, 0.574] | +0.009 | ⚠ yes |
+| R@20 | 0.573 [0.534, 0.613] | 0.588 [0.547, 0.632] | +0.015 | ⚠ yes |
+| H@5 | 0.890 [0.845, 0.930] | 0.910 [0.870, 0.950] | +0.020 | ⚠ yes |
+| **H@10** | **0.925** [0.890, 0.960] | **0.935** [0.900, 0.970] | +0.010 | ⚠ yes |
+| H@20 | 0.950 [0.920, 0.980] | 0.960 [0.935, 0.985] | +0.010 | ⚠ yes |
+
+**Decision.** Fine-tune wins on all 6 metrics by 1–2 points (directional consistency is real — 1.6% chance under the null) but every CI overlaps. Under our binding rule (non-overlapping CI required), production stays on **base**. Fine-tune kept for Phase 12 ablation.
+
+**Production config diff.** `configs/default.yaml` unchanged — `retriever.finetune_path: null` stays. `DenseRetriever` continues to load `BAAI/bge-small-en-v1.5` against `corpus.faiss`.
+
+**Hypothesis update.** V1's negative result was "HoVer recall drops when mining only from FEVER". V3's fix (HoVer-weighted mix) prevented the regression but didn't produce a significant lift. The mix-fix is half-confirmed: no regression, but also no headline gain.
+
+**Smoke test.** `pytest -m smoke` was not re-run because nothing in `build_pipeline()` changed — config still points at base. Will rerun once Phase 06 lands. (If the eval had flipped the decision, the smoke would be mandatory.)
+
+**Three Colab-specific bugs found and fixed during this phase.**
+
+1. **Stale clone / missing `%cd`.** Colab `%cd` only persists for the current cell; restart loses it. Added an explicit hard-reset clone block in the notebook.
+2. **`typer-slim 0.24` vs `typer 0.12.5` clash.** Colab preinstalls `typer-slim` newer than our pin, breaking the `--fp16/--no-fp16` flag derivation with `TypeError: Secondary flag is not valid for non-boolean flag`. Fixes: rewrote training + re-encoding cells as inline Python (no typer CLI); added explicit `--fp16/--no-fp16` to `train_bge.py` for future CLI users; dropped `typer`/`pydantic` pins from `requirements-colab.txt`.
+3. **`sentence_transformers.fit()` prompts for wandb.** Colab preinstalls wandb; the fit method prompts interactively, blocking the cell. Set `WANDB_DISABLED=true` + `WANDB_MODE=disabled` env vars before the import.
+
+**Open follow-ups.**
+
+- Phase 12 ablation: include base vs fine-tune as one of the ablation rows.
+- If Phase 13 error analysis flags retrieval as the bottleneck: rerun `retrieval_eval_finetune.py --n 1000` (CIs tighten by ~2.2×) before committing to a fine-tune flip.
+- Mining script: replace `df.isin(gold)` with `dict[doc_id, row_idx]` lookup for ~100× speedup.
+- `checkpoints/bge-small-v3-hn/model.safetensors` (133 MB) exceeds GitHub's 100 MB single-file cap. We omit it from git; the Colab notebook is the canonical reproduction path. Document this in `PHASE_05_DECISION.md`.

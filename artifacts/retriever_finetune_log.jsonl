@@ -1,0 +1,14 @@
+{
+  "base_model": "BAAI/bge-small-en-v1.5",
+  "epochs": 1,
+  "batch_size": 64,
+  "learning_rate": 2e-05,
+  "warmup_ratio": 0.1,
+  "seed": 42,
+  "device": "cuda",
+  "fp16": true,
+  "n_triplets": 39872,
+  "n_steps": 623,
+  "elapsed_s": 221.2,
+  "output_path": "checkpoints/bge-small-v3-hn"
+}

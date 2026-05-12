@@ -1,0 +1,9 @@
+{
+  "model": "checkpoints/bge-small-v3-hn",
+  "n_passages": 177317,
+  "embed_dim": 384,
+  "batch_size": 256,
+  "normalize": true,
+  "max_seq_length": 256,
+  "device": "cuda"
+}

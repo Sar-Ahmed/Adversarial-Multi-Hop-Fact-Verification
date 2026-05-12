@@ -1,0 +1,83 @@
+{
+  "summary": {
+    "n_examples_evaluated": 200,
+    "seed": 42,
+    "base_model": "BAAI/bge-small-en-v1.5",
+    "finetune_model": "checkpoints/bge-small-v3-hn",
+    "finetune_index": "artifacts/corpus_ft.faiss"
+  },
+  "results": {
+    "dense_base": {
+      "n_examples_with_gold": 200,
+      "elapsed_s": 41.5,
+      "recall_at_5": {
+        "point": 0.4516,
+        "ci_lo": 0.4123,
+        "ci_hi": 0.4934
+      },
+      "recall_at_10": {
+        "point": 0.5237,
+        "ci_lo": 0.4838,
+        "ci_hi": 0.565
+      },
+      "recall_at_20": {
+        "point": 0.5731,
+        "ci_lo": 0.5339,
+        "ci_hi": 0.6133
+      },
+      "hit_at_5": {
+        "point": 0.89,
+        "ci_lo": 0.845,
+        "ci_hi": 0.93
+      },
+      "hit_at_10": {
+        "point": 0.925,
+        "ci_lo": 0.89,
+        "ci_hi": 0.96
+      },
+      "hit_at_20": {
+        "point": 0.95,
+        "ci_lo": 0.92,
+        "ci_hi": 0.98
+      }
+    },
+    "dense_finetune": {
+      "n_examples_with_gold": 200,
+      "elapsed_s": 12.7,
+      "recall_at_5": {
+        "point": 0.4625,
+        "ci_lo": 0.4244,
+        "ci_hi": 0.5062
+      },
+      "recall_at_10": {
+        "point": 0.5329,
+        "ci_lo": 0.4911,
+        "ci_hi": 0.5741
+      },
+      "recall_at_20": {
+        "point": 0.5882,
+        "ci_lo": 0.5469,
+        "ci_hi": 0.6323
+      },
+      "hit_at_5": {
+        "point": 0.91,
+        "ci_lo": 0.87,
+        "ci_hi": 0.95
+      },
+      "hit_at_10": {
+        "point": 0.935,
+        "ci_lo": 0.9,
+        "ci_hi": 0.97
+      },
+      "hit_at_20": {
+        "point": 0.96,
+        "ci_lo": 0.935,
+        "ci_hi": 0.985
+      }
+    }
+  },
+  "decision": {
+    "winner": "base",
+    "reason": "CIs overlap; defaulting to base (simpler model). Fine-tune kept for ablation only."
+  }
+}
