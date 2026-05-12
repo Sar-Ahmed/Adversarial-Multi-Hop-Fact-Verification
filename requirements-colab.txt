@@ -5,11 +5,12 @@
 # Colab runtimes already ship with torch+cuda; we override only the libs that
 # need to match. Heavy GPU-specific libs (vLLM) are added per-notebook with
 # !pip install at the top to avoid resolver conflicts on import.
+#
+# IMPORTANT: do NOT pin `typer` or `pydantic` here. Colab preinstalls
+# `typer-slim>=0.24` and `pydantic>=2.11` (via google-adk / mcp), and pinning
+# us to older versions triggers a TypeError on boolean CLI flags during
+# Phase 05 training. The inline training cell in the notebook bypasses typer
+# entirely; the only thing we strictly need is sentence-transformers.
 
-transformers==4.49.0
 sentence-transformers==3.4.1
-datasets==2.20.0
-pyyaml==6.0.2
-pydantic==2.9.2
 loguru==0.7.2
-tqdm==4.66.5

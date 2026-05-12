@@ -57,7 +57,13 @@ def main(
     warmup_ratio: float = typer.Option(0.1),
     seed: int = typer.Option(42),
     output_dir: Path = typer.Option(CHECKPOINT_DIR),  # noqa: B008
-    fp16: bool = typer.Option(False, help="Enable fp16 training (GPU only)."),
+    fp16: bool = typer.Option(
+        False,
+        "--fp16/--no-fp16",
+        help="Enable fp16 training (GPU only). Explicit secondary flag so this works "
+        "across typer versions — older typer skips deriving --no-fp16 automatically and "
+        "fails with 'Secondary flag is not valid for non-boolean flag'.",
+    ),
 ) -> None:
     """Fine-tune bge-small with MNRL on the hard-negative triplets."""
     import torch
