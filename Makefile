@@ -74,6 +74,11 @@ mine-hard-negatives:
 train-bge:
 	$(PYTHON) -m src.retrieval.finetune.train_bge
 
+# === Phase 06 targets ===
+
+mine-distractors:
+	$(PYTHON) -m src.adversarial.mine --n $(N)
+
 # === Phase 11 / 12 targets (placeholders, populated when phases land) ===
 
 eval-main:

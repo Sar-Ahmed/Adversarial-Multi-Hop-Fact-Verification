@@ -63,11 +63,26 @@ class Pipeline:
         self.reranker = reranker
         self.verifier = verifier
 
-    def verify(self, claim: str) -> EvidenceChain:
+    def verify(
+        self,
+        claim: str,
+        *,
+        adversarial_distractors: list[Passage] | None = None,
+    ) -> EvidenceChain:
+        """Verify a single claim and return its EvidenceChain.
+
+        `adversarial_distractors` — optional pre-mined distractors (Phase 06)
+        injected into the dense retrieval pool before reranking. The eval
+        harness toggles this on/off to measure adversarial robustness.
+        """
         if not claim or not claim.strip():
             raise ValueError("Pipeline.verify called with empty claim")
 
-        logger.info("verify: {!r}", claim[:120])
+        logger.info(
+            "verify: {!r} (adversarial={})",
+            claim[:120],
+            bool(adversarial_distractors),
+        )
 
         sub_claims = self.decomposer.decompose(claim)
         logger.info("  decomposed into {} sub-claim(s)", len(sub_claims))
@@ -77,6 +92,15 @@ class Pipeline:
 
         for sc in sub_claims:
             candidates = self.retriever.retrieve(sc.text, top_k=self.cfg.retriever.top_k)
+            if adversarial_distractors:
+                from src.adversarial.inject import inject_distractors
+
+                candidates = inject_distractors(
+                    candidates,
+                    adversarial_distractors,
+                    mode=self.cfg.adversarial.inject_mode,
+                    seed=self.cfg.eval.seed,
+                )
             top = self.reranker.rerank(sc.text, candidates, top_k=self.cfg.reranker.top_k)
             for p in top:
                 passages_by_id[p.doc_id] = p

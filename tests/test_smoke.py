@@ -89,3 +89,35 @@ def test_pipeline_render_text_for_smoke_claim_does_not_crash(pipeline) -> None:
     text = chain.render_text()
     assert "Christopher Nolan" in text
     assert "verdict" in text.lower()
+
+
+@pytest.mark.smoke
+@pytest.mark.slow
+def test_pipeline_adversarial_mode_runs_end_to_end(pipeline) -> None:
+    """Phase 06: pipeline must produce a valid EvidenceChain when adversarial
+    distractors are injected. We use synthetic distractors here (not the
+    mined HoVer set) so the test doesn't depend on a phase-specific artifact."""
+    from src.schema import Passage
+
+    synthetic_distractors = [
+        Passage(
+            doc_id=f"distractor::{i}",
+            title=f"FakeDistractor_{i}",
+            sent_idx=0,
+            text=(
+                f"This passage {i} mentions Christopher Nolan but asserts he "
+                "did not direct Inception, which is false."
+            ),
+            score=0.9,
+        )
+        for i in range(5)
+    ]
+    chain = pipeline.verify(
+        "Christopher Nolan directed Inception.",
+        adversarial_distractors=synthetic_distractors,
+    )
+    assert chain.final_verdict is not None
+    assert 0.0 <= chain.final_confidence <= 1.0
+    # Distractor doc_ids should appear in passages_by_id ONLY if they survived
+    # the reranker's top_k cut. We don't assert presence; we just assert the
+    # pipeline ran without crashing and produced a well-formed chain.
