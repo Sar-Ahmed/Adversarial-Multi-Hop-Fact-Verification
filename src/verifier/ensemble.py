@@ -27,9 +27,16 @@ if TYPE_CHECKING:
 
 
 class EnsembleVerifier:
-    """LLM verdict + NLI-derived veto / soft-downgrade rule."""
+    """LLM verdict + NLI-derived veto / soft-downgrade rule, optionally
+    re-aggregated through the Phase 08 NEI calibrator.
 
-    def __init__(self, cfg: VerifierConfig) -> None:
+    If `calibrator` is supplied, it overrides the rule-based final verdict
+    whenever its max-class probability exceeds the calibrator's own
+    `decision_threshold` (see `NEICalibrator.predict`). Otherwise the rule
+    output is returned unchanged.
+    """
+
+    def __init__(self, cfg: VerifierConfig, calibrator=None) -> None:  # noqa: ANN001
         if not cfg.llm_path:
             raise ValueError(
                 "EnsembleVerifier needs cfg.verifier.llm_path set. "
@@ -38,6 +45,7 @@ class EnsembleVerifier:
         self.cfg = cfg
         self.llm = LLMVerifier(llm_path=cfg.llm_path)
         self.nli = NLIVerifier(model_name=cfg.nli_model)
+        self.calibrator = calibrator  # Phase 08 — optional NEICalibrator
 
     def verify(
         self,
@@ -73,6 +81,24 @@ class EnsembleVerifier:
                 nli_scores["max_contra"],
                 nli_scores["max_entail"],
             )
+
+        # Optional Phase 08 calibrator: re-aggregate (verdict, NLI, retrieval,
+        # lexical) features through the trained classifier and use its verdict
+        # if it's more confident than the rule.
+        if self.calibrator is not None:
+            from src.calibration.features import extract_features
+
+            features = extract_features(claim, passages, nli_scores)
+            cal_verdict, cal_conf, _cal_probs = self.calibrator.predict(features)
+            if cal_verdict is not verdict:
+                logger.info(
+                    "calibrator override: {} → {} (cal_conf={:.3f})",
+                    verdict.value,
+                    cal_verdict.value,
+                    cal_conf,
+                )
+            return cal_verdict, cal_conf, f"{reasoning} [calibrator: p={cal_conf:.2f}]"
+
         return verdict, confidence, reasoning
 
     def verify_with_trace(

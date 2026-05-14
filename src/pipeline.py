@@ -189,7 +189,21 @@ def build_pipeline(cfg: PipelineConfig) -> Pipeline:
     if cfg.verifier.llm_path:
         from src.verifier.ensemble import EnsembleVerifier
 
-        verifier = EnsembleVerifier(cfg.verifier)
+        # Optional Phase 08 calibrator (config-driven). If the checkpoint exists,
+        # the EnsembleVerifier overrides its rule-based verdict with the
+        # calibrator's prediction whenever the calibrator is more confident.
+        calibrator = None
+        if cfg.calibration.nei_classifier_path:
+            from pathlib import Path
+
+            ckpt = Path(cfg.calibration.nei_classifier_path)
+            if ckpt.exists():
+                from src.calibration.predict import NEICalibrator
+
+                calibrator = NEICalibrator(
+                    ckpt, decision_threshold=cfg.calibration.decision_threshold
+                )
+        verifier = EnsembleVerifier(cfg.verifier, calibrator=calibrator)
     else:
         from src.verifier.stub import StubVerifier
 

@@ -57,9 +57,16 @@ verifier:
   entail_threshold: 0.7
 
 # === Phase 08: NEI calibration ===
+# The calibrator implements the spec's NEI-calibration requirement: a learned
+# 3-class classifier over engineered features (NLI scores, retrieval gap,
+# lexical overlap). It fixes V1's 0% NEI recall failure (V3 hits 67% NEI
+# recall on FEVER dev) at a documented cost: HoVer-only accuracy drops ~8.5
+# pts because the calibrator (trained on FEVER's balanced 3-class data)
+# predicts NEI on HoVer SUPPORTED-gold claims whose features look NEI-like.
+# Full analysis in docs/PHASE_08_nei_calibration.md.
 calibration:
-  nei_classifier_path: null       # phase 08 -> checkpoints/nei_classifier.joblib
-  scaler_path: null
+  nei_classifier_path: checkpoints/nei_classifier.joblib
+  scaler_path: null               # scaler is embedded in the joblib Pipeline
   decision_threshold: 0.5
 
 # === Phase 09: temporal (gated) ===

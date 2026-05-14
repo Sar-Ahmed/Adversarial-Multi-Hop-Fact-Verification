@@ -1,0 +1,48 @@
+{
+  "n_train": 600,
+  "n_features": 11,
+  "feature_names": [
+    "nli_max_contra",
+    "nli_max_entail",
+    "nli_max_neutral",
+    "nli_mean_contra",
+    "nli_mean_entail",
+    "nli_contra_minus_entail_top1",
+    "retrieval_top1_score",
+    "retrieval_score_gap_top1_top5",
+    "claim_n_words",
+    "mean_passage_length_chars",
+    "entity_overlap_top1_jaccard"
+  ],
+  "seed": 42,
+  "C_grid": [
+    0.1,
+    1.0,
+    10.0
+  ],
+  "best_C": 10.0,
+  "cv_macro_f1": 0.49201163073457865,
+  "cv_per_C": [
+    {
+      "C": 0.1,
+      "macro_f1_mean": 0.4892058315141076,
+      "macro_f1_std": 0.04713430347941701
+    },
+    {
+      "C": 1.0,
+      "macro_f1_mean": 0.4907237256430279,
+      "macro_f1_std": 0.04228567086577316
+    },
+    {
+      "C": 10.0,
+      "macro_f1_mean": 0.49201163073457865,
+      "macro_f1_std": 0.04096125523025053
+    }
+  ],
+  "label_distribution": {
+    "NEI": 200,
+    "SUPPORTED": 200,
+    "REFUTED": 200
+  },
+  "training_time_s": 0.01
+}
