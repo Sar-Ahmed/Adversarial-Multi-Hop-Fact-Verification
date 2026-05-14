@@ -168,7 +168,6 @@ def build_pipeline(cfg: PipelineConfig) -> Pipeline:
     """
     from src.reranker.cross_encoder import CrossEncoderReranker
     from src.retrieval.dense import DenseRetriever
-    from src.verifier.stub import StubVerifier
 
     decomposer: _Decomposer
     if cfg.decomposer.llm_path:
@@ -186,10 +185,20 @@ def build_pipeline(cfg: PipelineConfig) -> Pipeline:
 
         decomposer = StubDecomposer()
 
+    verifier: _Verifier
+    if cfg.verifier.llm_path:
+        from src.verifier.ensemble import EnsembleVerifier
+
+        verifier = EnsembleVerifier(cfg.verifier)
+    else:
+        from src.verifier.stub import StubVerifier
+
+        verifier = StubVerifier()
+
     return Pipeline(
         cfg=cfg,
         decomposer=decomposer,
         retriever=DenseRetriever(cfg.retriever, cfg.corpus),
         reranker=CrossEncoderReranker(cfg.reranker),
-        verifier=StubVerifier(),
+        verifier=verifier,
     )

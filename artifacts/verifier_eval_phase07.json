@@ -1,0 +1,164 @@
+{
+  "summary": {
+    "n_claims": 200,
+    "seed": 42,
+    "verifier_llm": "checkpoints/qwen2.5-3b-instruct-q4_k_m.gguf",
+    "nli_model": "cross-encoder/nli-deberta-v3-base",
+    "prompt_hash": "350124b0e590",
+    "contra_veto_threshold": 0.95,
+    "entail_threshold": 0.7,
+    "elapsed_s": 4848.8
+  },
+  "results": {
+    "llm_only": {
+      "n": 200,
+      "accuracy": {
+        "point": 0.02,
+        "ci_lo": 0.005,
+        "ci_hi": 0.04
+      },
+      "macro_f1": 0.0236,
+      "weighted_f1": 0.0361,
+      "per_class": {
+        "SUPPORTED": {
+          "precision": 0.3636,
+          "recall": 0.0392,
+          "f1": 0.0708,
+          "support": 102,
+          "matched": 4
+        },
+        "REFUTED": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 98,
+          "matched": 0
+        },
+        "NEI": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 0,
+          "matched": 0
+        }
+      },
+      "confusion_matrix": {
+        "SUPPORTED": {
+          "SUPPORTED": 4,
+          "REFUTED": 0,
+          "NEI": 98
+        },
+        "REFUTED": {
+          "SUPPORTED": 7,
+          "REFUTED": 0,
+          "NEI": 91
+        },
+        "NEI": {
+          "SUPPORTED": 0,
+          "REFUTED": 0,
+          "NEI": 0
+        }
+      }
+    },
+    "llm_plus_nli_veto": {
+      "n": 200,
+      "accuracy": {
+        "point": 0.03,
+        "ci_lo": 0.01,
+        "ci_hi": 0.055
+      },
+      "macro_f1": 0.0381,
+      "weighted_f1": 0.0568,
+      "per_class": {
+        "SUPPORTED": {
+          "precision": 0.4,
+          "recall": 0.0196,
+          "f1": 0.0374,
+          "support": 102,
+          "matched": 2
+        },
+        "REFUTED": {
+          "precision": 0.6667,
+          "recall": 0.0408,
+          "f1": 0.0769,
+          "support": 98,
+          "matched": 4
+        },
+        "NEI": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 0,
+          "matched": 0
+        }
+      },
+      "confusion_matrix": {
+        "SUPPORTED": {
+          "SUPPORTED": 2,
+          "REFUTED": 2,
+          "NEI": 98
+        },
+        "REFUTED": {
+          "SUPPORTED": 3,
+          "REFUTED": 4,
+          "NEI": 91
+        },
+        "NEI": {
+          "SUPPORTED": 0,
+          "REFUTED": 0,
+          "NEI": 0
+        }
+      }
+    },
+    "llm_plus_nli_bidir": {
+      "n": 200,
+      "accuracy": {
+        "point": 0.36,
+        "ci_lo": 0.295,
+        "ci_hi": 0.425
+      },
+      "macro_f1": 0.2327,
+      "weighted_f1": 0.3454,
+      "per_class": {
+        "SUPPORTED": {
+          "precision": 0.5882,
+          "recall": 0.098,
+          "f1": 0.1681,
+          "support": 102,
+          "matched": 10
+        },
+        "REFUTED": {
+          "precision": 0.4559,
+          "recall": 0.6327,
+          "f1": 0.5299,
+          "support": 98,
+          "matched": 62
+        },
+        "NEI": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 0,
+          "matched": 0
+        }
+      },
+      "confusion_matrix": {
+        "SUPPORTED": {
+          "SUPPORTED": 10,
+          "REFUTED": 74,
+          "NEI": 18
+        },
+        "REFUTED": {
+          "SUPPORTED": 7,
+          "REFUTED": 62,
+          "NEI": 29
+        },
+        "NEI": {
+          "SUPPORTED": 0,
+          "REFUTED": 0,
+          "NEI": 0
+        }
+      }
+    }
+  }
+}

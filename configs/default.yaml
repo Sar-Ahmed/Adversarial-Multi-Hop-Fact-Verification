@@ -44,9 +44,15 @@ adversarial:
 
 # === Phase 07: cross-document verifier ===
 verifier:
-  llm_path: null                  # phase 07 mirrors decomposer.llm_path
+  llm_path: checkpoints/qwen2.5-3b-instruct-q4_k_m.gguf
   nli_model: cross-encoder/nli-deberta-v3-base
-  mode: llm_plus_nli_veto         # llm_only | llm_plus_nli_veto | per_subclaim_cot
+  # llm_plus_nli_bidir lifts accuracy from 0.03 to 0.36 on HoVer-dev n=200 by
+  # letting NLI flip NEI→REFUTED (high contra) and NEI→SUPPORTED (high entail)
+  # in addition to the legacy SUPPORTED→REFUTED veto. Full analysis in
+  # docs/PHASE_07_verifier_ensemble.md. The verifier underperforms the trivial
+  # "always REFUTED" baseline (0.49 acc) — Phase 08 calibrator + Phase 13 error
+  # analysis are the recovery paths.
+  mode: llm_plus_nli_bidir         # llm_only | llm_plus_nli_veto | llm_plus_nli_bidir
   contra_veto_threshold: 0.95
   entail_threshold: 0.7
 

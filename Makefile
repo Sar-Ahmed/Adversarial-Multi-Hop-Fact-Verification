@@ -79,6 +79,11 @@ train-bge:
 mine-distractors:
 	$(PYTHON) -m src.adversarial.mine --n $(N)
 
+# === Phase 07 targets ===
+
+eval-verifier:
+	$(PYTHON) -m src.eval.verifier_eval --n $(N)
+
 # === Phase 11 / 12 targets (placeholders, populated when phases land) ===
 
 eval-main:
