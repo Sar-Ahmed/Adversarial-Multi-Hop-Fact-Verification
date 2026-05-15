@@ -50,7 +50,7 @@ Read in this order:
 | 12 | [Ablation study](PHASE_12_ablation.md) | Per-component contribution | 1–2 days | CPU |
 | 13 | [Error analysis](PHASE_13_error_analysis.md) | 50 stratified failure cases | 1 day | CPU |
 | 14 | [Human eval](PHASE_14_human_eval.md) | Evidence chain quality — 50 chains rated (deviation from 100); decomposition 4.16 / citations 4.46 / reasoning 2.58 / faithfulness 2.58 / overall 2.56 | 1 day | manual |
-| 15 | [Final report](PHASE_15_final_report.md) | Report, handoff, known limitations | 0.5 day | — |
+| 15 | [Final report](PHASE_15_final_report.md) | Headline 0.360 acc [0.295, 0.425] on HoVer dev; FEVER NEI recall 0→0.67; robustness Δ=−0.02 — see [FINAL_REPORT.md](FINAL_REPORT.md), [SETUP_AND_REPRODUCE.md](SETUP_AND_REPRODUCE.md), [HANDOFF.md](HANDOFF.md) | 0.5 day | — |
 
 **Total estimate:** 18–25 days for one engineer (CPU-only baseline; Colab GPU access cuts Phase 05 and parts of 07 by ~40%).
 

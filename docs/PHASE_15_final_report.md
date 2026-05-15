@@ -74,6 +74,40 @@ The point of the report is *traceability*. A reviewer should be able to pick any
 - Do not commit a draft report with TODOs. Every section is filled in or explicitly marked as "out of scope".
 - Do not bury the limitations section at the bottom in 8pt font. Limitations get equal billing with results.
 
-## Outcome (filled at end of phase)
+## Outcome (Phase 15 closed 2026-05-15)
 
-> Append: link to the tagged release, link to FINAL_REPORT.md, total project wall time, total LOC of `src/`.
+**Status: all four Phase 15 deliverables shipped. V3 tagged `v3.0`.**
+
+### Files added
+
+- [`docs/FINAL_REPORT.md`](FINAL_REPORT.md) — the headline report. Every numerical claim has `n=` and a 95% CI; every CI cites the JSON artifact it came from. Sections: TL;DR, pipeline overview, headline numbers, ablation results, error analysis, evidence chain quality, adversarial robustness, known limitations (9 items), honest negative results (5 items — Phase 05 fine-tune, Phase 06 distractors, Phase 07 3B accuracy, Phase 08 calibrator HoVer regression, Phase 11 decomposed mode), reproducibility notes, spec deliverable map.
+- [`docs/SETUP_AND_REPRODUCE.md`](SETUP_AND_REPRODUCE.md) — clone-to-headline in 12 steps, ~30 min minimal vs ~8 h full reproduction. Each artifact gets a single command.
+- [`docs/HANDOFF.md`](HANDOFF.md) — 30-minute onboarding for the next engineer: reading order, the one thing to know (verifier is the bottleneck), three fix paths with effort/lift, landmines that look scary but aren't.
+- [`docs/SCOPED_OUT.md`](SCOPED_OUT.md) — was already at 77 lines; Phase 15 added the Phase 14 n=50/single-rater section so the deviation is in one place.
+
+### Headline numbers reaffirmed in the report
+
+- HoVer dev accuracy: **0.360 [0.295, 0.425]** (n=200; whole-claim mode, NLI bidir veto, no calibrator)
+- Macro-F1: 0.233; REFUTED F1 0.53; SUPPORTED F1 0.17
+- FEVER NEI recall: **0.670** (vs V1 baseline 0.000) — V3's largest single win on a spec metric
+- Adversarial Δ: **−0.020 [−0.060, 0.000]** (n=50 paired) — spec target ≤0.05 ✓
+- Phase 14 chain ratings: decomp 4.16, citations 4.46, reasoning 2.58, faithfulness 2.58, overall 2.56
+- Phase 13 bucket distribution: 28/50 nei_miscalibration (verifier), 12/50 partial_match, 10/50 entity_confusion, 0/50 temporal/retrieval/decomp/negation
+
+### Spec exit criteria
+
+- [x] Every numerical claim in `FINAL_REPORT.md` has an `n=` and a 95% CI
+- [x] Every numerical claim links to the JSON artifact it came from
+- [x] `SETUP_AND_REPRODUCE.md` lets a fresh checkout reproduce the headline numbers within ~8 hours of compute
+- [x] `SCOPED_OUT.md` exists and is referenced from `FINAL_REPORT.md` § Known limitations
+- [x] `HANDOFF.md` exists with "first 30 minutes" instructions
+- [x] No `PHASE_X_COMPLETE.md` victory-lap files were created (rule held across the whole V3 repo)
+- [x] Final commit tagged `v3.0`
+
+### Project totals
+
+- **`src/` LOC.** 6,670 across 16 phases.
+- **Phases.** 00–15 (this doc closes 15).
+- **Wall time.** 7 days (2026-05-09 → 2026-05-15).
+- **Compute envelope.** Single laptop CPU + ~25 h Colab T4 GPU (Phase 05 fine-tune, optional).
+- **Tag.** `v3.0` on master.
