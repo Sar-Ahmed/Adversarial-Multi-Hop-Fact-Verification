@@ -57,6 +57,7 @@ Read in this order:
 | # | Phase | Goal | Effort | Outcome |
 |---|---|---|---|---|
 | 16 | [Soft-prompt v3.1](PHASE_16_soft_prompt.md) | Re-prompt the 3B verifier to drop the strict-NEI rule | 1.5 h | **scope-out** — sanity n=5 showed 0/5 verdict shifts; bottleneck is model capacity not prompt wording |
+| 17 | [7B verifier sweep](PHASE_17_7b_verifier.md) | Swap Qwen 2.5-3B for 2.5-7B (4-bit NF4 on Colab T4); paired Δ vs v3.0 | 2.5 h | **planned** — [Colab notebook](../notebooks/phase17_7b_verifier_sweep.ipynb) ready; reuses cached retrieval + NLI, only LLM call changes |
 
 **Total estimate:** 18–25 days for one engineer (CPU-only baseline; Colab GPU access cuts Phase 05 and parts of 07 by ~40%).
 
