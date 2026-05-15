@@ -1,0 +1,19 @@
+{
+  "summary": {
+    "n_target": 50,
+    "n_evaluated": 50,
+    "seed": 42,
+    "mode": "whole_claim_llm_plus_nli_bidir",
+    "inject_mode": "mix",
+    "spec_target": "delta <= 0.05",
+    "passes_spec": true
+  },
+  "paired_bootstrap": {
+    "n": 50,
+    "acc_clean": 0.36,
+    "acc_adversarial": 0.38,
+    "delta": -0.02,
+    "ci_lo": -0.06,
+    "ci_hi": 0.0
+  }
+}

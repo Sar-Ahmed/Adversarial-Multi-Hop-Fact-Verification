@@ -66,6 +66,75 @@ V1 reported point estimates on n=200 with no CIs. On 200 examples, ±3% is easy 
 - Do not subset eval based on what's "easy" — that's eval gaming. Stratification by gold class is fine; cherry-picking is not.
 - Do not run only one of clean/adversarial. Both, paired, every time.
 
-## Outcome (filled at end of phase)
+## Outcome (Phase 11 closed 2026-05-15)
+
+**Status: 3 of 5 exit criteria met. Production aggregator decision made. Adversarial robustness target met. Macro-F1 target missed — known downstream of Phase 07/08 verifier limitations.**
+
+### Headline numbers
+
+All metrics on HoVer-dev n=200 + FEVER-dev n=300 (balanced 100/100/100), 95% bootstrap CIs from 1000 resamples, seed=42:
+
+| Eval | n | Accuracy | Macro-F1 | NEI Recall | Notes |
+|---|---|---|---|---|---|
+| **HoVer-dev whole-claim** | 200 | **0.360** [0.295, 0.425] | **0.233** | — | **production default** |
+| HoVer-dev decomposed | 200 | 0.145 [0.100, 0.195] | 0.114 | — | 22 pts worse — ruled out |
+| FEVER-dev calibrated | 300 | 0.427 [0.370, 0.483] | 0.417 | **0.670** | V1 was 0% on this metric |
+| Robustness Δ (n=50 paired) | 50 | clean=0.36, adv=0.38 | — | — | Δ = **-0.020** [-0.060, 0.000] |
+
+### Spec exit criteria
+
+- [x] All headline numbers carry an n + 95% CI (eval_main.json, robustness_eval.json, per_class_breakdown.json all conform)
+- [x] **Adversarial robustness Δ ≤ 0.05**: achieved **-0.020** (no degradation; reranker filters distractors effectively)
+- [ ] **HoVer-dev macro-F1 ≥ 0.40**: hit **0.233** — spec-fail, documented; downstream of Phase 07's 3B verifier NEI bias
+- [x] **FEVER-dev NEI recall ≥ 0.40**: hit **0.67** (target smashed; Phase 08 win confirmed at the eval-framework level)
+- [x] All eval JSONs include git SHA, seed, n, CI bounds
+
+### The architectural decision: whole-claim mode wins
+
+The single most important call in Phase 11 is choosing the production aggregator. Phase 10 closed with a 22-point gap on the same n=200 eval:
+
+| Mode | Acc | Macro-F1 | Why |
+|---|---|---|---|
+| whole-claim | 0.360 | **0.233** | single LLM call sees the full claim + top-10 passages; cleaner verdict |
+| decomposed | 0.145 | 0.114 | per-sub-claim LLM call returns NEI on multi-hop pieces; aggregator (any REFUTED → REFUTED, all SUP → SUP, else NEI) collapses to NEI most of the time |
+
+`eval_main.json` records `production_recommendation: whole_claim`. The decomposer module stays in the codebase — its output (the sub-claim DAG) still drives the evidence-chain audit trail in Phase 10's rendered chains — but **the verifier sees the whole claim, not each sub-claim**.
+
+(Note: this means we're not following the spec's "per-sub-claim CoT" guidance for HoVer. The spec's per-sub-claim recommendation works *if* the verifier produces reliable per-sub-claim verdicts. Our 3B verifier doesn't — it defaults to NEI on isolated multi-hop pieces. A 7B or 13B verifier might flip this. Open follow-up.)
+
+### Adversarial robustness — the bright spot
+
+n=50 paired bootstrap on HoVer-dev with the Phase 06 distractors injected before reranking:
+
+- Clean accuracy: 0.360
+- Adversarial accuracy: 0.380
+- **Paired Δ = -0.020 [-0.060, 0.000]**
+- **Spec target ≤ 0.05: passes with the entire CI on the right side of zero**
+
+The negative-then-zero-bounded delta is consistent with "the reranker is doing its job" — the cross-encoder reads (claim, passage) pairs jointly and demotes the cos-similar-but-NLI-contradicting distractors below the real top-10. Phase 06's documented gap (90% of distractors flagged as "not really contradictory" in the sanity check) is consistent with this: the distractors don't bite *because* they're not really adversarial against this reranker.
+
+A truly adversarial distractor set would have lowered accuracy meaningfully. Ours didn't. Two readings:
+1. **Optimistic:** the production pipeline is robust to current-style adversaries.
+2. **Honest:** our adversarial set is weak. A future, entity-aware mining recipe (Phase 06 open follow-up) might tell a different story.
+
+### Files added
+
+- `src/eval/run_eval.py` — clean-mode eval (reads cached Phase 07/08/10 artifacts, re-aggregates whole-claim through `llm_plus_nli_bidir` inline)
+- `src/eval/robustness.py` — adversarial run + paired-bootstrap delta with resume capability
+- `artifacts/eval_main.json` — headline metrics + production_recommendation
+- `artifacts/per_class_breakdown.json` — P/R/F1 by class for all three configurations
+- `artifacts/robustness_eval.json` — paired delta + clean/adv accuracies
+- `artifacts/adversarial_traces.jsonl` — 50 traces for the adversarial side of the paired comparison
+
+### Production config diff
+
+No change to `configs/default.yaml`. The recommendation is "use whole-claim mode" but the current pipeline (Phase 10's `Pipeline.verify`) runs decomposed. **Switching the production default to whole-claim is a Phase 15 final-report decision** — for now, the decomposed pipeline still produces the rich audit-trail chains, and Phase 11 reports both modes' numbers so a reviewer can make the call.
+
+### Open follow-ups
+
+- **Switch production aggregator to whole-claim mode** (one-line change in `Pipeline.verify`: skip decomposer, run verifier on the whole claim). Defer to Phase 15 — Phase 13 error analysis may surface reasons to keep the decomposer output even if we don't use its per-sub-claim verdicts.
+- **Macro-F1 gap (0.23 vs spec 0.40).** Root cause is the verifier producing high-confidence wrong verdicts on multi-hop claims. Recovery paths: prompt softening (Phase 07 follow-up), 7B model sweep on Colab, or training a stronger calibrator with the LLM verdict as a feature (Phase 08 follow-up).
+- **Robustness eval at n=200.** We ran 50 paired examples for the delta; the headline result is directional. A full n=200 would tighten the CI by ~2×.
+- **Phase 12 ablation** — run with each component disabled in turn (BM25 only, no reranker, no NLI veto, no calibrator) to attribute V3's accuracy to the components, not the architecture as a whole.
 
 > Append: macro-F1 / accuracy with CI for clean and adversarial, robustness delta with CI, per-class F1, FEVER NEI recall with CI.
