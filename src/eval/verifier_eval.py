@@ -29,6 +29,16 @@ ROOT = Path(__file__).resolve().parents[2]
 TRACES_PATH = ROOT / "artifacts" / "per_subclaim_traces.jsonl"
 RESULT_PATH = ROOT / "artifacts" / "verifier_eval_phase07.json"
 
+
+def _paths_for_suffix(suffix: str) -> tuple[Path, Path]:
+    """Return (traces, result) paths for an output suffix. Empty = v3.0 paths."""
+    if not suffix:
+        return TRACES_PATH, RESULT_PATH
+    return (
+        ROOT / "artifacts" / f"per_subclaim_traces_{suffix}.jsonl",
+        ROOT / "artifacts" / f"verifier_eval_{suffix}.json",
+    )
+
 app = typer.Typer(add_completion=False, no_args_is_help=False)
 
 _LABEL_ORDER = ["SUPPORTED", "REFUTED", "NEI"]
@@ -104,6 +114,16 @@ def _confusion(y_true: list[str], y_pred: list[str]) -> dict:
 def main(
     n: int = typer.Option(200, help="Number of HoVer-dev claims (0 = all)."),
     seed: int = typer.Option(42),
+    prompt_variant: str = typer.Option(
+        "v1",
+        "--prompt-variant",
+        help="Verifier prompt variant: v1 (v3.0 production) or v2 (Phase 16 soft-prompt).",
+    ),
+    out_suffix: str = typer.Option(
+        "",
+        "--out-suffix",
+        help="Suffix for traces+result paths (e.g. 'softprompt'). Empty = v3.0 paths.",
+    ),
 ) -> None:
     """Run the verifier eval and write traces + metrics."""
     from src.config import PipelineConfig
@@ -126,6 +146,11 @@ def main(
             "configs/default.yaml has verifier.llm_path: null — Phase 07 needs the GGUF"
         )
 
+    traces_path, result_path = _paths_for_suffix(out_suffix)
+    logger.info(
+        "prompt_variant={} hash={} → traces={}", prompt_variant, prompt_hash(prompt_variant), traces_path.name
+    )
+
     splits = load_hover()
     dev = [ex for ex in splits["validation"] if ex.supporting_facts]
     rng = random.Random(seed)
@@ -137,30 +162,30 @@ def main(
     reranker = CrossEncoderReranker(cfg.reranker)
     # Use llm_plus_nli_veto so verify_with_trace always has NLI scores cached;
     # we recompute llm_only by re-aggregating the trace offline.
-    verifier = EnsembleVerifier(cfg.verifier)
+    verifier = EnsembleVerifier(cfg.verifier, prompt_variant=prompt_variant)
 
     # Resume from an existing traces file if present so a system restart mid-eval
     # doesn't waste the work already done. Each line is one (claim) row keyed
     # by `uid`; we skip uids already seen and append new ones.
     traces: list[dict] = []
     already_seen: set[str] = set()
-    TRACES_PATH.parent.mkdir(parents=True, exist_ok=True)
-    if TRACES_PATH.exists():
-        with open(TRACES_PATH, encoding="utf-8") as fh:
+    traces_path.parent.mkdir(parents=True, exist_ok=True)
+    if traces_path.exists():
+        with open(traces_path, encoding="utf-8") as fh:
             for line in fh:
                 if not line.strip():
                     continue
                 row = json.loads(line)
                 traces.append(row)
                 already_seen.add(row["uid"])
-        logger.info("resuming: loaded {} existing trace rows from {}", len(traces), TRACES_PATH)
+        logger.info("resuming: loaded {} existing trace rows from {}", len(traces), traces_path)
 
     todo = [ex for ex in dev if ex.uid not in already_seen]
     logger.info("{} claims still to verify (already done: {})", len(todo), len(already_seen))
 
     t0 = time.time()
     # Append-mode so partial work survives an interruption.
-    with open(TRACES_PATH, "a", encoding="utf-8") as fh:
+    with open(traces_path, "a", encoding="utf-8") as fh:
         for i, ex in enumerate(todo):
             if i % 10 == 0 and i > 0:
                 rate = i / max(time.time() - t0, 1e-6)
@@ -212,7 +237,7 @@ def main(
 
     elapsed = time.time() - t0
     logger.info("=== eval done in {:.1f}s ===", elapsed)
-    logger.info("traces: {} rows → {}", len(traces), TRACES_PATH)
+    logger.info("traces: {} rows → {}", len(traces), traces_path)
 
     # Compute metrics for each mode
     results = {
@@ -225,14 +250,15 @@ def main(
             "seed": seed,
             "verifier_llm": cfg.verifier.llm_path,
             "nli_model": cfg.verifier.nli_model,
-            "prompt_hash": prompt_hash(),
+            "prompt_variant": prompt_variant,
+            "prompt_hash": prompt_hash(prompt_variant),
             "contra_veto_threshold": cfg.verifier.contra_veto_threshold,
             "entail_threshold": cfg.verifier.entail_threshold,
             "elapsed_s": round(elapsed, 1),
         },
         "results": results,
     }
-    RESULT_PATH.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+    result_path.write_text(json.dumps(payload, indent=2), encoding="utf-8")
     logger.info("=== summary ===")
     for mode, m in results.items():
         if not m:
@@ -246,7 +272,7 @@ def main(
             acc["ci_hi"],
             m["macro_f1"],
         )
-    logger.info("wrote {}", RESULT_PATH)
+    logger.info("wrote {}", result_path)
 
 
 if __name__ == "__main__":

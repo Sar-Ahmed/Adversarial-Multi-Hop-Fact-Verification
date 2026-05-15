@@ -96,10 +96,12 @@ class LLMVerifier:
         max_tokens: int = 256,
         temperature: float = 0.0,
         seed: int = 42,
+        prompt_variant: str = "v1",
     ) -> None:
         self.llm = LocalLLM(model_path=llm_path, n_ctx=n_ctx, seed=seed)
         self.max_tokens = max_tokens
         self.temperature = temperature
+        self.prompt_variant = prompt_variant
 
     def verify(self, claim: str, passages: list[Passage]) -> tuple[Label, float, str]:
         """Return (verdict, confidence, reasoning)."""
@@ -110,7 +112,7 @@ class LLMVerifier:
             return Label.NEI, 0.4, "no passages retrieved"
 
         passages_text = [p.text for p in passages]
-        messages = build_messages(claim, passages_text)
+        messages = build_messages(claim, passages_text, variant=self.prompt_variant)
         raw = self.llm.chat(
             messages=messages,
             max_tokens=self.max_tokens,

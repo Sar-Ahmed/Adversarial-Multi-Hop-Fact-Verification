@@ -36,16 +36,22 @@ class EnsembleVerifier:
     output is returned unchanged.
     """
 
-    def __init__(self, cfg: VerifierConfig, calibrator=None) -> None:  # noqa: ANN001
+    def __init__(
+        self,
+        cfg: VerifierConfig,
+        calibrator=None,  # noqa: ANN001
+        prompt_variant: str = "v1",
+    ) -> None:
         if not cfg.llm_path:
             raise ValueError(
                 "EnsembleVerifier needs cfg.verifier.llm_path set. "
                 "If you want a stub verifier, use StubVerifier instead."
             )
         self.cfg = cfg
-        self.llm = LLMVerifier(llm_path=cfg.llm_path)
+        self.llm = LLMVerifier(llm_path=cfg.llm_path, prompt_variant=prompt_variant)
         self.nli = NLIVerifier(model_name=cfg.nli_model)
         self.calibrator = calibrator  # Phase 08 — optional NEICalibrator
+        self.prompt_variant = prompt_variant
 
     def verify(
         self,

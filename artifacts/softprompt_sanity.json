@@ -1,0 +1,83 @@
+{
+  "summary": {
+    "n": 5,
+    "elapsed_s": 975.3,
+    "v1_verdict_counts": {
+      "SUPPORTED": 0,
+      "REFUTED": 0,
+      "NEI": 5
+    },
+    "v2_verdict_counts": {
+      "SUPPORTED": 0,
+      "REFUTED": 0,
+      "NEI": 5
+    },
+    "v3_cached_v1_verdict_counts": {
+      "SUPPORTED": 0,
+      "REFUTED": 0,
+      "NEI": 5
+    },
+    "v1_accuracy": 0.0,
+    "v2_accuracy": 0.0,
+    "v3_cached_v1_accuracy": 0.0,
+    "v2_parse_failures": 0,
+    "v1_v2_verdict_shifts": 0
+  },
+  "per_row": [
+    {
+      "uid": "27818aa7-8242-4870-bd7e-d847005d9677",
+      "claim": "Mixed martial arts promotion that was purchased by WSOF Canada in 2001 used to feature the man Joe Lauzon is tied with in having the most po",
+      "gold": "SUPPORTED",
+      "v3_cached_v1_verdict": "NEI",
+      "fresh_v1_verdict": "NEI",
+      "fresh_v1_reason": "The evidence does not provide information about the specific mixed martial arts promotion that was purchased by WSOF Canada in 2001 or the man tied with Joe Lauzon for the most post-fight bonus awards",
+      "v2_verdict": "NEI",
+      "v2_reason": "The evidence does not mention Joe Lauzon, World Extreme Cagefighting, or the specific post-fight bonus awards mentioned in the claim.",
+      "v2_parse_failed": false
+    },
+    {
+      "uid": "8ae5dcf4-7e4e-463b-bb8b-60065ed91f1e",
+      "claim": "Christopher Kelly is a journalist for a magazine headquartered in Downtown Austin, Texas. That magazine had an article by Skip Hollandsworth",
+      "gold": "REFUTED",
+      "v3_cached_v1_verdict": "NEI",
+      "fresh_v1_verdict": "NEI",
+      "fresh_v1_reason": "The evidence does not clearly support or refute the claim about Christopher Kelly being a journalist for Texas Monthly or the specific details of the article and film adaptation.",
+      "v2_verdict": "NEI",
+      "v2_reason": "The evidence does not mention Christopher Kelly, Texas Monthly, or the specific magazine article and film details mentioned in the claim.",
+      "v2_parse_failed": false
+    },
+    {
+      "uid": "259c831a-e906-42b4-a78e-e33f98941710",
+      "claim": "The largest lake in New Hampshire sits nine vertical feet lower than Lake Kanasatka.",
+      "gold": "REFUTED",
+      "v3_cached_v1_verdict": "NEI",
+      "fresh_v1_verdict": "NEI",
+      "fresh_v1_reason": "Passages 8 and 9 provide conflicting information about the relative elevations of the lakes, but there is not enough consistent information to determine the claim.",
+      "v2_verdict": "NEI",
+      "v2_reason": "Passages 1-9 do not mention Lake Kanasatka or Lake Winnipesaukee, focusing instead on other geographical features and locations in New Hampshire.",
+      "v2_parse_failed": false
+    },
+    {
+      "uid": "e0a5abda-14ef-4f2e-bcc6-254e4192a92a",
+      "claim": "She's So Huge is the name of the song by a band featured in the 2001 American teen crime comedy film directed by Francine McDougall. A man p",
+      "gold": "REFUTED",
+      "v3_cached_v1_verdict": "NEI",
+      "fresh_v1_verdict": "NEI",
+      "fresh_v1_reason": "The evidence does not provide enough information to confirm or refute the specific details of the claim, such as the band's name, the film it was featured in, or the man who played instruments and sta",
+      "v2_verdict": "NEI",
+      "v2_reason": "The evidence does not mention the specific song 'She's So Huge', the band, or the 2001 American teen crime comedy film directed by Francine McDougall.",
+      "v2_parse_failed": false
+    },
+    {
+      "uid": "434311e3-16d2-481a-a99a-ff5cbaa6785a",
+      "claim": "Rebecca Sugar created the scifi television series which has \"Off Colors\" as the third episode to the fifth season.",
+      "gold": "SUPPORTED",
+      "v3_cached_v1_verdict": "NEI",
+      "fresh_v1_verdict": "NEI",
+      "fresh_v1_reason": "None of the evidence passages specifically mention Rebecca Sugar creating a scifi television series with 'Off Colors' as the third episode of the fifth season.",
+      "v2_verdict": "NEI",
+      "v2_reason": "None of the evidence passages mention Rebecca Sugar, 'Off Colors', or the specific episode order of a television series.",
+      "v2_parse_failed": false
+    }
+  ]
+}

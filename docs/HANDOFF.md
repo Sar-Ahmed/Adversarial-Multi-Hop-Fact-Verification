@@ -27,13 +27,13 @@ Retrieval, decomposition, and reranking are not the problem. The 3B verifier is.
 
 From [`ERROR_ANALYSIS.md`](ERROR_ANALYSIS.md) and [`SCOPED_OUT.md`](SCOPED_OUT.md):
 
-| Path | Effort | Expected lift | Where to start |
-|---|---|---|---|
-| **A. Soft-prompt the 3B verifier** | ~1.5 h | +5–8 pts | [`src/verifier/prompts.py`](../src/verifier/prompts.py) — remove the strict "if on-topic but doesn't address claim, return NEI" rule |
-| **B. 7B verifier sweep** | ~3 h Colab | +10–15 pts | [`notebooks/phase07_verifier_sweep.ipynb`](../notebooks/phase07_verifier_sweep.ipynb) stub — Qwen 2.5-7B-Instruct via vLLM |
-| **C. Entity-aware retrieval** | ~half day | +2–4 pts (entity_confusion bucket) | [`src/retrieval/dense.py`](../src/retrieval/dense.py) — add spaCy NER, require distractors to share at least one claim entity |
+| Path | Effort | Expected lift | Status | Where to start |
+|---|---|---|---|---|
+| ~~A. Soft-prompt the 3B verifier~~ | ~1.5 h | +5–8 pts | **tried, scope-out 2026-05-15** | [`docs/PHASE_16_soft_prompt.md`](PHASE_16_soft_prompt.md) — sanity n=5 showed 0/5 verdict shifts; reasoning got worse. Bottleneck is model capacity, not prompt wording. |
+| **B. 7B verifier sweep** ← **start here** | ~3 h Colab | +10–15 pts | unstarted; Path A failure strengthens this | [`notebooks/phase07_verifier_sweep.ipynb`](../notebooks/phase07_verifier_sweep.ipynb) stub — Qwen 2.5-7B-Instruct via vLLM |
+| **C. Entity-aware retrieval** | ~half day | +2–4 pts (entity_confusion bucket) | unstarted | [`src/retrieval/dense.py`](../src/retrieval/dense.py) — add spaCy NER, require distractors to share at least one claim entity |
 
-Path A is the cheapest test of the hypothesis. If A fires, B becomes much more attractive.
+Path A was the cheapest test of the bottleneck hypothesis and it ruled out prompt rewording as the fix. Path B is now the highest-leverage next experiment. Path A infrastructure (`SYSTEM_PROMPT_V2`, `--prompt-variant` flag, `softprompt_sanity.py`, `paired_compare.py`) is committed and reusable if a future iteration wants to try yet another prompt variant against a 7B model — the variant slot is just a string.
 
 ## Where the numbers live
 

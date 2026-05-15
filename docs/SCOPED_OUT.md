@@ -34,13 +34,19 @@ A single catalogue of capabilities that V3 explicitly does not ship, with each d
 
 **Fix path:** rerun `src.calibration.build_features` on FEVER + HoVer with LLM verdict added to the feature vector, retrain.
 
-## Soft-prompt fix on the 3B Qwen verifier (Phase 07 follow-up)
+## Soft-prompt fix on the 3B Qwen verifier (Phase 16 — tried and scoped out)
 
-**Documented gap, not run.**
+**Tried on 2026-05-15. Negative result. Full write-up in [`docs/PHASE_16_soft_prompt.md`](PHASE_16_soft_prompt.md).**
 
-**Why:** Phase 07 verifier prompt has a strict "if on-topic but doesn't address claim, return NEI" rule. On multi-hop HoVer claims this causes the 3B verifier to return NEI on 95% of claims. The bidirectional NLI rule (Phase 07 / Phase 12) recovers some of these; 56% of Phase 13 failures are still nei_miscalibration.
+**What I tried:** added a second prompt variant `SYSTEM_PROMPT_V2` that replaces the strict "if on-topic but doesn't address claim → NEI" rule with "if any part of the claim is supported or contradicted, lean toward a verdict; NEI only when evidence is off-topic." Wired a `--prompt-variant` flag through `verifier_eval.py`, ran a fast n=5 sanity that re-uses the v3.0 cached passages.
 
-**Fix path:** remove the strict-NEI rule, replace with "if any part of the claim is contradicted, lean REFUTED; if any part is supported, lean SUPPORTED; NEI only when no part is addressed." Estimated 1.5 h re-run on Colab.
+**What happened:** 5/5 cases identical NEI verdicts (the v3.0 v1 baseline was also 5/5 NEI). Pass criterion "v2 NEI rate < v1 NEI rate" failed cleanly. Worse, the v2 *reasoning text* on those same 5 falsely claims entities are not mentioned when they are — anchoring on the new "off-topic only" few-shot example degrades faithfulness even when the verdict doesn't change. Examples in the Phase 16 outcome doc.
+
+**Why it failed:** the 3B model is too anchored on the NEI-on-uncertain heuristic for prompt rewording alone to dislodge. The bidir NLI rule (Phase 12, +33 pts) already captures the recoverable NEI→{SUPPORTED,REFUTED} signal at aggregation time. What remains is model-capacity-limited.
+
+**Infrastructure kept:** `SYSTEM_PROMPT_V2`, `LLMVerifier(prompt_variant=...)`, the `--prompt-variant` CLI flag, `softprompt_sanity.py`, `paired_compare.py`. All committed for future prompt-variant experiments. A future iteration that wants to try another wording can just add `SYSTEM_PROMPT_V3` and re-run the sanity.
+
+**Where the effort goes:** the 7B verifier sweep (next section). Path A's negative result strengthens the case for Path B.
 
 ## 7B verifier sweep (Phase 07 follow-up)
 
