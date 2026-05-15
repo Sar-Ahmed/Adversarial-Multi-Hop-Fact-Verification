@@ -1,0 +1,174 @@
+{
+  "n_rated": 50,
+  "rater": "single (self-rated by the developer per Phase 14 protocol)",
+  "scale": "1-5 Likert; 5 = excellent, 1 = unusable",
+  "per_dimension": {
+    "decomposition": {
+      "mean": 4.16,
+      "stdev": 0.548,
+      "ci95": [
+        4.0,
+        4.32
+      ],
+      "median": 4.0,
+      "n": 50
+    },
+    "citations": {
+      "mean": 4.46,
+      "stdev": 0.676,
+      "ci95": [
+        4.26,
+        4.64
+      ],
+      "median": 5.0,
+      "n": 50
+    },
+    "reasoning": {
+      "mean": 2.58,
+      "stdev": 0.673,
+      "ci95": [
+        2.4,
+        2.76
+      ],
+      "median": 3.0,
+      "n": 50
+    },
+    "faithfulness": {
+      "mean": 2.58,
+      "stdev": 0.835,
+      "ci95": [
+        2.38,
+        2.8
+      ],
+      "median": 3.0,
+      "n": 50
+    },
+    "overall": {
+      "mean": 2.56,
+      "stdev": 0.76,
+      "ci95": [
+        2.36,
+        2.76
+      ],
+      "median": 2.0,
+      "n": 50
+    }
+  },
+  "histograms": {
+    "decomposition": {
+      "1": 0,
+      "2": 0,
+      "3": 4,
+      "4": 34,
+      "5": 12
+    },
+    "citations": {
+      "1": 0,
+      "2": 0,
+      "3": 5,
+      "4": 17,
+      "5": 28
+    },
+    "reasoning": {
+      "1": 3,
+      "2": 17,
+      "3": 28,
+      "4": 2,
+      "5": 0
+    },
+    "faithfulness": {
+      "1": 4,
+      "2": 20,
+      "3": 19,
+      "4": 7,
+      "5": 0
+    },
+    "overall": {
+      "1": 2,
+      "2": 24,
+      "3": 18,
+      "4": 6,
+      "5": 0
+    }
+  },
+  "by_correctness": {
+    "decomposition": {
+      "correct": {
+        "n": 10,
+        "mean": 4.1
+      },
+      "incorrect": {
+        "n": 40,
+        "mean": 4.175
+      }
+    },
+    "citations": {
+      "correct": {
+        "n": 10,
+        "mean": 4.5
+      },
+      "incorrect": {
+        "n": 40,
+        "mean": 4.45
+      }
+    },
+    "reasoning": {
+      "correct": {
+        "n": 10,
+        "mean": 2.9
+      },
+      "incorrect": {
+        "n": 40,
+        "mean": 2.5
+      }
+    },
+    "faithfulness": {
+      "correct": {
+        "n": 10,
+        "mean": 3.4
+      },
+      "incorrect": {
+        "n": 40,
+        "mean": 2.375
+      }
+    },
+    "overall": {
+      "correct": {
+        "n": 10,
+        "mean": 3.4
+      },
+      "incorrect": {
+        "n": 40,
+        "mean": 2.35
+      }
+    }
+  },
+  "by_gold_label": {
+    "SUPPORTED": {
+      "n": 25,
+      "decomposition": 4.0,
+      "citations": 4.28,
+      "reasoning": 2.44,
+      "faithfulness": 2.4,
+      "overall": 2.32
+    },
+    "REFUTED": {
+      "n": 25,
+      "decomposition": 4.32,
+      "citations": 4.64,
+      "reasoning": 2.72,
+      "faithfulness": 2.76,
+      "overall": 2.8
+    }
+  },
+  "correlation_with_correctness": {
+    "decomposition": -0.055,
+    "citations": 0.03,
+    "reasoning": 0.24,
+    "faithfulness": 0.496,
+    "overall": 0.558
+  },
+  "n_correct": 10,
+  "n_incorrect": 40,
+  "accuracy_in_sample": 0.2
+}

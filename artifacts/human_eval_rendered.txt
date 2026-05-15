@@ -1,0 +1,1484 @@
+# Phase 14 — rendered chains for human rating
+
+50 chains stratified by gold label (25 SUPPORTED + 25 REFUTED).
+Read each chain, then fill the corresponding row in `human_eval_sample.csv`.
+Rubric in `docs/HUMAN_EVAL_PROTOCOL.md`.
+
+## #1  uid=c1786d18  gold=REFUTED  predicted=REFUTED
+
+```
+Claim: The creator of the comedy series The Life & Times of Tim is not a former advertising copywriter. The daughter of Cyrinda Foxe is also not a former advertising copywriter.
+Final verdict: REFUTED (confidence 0.53)
+Sub-claims: 2
+
+Sub-claim 0 [other]: The creator of The Life & Times of Tim is not a former advertising copywriter.
+  Verdict: REFUTED (confidence 0.58)
+  Reasoning: The evidence does not provide information about the creator of The Life & Times of Tim or their background in advertising. [NLI-bidir: NEI→REFUTED on max_contra=1.00] [calibrator: p=0.58]
+  [Steve_Dildarian::0] Steve_Dildarian: Steve Dildarian -LRB- born November 3 , 1969 -RRB- is an American former advertising copywriter who is the creator , writer , producer and voice of Tim in the HBO animated television series The Life &...
+  [The_Sunday_Times::2] The_Sunday_Times: Times Newspapers also publishes The Times .
+  [Russell_T_Davies::0] Russell_T_Davies: Stephen Russell Davies , OBE -LRB- born 27 April 1963 -RRB- , better known as Russell T Davies , is a Welsh screenwriter and television producer whose works include Queer as Folk , Bob & Rose , The Se...
+
+Sub-claim 1 [other]: Cyrinda Foxe's daughter is not a former advertising copywriter.
+  Verdict: NEI (confidence 0.49)
+  Reasoning: The evidence does not provide information about Cyrinda Foxe's daughter or her profession. [calibrator: p=0.49]
+  [Cyrinda_Foxe::0] Cyrinda_Foxe: Cyrinda Foxe -LRB- born Kathleen Victoria Hetzekian ; February 22 , 1952 -- September 7 , 2002 -RRB- was an American actress , model and publicist , best known for her role in Andy Warhol 's Bad -LRB-...
+  [Robin_Weaver::1] Robin_Weaver: She has also appeared in several TV commercials .
+  [Elisabeth_Moss::1] Elisabeth_Moss: She is known for her roles as Zoey Bartlet , the youngest daughter of President Josiah Bartlet , on the NBC television series The West Wing -LRB- 1999 -- 2006 -RRB- ; Peggy Olson , secretary-turned-co...
+```
+
+---
+
+## #2  uid=f217115f  gold=REFUTED  predicted=NEI
+
+```
+Claim: Sinclair Hill is younger than the director of The Divorcee.
+Final verdict: NEI (confidence 0.46)
+Sub-claims: 3
+
+Sub-claim 0 [lookup]: Sinclair Hill is younger than a specific person.
+  Verdict: NEI (confidence 0.50)
+  Reasoning: None of the evidence passages provide information about the age or birth year of a specific person to compare with Sinclair Hill. [calibrator: p=0.50]
+  [Sinclair_Hill::0] Sinclair_Hill: Sinclair Hill -LRB- 1894 -- 1945 -RRB- was a British film director , producer and screenwriter .
+  [Jonah_Hill::0] Jonah_Hill: Jonah Hill Feldstein -LRB- born December 20 , 1983 -RRB- , better known as Jonah Hill , is an American actor , producer , screenwriter and comedian .
+  [Roald_Dahl::0] Roald_Dahl: Roald Dahl -LRB- -LSB- langpronˈroʊ.əld _ ˈdɑːl -RSB- , -LSB- ˈɾuːɑl dɑl -RSB- ; 13 September 1916 -- 23 November 1990 -RRB- was a British novelist , short story writer , poet , screenwriter , and fig...
+
+Sub-claim 1 [lookup]: That specific person directed The Divorcee.
+  depends_on: [0]
+  Verdict: NEI (confidence 0.42)
+  Reasoning: None of the evidence passages directly mention who directed The Divorcee. [NLI-bidir: NEI→SUPPORTED on max_entail=0.95] [calibrator: p=0.42]
+  [The_Divorcee::0] The_Divorcee: The Divorcee is a 1930 American pre-Code drama film written by Nick Grindé , John Meehan , and Zelda Sears , based on the novel Ex-Wife by Ursula Parrott .
+  [Danger_UXB::13] Danger_UXB: was the technical adviser .
+  [Film_director::0] Film_director: A film director is a person who directs the making of a film .
+
+Sub-claim 2 [comparison]: The specific person who directed The Divorcee is older than Sinclair Hill.
+  depends_on: [0, 1]
+  Verdict: NEI (confidence 0.45)
+  Reasoning: None of the evidence provides information about the director of The Divorcee or Sinclair Hill's age. [calibrator: p=0.45]
+  [The_Divorcee::0] The_Divorcee: The Divorcee is a 1930 American pre-Code drama film written by Nick Grindé , John Meehan , and Zelda Sears , based on the novel Ex-Wife by Ursula Parrott .
+  [Sinclair_Hill::0] Sinclair_Hill: Sinclair Hill -LRB- 1894 -- 1945 -RRB- was a British film director , producer and screenwriter .
+  [Edgar_Wright::0] Edgar_Wright: Edgar Howard Wright -LRB- born 18 April 1974 -RRB- is an English director , screenwriter , producer , and actor .
+```
+
+---
+
+## #3  uid=f276bcee  gold=SUPPORTED  predicted=REFUTED
+
+```
+Claim: Bryan Douglas Caplan is an adjunct scholar in biology. He works where the editor of 'World Climate Report' is a senior fellow in Washington D.C.
+Final verdict: REFUTED (confidence 0.44)
+Sub-claims: 3
+
+Sub-claim 0 [lookup]: Bryan Douglas Caplan is an adjunct scholar in biology.
+  Verdict: NEI (confidence 0.44)
+  Reasoning: Passages 2, 5, and 10 describe Bryan Douglas Caplan's fields of study and affiliations, but none of them mention him being an adjunct scholar in biology. [NLI-bidir: NEI→REFUTED on max_contra=1.00] [calibrator: p=0.44]
+  [Biology::0] Biology: Biology is a natural science concerned with the study of life and living organisms , including their structure , function , growth , evolution , distribution , identification and taxonomy .
+  [Bryan_Caplan::0] Bryan_Caplan: Bryan Douglas Caplan -LRB- born April 8 , 1971 -RRB- is an American economist .
+  [Life::3] Life: Biology is the primary science concerned with the study of life , although many other sciences are involved .
+
+Sub-claim 1 [lookup]: 'World Climate Report' editor is a senior fellow in Washington D.C.
+  Verdict: NEI (confidence 0.37)
+  Reasoning: Passages 1-5 describe the location of the magazine's headquarters, but do not specify the editor's position or affiliation. [NLI-bidir: NEI→REFUTED on max_contra=1.00] [calibrator: p=0.37]
+  [World_Climate_Report::0] World_Climate_Report: World Climate Report , a newsletter edited by Patrick Michaels , was produced by the Greening Earth Society , a non-profit organization created by the Western Fuels Association .
+  [World_Climate_Report::14] World_Climate_Report: World Climate Report , a concise , hard-hitting and scientifically correct response to the global change reports which gain attention in the literature and popular press .
+  [L'Obs::2] L'Obs: Its current editor is .
+
+Sub-claim 2 [composition]: Bryan Douglas Caplan works where the editor of 'World Climate Report' is a senior fellow in Washington D.C.
+  depends_on: [0, 1]
+  Verdict: REFUTED (confidence 0.51)
+  Reasoning: Passage 9 provides information about Bryan Douglas Caplan's affiliations, but does not mention the editor of 'World Climate Report' or their location. [NLI-bidir: NEI→REFUTED on max_contra=1.00] [calibrator: p=0.51]
+  [Bryan_Caplan::0] Bryan_Caplan: Bryan Douglas Caplan -LRB- born April 8 , 1971 -RRB- is an American economist .
+  [World_Climate_Report::0] World_Climate_Report: World Climate Report , a newsletter edited by Patrick Michaels , was produced by the Greening Earth Society , a non-profit organization created by the Western Fuels Association .
+  [Multinational_Monitor::6] Multinational_Monitor: The headquarters of the magazine was in Washington DC .
+```
+
+---
+
+## #4  uid=182e02b0  gold=SUPPORTED  predicted=REFUTED
+
+```
+Claim: Daniel Ken "Dan" Inouye won the 2004 United States Senate election in Hawaii by a margin of 12%.
+Final verdict: REFUTED (confidence 0.54)
+Sub-claims: 2
+
+Sub-claim 0 [lookup]: Daniel Ken 'Dan' Inouye won the 2004 United States Senate election in Hawaii.
+  Verdict: NEI (confidence 0.44)
+  Reasoning: Passage 1 provides background information about the 2004 election but does not specify who won. Passages 2, 6, and 7 mention Dan Inouye's election to the Senate, but do not state that he won the 2004 election. [NLI-bidir: NEI→REFUTED on max_contra=0.99] [calibrator: p=0.44]
+  [United_States_Senate_election_in_Hawaii,_2004::0] United_States_Senate_election_in_Hawaii,_2004: The 2004 United States Senate election in Hawaii took place on November 2 , 2004 alongside other elections to the United States Senate in other states as well as elections to the United States House o...
+  [Tom_Coburn::6] Tom_Coburn: In 2004 , he returned to political life with a successful run for the U.S. Senate .
+  [Tamerlan_Tsarnaev::4] Tamerlan_Tsarnaev: He came to the United States in 2004 .
+
+Sub-claim 1 [lookup]: Inouye's margin of victory was 12%.
+  depends_on: [0]
+  Verdict: REFUTED (confidence 0.65)
+  Reasoning: None of the evidence passages provide information about Inouye's margin of victory. [NLI-bidir: NEI→REFUTED on max_contra=1.00] [calibrator: p=0.65]
+  [Electoral_district_of_Fisher::25] Electoral_district_of_Fisher: On a 0.02 percent margin , it became the most marginal seat in parliament .
+  [United_States_presidential_election,_2012::16] United_States_presidential_election,_2012: As such , his margin of victory decreased from 2008 .
+  [Margaret_Court::9] Margaret_Court: Her open era singles career winning percentage of 91.37 % -LRB- 593 -- 56 -RRB- is unequalled , as is her open era winning percentage of 91.7 % -LRB- 11 -- 1 -RRB- in Grand Slam finals .
+```
+
+---
+
+## #5  uid=1fcf41b8  gold=SUPPORTED  predicted=REFUTED
+
+```
+Claim: The genus for Monstera acuminata does not have more species than Cercis.
+Final verdict: REFUTED (confidence 0.62)
+Sub-claims: 3
+
+Sub-claim 0 [lookup]: The genus for Monstera acuminata has a known number of species.
+  Verdict: SUPPORTED (confidence 0.67)
+  Reasoning: Passages 1, 2, 6, and 7 provide information about the number of species in the genus Monstera, but they do not specifically mention Monstera acuminata or provide a known number for it. [calibrator: p=0.67]
+  [Streptococcus::9] Streptococcus: Currently , over 50 species are recognised in this genus .
+  [Monstera::0] Monstera: Monstera is a genus of about 50 species of flowering plants in the arum family , Araceae , native to tropical regions of the Americas .
+  [Taxonomy_of_the_Orchidaceae::27] Taxonomy_of_the_Orchidaceae: The number of genera recognized in the family has varied from one classification to another .
+
+Sub-claim 1 [lookup]: The genus for Cercis has a known number of species.
+  Verdict: SUPPORTED (confidence 0.59)
+  Reasoning: The evidence does not provide a clear and consistent number of species for the genus Cercis. [calibrator: p=0.59]
+  [Cercis::0] Cercis: Cercis -LSB- ˈsɜːrsᵻs -RSB- , is a genus of about 10 species in the subfamily Caesalpinioideae of the pea family Fabaceae , native to warm temperate regions .
+  [Streptococcus::9] Streptococcus: Currently , over 50 species are recognised in this genus .
+  [Solanum::6] Solanum: Thus , the genus today contains roughly 1,500 -- 2,000 species .
+
+Sub-claim 2 [comparison]: The genus for Monstera acuminata has no more species than the genus for Cercis.
+  depends_on: [0, 1]
+  Verdict: REFUTED (confidence 0.60)
+  Reasoning: The evidence does not provide a clear count of species in either the Cercis or Monstera acuminata genus. [NLI-bidir: NEI→REFUTED on max_contra=1.00] [calibrator: p=0.60]
+  [Cercis::0] Cercis: Cercis -LSB- ˈsɜːrsᵻs -RSB- , is a genus of about 10 species in the subfamily Caesalpinioideae of the pea family Fabaceae , native to warm temperate regions .
+  [Monstera::0] Monstera: Monstera is a genus of about 50 species of flowering plants in the arum family , Araceae , native to tropical regions of the Americas .
+  [Monstera_acuminata::0] Monstera_acuminata: Monstera acuminata , or shingle plant , is a species of flowering plant from Araceae family which is widespread from Mexico to Central America .
+```
+
+---
+
+## #6  uid=8ae5dcf4  gold=REFUTED  predicted=NEI
+
+```
+Claim: Christopher Kelly is a journalist for a magazine headquartered in Downtown Austin, Texas. That magazine had an article by Skip Hollandsworth that was adapted into the film  Love's Deadly Triangle: The Texas Cadet Murder.
+Final verdict: NEI (confidence 0.48)
+Sub-claims: 4
+
+Sub-claim 0 [lookup]: Christopher Kelly is a journalist.
+  Verdict: NEI (confidence 0.52)
+  Reasoning: None of the evidence directly states that Christopher Kelly is a journalist. [calibrator: p=0.52]
+  [William_Ridley_Wills::6] William_Ridley_Wills: He was well known as a novelist , poet , and journalist .
+  [The_Daily_Telegraph::0] The_Daily_Telegraph: The Daily Telegraph , commonly referred to simply as The Telegraph , is a national British daily broadsheet newspaper published in London by Telegraph Media Group and distributed across the United Kin...
+  [George_Ruby::9] George_Ruby: He worked as a journalist in that city .
+
+Sub-claim 1 [composition]: Christopher Kelly works for a magazine headquartered in Downtown Austin, Texas.
+  depends_on: [0]
+  Verdict: SUPPORTED (confidence 0.63)
+  Reasoning: None of the evidence directly mentions Christopher Kelly or a magazine headquartered in Downtown Austin, Texas. [calibrator: p=0.63]
+  [Texas_Monthly::0] Texas_Monthly: Texas Monthly is a monthly American magazine headquartered in Downtown Austin , Texas .
+  [Kathy_Cronkite::16] Kathy_Cronkite: She currently lives in Austin , TX .
+  [Charles_Hirshberg::1] Charles_Hirshberg: He primarily writes for large-circulation magazines .
+
+Sub-claim 2 [lookup]: The magazine has an article by Skip Hollandsworth.
+  Verdict: NEI (confidence 0.40)
+  Reasoning: None of the evidence passages mention Skip Hollandsworth or an article in the magazine. [calibrator: p=0.40]
+  [AARP_The_Magazine::0] AARP_The_Magazine: AARP The Magazine is an American bi-monthly magazine , published by the American Association of Retired People , AARP , which focuses on aging issues .
+  [ESPN_The_Magazine::0] ESPN_The_Magazine: ESPN The Magazine is a fortnightly sports magazine published by the ESPN sports network in Bristol , Connecticut in the United States .
+  [America_-LRB-magazine-RRB-::3] America_-LRB-magazine-RRB-: The magazine is also available online .
+
+Sub-claim 3 [composition]: Skip Hollandsworth's article was adapted into the film Love's Deadly Triangle: The Texas Cadet Murder.
+  depends_on: [2]
+  Verdict: NEI (confidence 0.38)
+  Reasoning: Passage 1 only states it was adapted into a movie, but does not specify the title or the source. [NLI-bidir: NEI→REFUTED on max_contra=1.00] [calibrator: p=0.38]
+  [Plymouth_Fury::15] Plymouth_Fury: It was later adapted into a movie .
+  [Love's_Deadly_Triangle-COLON-_The_Texas_Cadet_Murder::0] Love's_Deadly_Triangle-COLON-_The_Texas_Cadet_Murder: Love 's Deadly Triangle : The Texas Cadet Murder -LRB- DVD title : Swearing Allegiance -RRB- is a 1997 American drama television film based on real life murder of Adrianne Jones by Diane Zamora in Tex...
+  [Love's_Deadly_Triangle-COLON-_The_Texas_Cadet_Murder::2] Love's_Deadly_Triangle-COLON-_The_Texas_Cadet_Murder: The film was adapted from `` The Killer Cadets '' , an article in Texas Monthly by Skip Hollandsworth , and aired on NBC .
+```
+
+---
+
+## #7  uid=1ddef0e6  gold=SUPPORTED  predicted=REFUTED
+
+```
+Claim: Pretty Woman was a horror film by a screenwriter. The screenwriter and Shawn Levy are both film producers.
+Final verdict: REFUTED (confidence 0.55)
+Sub-claims: 4
+
+Sub-claim 0 [negation]: Pretty Woman was a horror film.
+  Verdict: REFUTED (confidence 0.63)
+  Reasoning: Passage 1 describes Pretty Woman as a romantic comedy, not a horror film. [NLI-bidir: NEI→REFUTED on max_contra=1.00] [calibrator: p=0.63]
+  [Pretty_Woman::0] Pretty_Woman: Pretty Woman is a 1990 American romantic comedy film directed by Garry Marshall from a screenplay by J. F. Lawton .
+  [Horror_film::0] Horror_film: A horror film is a movie that seeks to elicit a physiological reaction , such as an elevated heartbeat , through the use of fear and shocking one 's audiences .
+  [Charlize_Theron::1] Charlize_Theron: She has starred in several Hollywood films , such as The Devil 's Advocate -LRB- 1997 -RRB- , Mighty Joe Young -LRB- 1998 -RRB- , The Cider House Rules -LRB- 1999 -RRB- , Monster -LRB- 2003 -RRB- , Th...
+
+Sub-claim 1 [lookup]: A screenwriter wrote Pretty Woman.
+  Verdict: NEI (confidence 0.47)
+  Reasoning: None of the evidence passages explicitly state who wrote Pretty Woman or provide information about a screenwriter's involvement. [NLI-bidir: NEI→REFUTED on max_contra=0.99] [calibrator: p=0.47]
+  [J._K._Rowling::0] J._K._Rowling: Joanne Rowling , -LRB- -LSB- ˈrəʊlɪŋ -RSB- born 31 July 1965 -RRB- , pen names J. K. Rowling and Robert Galbraith , is a British novelist , screenwriter and film producer best known as the author of t...
+  [Pretty_Woman::0] Pretty_Woman: Pretty Woman is a 1990 American romantic comedy film directed by Garry Marshall from a screenplay by J. F. Lawton .
+  [Brave_-LRB-2012_film-RRB-::2] Brave_-LRB-2012_film-RRB-: The story is by Chapman , with the screenplay by Andrews , Purcell , Chapman and Irene Mecchi .
+
+Sub-claim 2 [lookup]: Shawn Levy is a film producer.
+  Verdict: SUPPORTED (confidence 0.63)
+  Reasoning: Passages 7 and 9 clearly state that Shawn Levy is a film producer. [NLI veto: max_contra=0.96 >= 0.95] [calibrator: p=0.63]
+  [Shawn_Levy::0] Shawn_Levy: Shawn Adam Levy -LRB- born July 23 , 1968 -RRB- is a Canadian film director , producer , and actor .
+  [Shawn_Levy::7] Shawn_Levy: Levy was a producer on the 2016 sci-fi film Arrival , which resulted in him receiving an Academy Award nomination for Best Picture .
+  [Date_Night::0] Date_Night: Date Night is a 2010 American comedy film directed by Shawn Levy , written by Josh Klausner and starring Steve Carell and Tina Fey as a couple who get caught up in a case of mistaken identity while on...
+
+Sub-claim 3 [composition]: A screenwriter and Shawn Levy are both film producers.
+  depends_on: [1, 2]
+  Verdict: NEI (confidence 0.45)
+  Reasoning: Passages 9 and 10 clearly state that Shawn Levy is both a producer and a screenwriter. [NLI veto: max_contra=1.00 >= 0.95] [calibrator: p=0.45]
+  [Shawn_Levy::0] Shawn_Levy: Shawn Adam Levy -LRB- born July 23 , 1968 -RRB- is a Canadian film director , producer , and actor .
+  [Shawn_Levy::7] Shawn_Levy: Levy was a producer on the 2016 sci-fi film Arrival , which resulted in him receiving an Academy Award nomination for Best Picture .
+  [Cheaper_by_the_Dozen_2::2] Cheaper_by_the_Dozen_2: Shawn Levy , the director of the first film , did not return as director for this sequel , which was instead directed by Adam Shankman -LRB- The Pacifier -RRB- .
+```
+
+---
+
+## #8  uid=30a535f5  gold=SUPPORTED  predicted=NEI
+
+```
+Claim: This British screenwriter adapted The Beach for a romantic movie from the novel by Alex Garland. He also wrote T2 Trainspotting.
+Final verdict: NEI (confidence 0.43)
+Sub-claims: 3
+
+Sub-claim 0 [composition]: A British screenwriter adapted The Beach for a romantic movie.
+  Verdict: NEI (confidence 0.37)
+  Reasoning: Passage 7 provides information about The Theory of Everything, but it does not mention John Hodge or the adaptation of The Beach. [NLI-bidir: NEI→REFUTED on max_contra=1.00] [calibrator: p=0.37]
+  [The_Beach_-LRB-film-RRB-::0] The_Beach_-LRB-film-RRB-: The Beach is a 2000 adventure drama film directed by Danny Boyle and based on the 1996 novel of the same name by Alex Garland , which was adapted for the film by John Hodge .
+  [Plymouth_Fury::15] Plymouth_Fury: It was later adapted into a movie .
+  [La_La_Land_-LRB-film-RRB-::0] La_La_Land_-LRB-film-RRB-: La La Land is a 2016 American romantic musical film written and directed by Damien Chazelle , and starring Ryan Gosling and Emma Stone as a musician and an aspiring actress who meet and fall in love i...
+
+Sub-claim 1 [composition]: The adapted movie from The Beach was released in a romantic genre.
+  depends_on: [0]
+  Verdict: NEI (confidence 0.39)
+  Reasoning: None of the evidence passages specifically mention the movie adaptation of The Beach or its genre. [calibrator: p=0.39]
+  [The_Beach_-LRB-film-RRB-::0] The_Beach_-LRB-film-RRB-: The Beach is a 2000 adventure drama film directed by Danny Boyle and based on the 1996 novel of the same name by Alex Garland , which was adapted for the film by John Hodge .
+  [Plymouth_Fury::15] Plymouth_Fury: It was later adapted into a movie .
+  [Beauty_and_the_Beast_-LRB-2017_film-RRB-::0] Beauty_and_the_Beast_-LRB-2017_film-RRB-: Beauty and the Beast is a 2017 American musical romantic fantasy film directed by Bill Condon from a screenplay written by Stephen Chbosky and Evan Spiliotopoulos , and co-produced by Walt Disney Pict...
+
+Sub-claim 2 [lookup]: A British screenwriter wrote T2 Trainspotting.
+  Verdict: SUPPORTED (confidence 0.55)
+  Reasoning: Passage 5 explicitly states that John Hodge wrote the script for T2 Trainspotting, based on the novel Trainspotting by Irvine Welsh, but does not claim he is the British screenwriter who wrote the original novel. [calibrator: p=0.55]
+  [John_Hodge_-LRB-screenwriter-RRB-::0] John_Hodge_-LRB-screenwriter-RRB-: John Hodge -LRB- born 1964 -RRB- is a British screenwriter and dramatist , most noted for his adaptation of Irvine Welsh 's novel Trainspotting into the script for the film of the same title .
+  [J._K._Rowling::0] J._K._Rowling: Joanne Rowling , -LRB- -LSB- ˈrəʊlɪŋ -RSB- born 31 July 1965 -RRB- , pen names J. K. Rowling and Robert Galbraith , is a British novelist , screenwriter and film producer best known as the author of t...
+  [Adaptation_-LRB-film-RRB-::9] Adaptation_-LRB-film-RRB-: Finally he wrote a script based on his experience of adapting the book into a screenplay .
+```
+
+---
+
+## #9  uid=18967cdb  gold=SUPPORTED  predicted=NEI
+
+```
+Claim: The band a singer was in was an Australian rock band that was "one of the most critically acclaimed bands of the 80's". The band is featured in KSPN's AAA format. Shane Shu has a voice that has been compared to the singer's voice. The band is featured in KSPN's AAA format.
+Final verdict: NEI (confidence 0.46)
+Sub-claims: 3
+
+Sub-claim 0 [lookup]: The band was an Australian rock band that was 'one of the most critically acclaimed bands of the 80's'.
+  Verdict: SUPPORTED (confidence 0.51)
+  Reasoning: Passages 1, 6, 7, 8, and 10 provide information about different bands or music genres, but none specifically mentions the band as an Australian rock band from the 1980s. [calibrator: p=0.51]
+  [Talking_Heads::2] Talking_Heads: Described by critic Stephen Thomas Erlewine as `` one of the most critically acclaimed bands of the '80s , '' the group helped to pioneer new wave music by integrating elements of punk , art rock , fu...
+  [The_Libertines::5] The_Libertines: The band gained some notoriety in the early 2000s .
+  [Tom_Morello::11] Tom_Morello: The group went on to become one of the most popular and influential rock acts of the 1990s .
+
+Sub-claim 1 [comparison]: Shane Shu has a voice that has been compared to the singer's voice.
+  Verdict: NEI (confidence 0.42)
+  Reasoning: The evidence does not provide information about Shane Shu's voice being compared to another singer's voice. [NLI-bidir: NEI→REFUTED on max_contra=1.00] [calibrator: p=0.42]
+  [Shane_Shu::0] Shane_Shu: Shane Shu -LRB- Shane Berend van Lunteren , born February 11 , 1976 -RRB- is a Dutch/Canadian singer-songwriter , producer and photographer from Kamloops , British Columbia .
+  [Singing::1] Singing: A person who sings is called a singer or vocalist .
+  [Yang_Seung-ho::0] Yang_Seung-ho: Yang Seung-ho -LRB- 양승호 ; born October 16 , 1987 -RRB- , is a South Korean idol singer , dancer , actor , model and the leader of Korean male group MBLAQ , currently active in South Korea under Will E...
+
+Sub-claim 2 [composition]: The band is featured in KSPN's AAA format.
+  depends_on: [0, 1]
+  Verdict: NEI (confidence 0.45)
+  Reasoning: None of the evidence directly mentions the band or its format. [calibrator: p=0.45]
+  [KSPN-FM::4] KSPN-FM: KSPN features the AAA format , which combines the classic rock hits from Tom Petty , Van Morrison and Talking Heads with today 's newer musicians like Ben Harper , Blues Traveler , Sonia Dada and Wide...
+  [The_Libertines::5] The_Libertines: The band gained some notoriety in the early 2000s .
+  [Red_Hot_Chili_Peppers::4] Red_Hot_Chili_Peppers: Red Hot Chili Peppers are one of the best-selling bands of all time with over 80 million records sold worldwide , have been nominated for sixteen Grammy Awards , of which they have won six , and are t...
+```
+
+---
+
+## #10  uid=784fae13  gold=SUPPORTED  predicted=NEI
+
+```
+Claim: Between one of the several Tugou breeds distributed across guinea and this area, this area is used for hunting. The Zami River flows past this area.
+Final verdict: NEI (confidence 0.47)
+Sub-claims: 3
+
+Sub-claim 0 [lookup]: One of the several Tugou breeds is distributed across Guinea.
+  Verdict: NEI (confidence 0.47)
+  Reasoning: The evidence does not specifically mention any Tugou breeds being distributed across Guinea. [NLI-bidir: NEI→REFUTED on max_contra=1.00] [calibrator: p=0.47]
+  [Eryngium::1] Eryngium: There are about 250 species .
+  [Tugou::1] Tugou: Tugou includes the most popular Chinese dog breed - the Chinese Field Dog -LRB- 中華田園犬 , pinyin : zhōng huá tián yuán quǎn -RRB- , Chinese Chongqing Dog , Xiasi Dog , and several other native dog breed...
+  [Tugou::0] Tugou: Tugou -LRB- 土狗 , pinyin : tǔ gǒu -RRB- , literally means Native Dog in Mandarin Chinese , is the general name for several dog breeds originated from China and still abundantly exists across the countr...
+
+Sub-claim 1 [composition]: This area is used for hunting.
+  depends_on: [0]
+  Verdict: NEI (confidence 0.45)
+  Reasoning: Passage 7 explicitly mentions that the area is open for year-round recreation including hunting. [NLI veto: max_contra=1.00 >= 0.95] [calibrator: p=0.45]
+  [Hunter_Region::0] Hunter_Region: The Hunter Region , also commonly known as the Hunter Valley , is a region of New South Wales , Australia , extending from approximately 120 km to 310 km north of Sydney .
+  [Port_McArthur_Tidal_Wetlands_System::2] Port_McArthur_Tidal_Wetlands_System: It is an important site for waders , or shorebirds .
+  [Salburun::5] Salburun: Hunting with eagles ,
+
+Sub-claim 2 [lookup]: The Zami River flows past this area.
+  Verdict: NEI (confidence 0.49)
+  Reasoning: None of the evidence passages directly mention the Zami River or its location. [calibrator: p=0.49]
+  [Middle_East::0] Middle_East: The Middle Eastالشرق الأوسط , ; Միջին Արևելք , ; Orta Şərq Central Kurdish : ڕۆژھەڵاتی ناوین , Rojhelatî Nawîn ; Moyen-Orient ახლო აღმოსავლეთი , ; Μέση Ανατολή , ; המזרח התיכון , ; Rojhilata Navîn خاو...
+  [Zami_River::0] Zami_River: Zami River is a river of Burma -LRB- Myanmar -RRB- , arising at in southern Kayin State .
+  [Zami_River::2] Zami_River: The Zami River is a tributary of the Ataran River , which on a grander scale is part of the Salween River Basin .
+```
+
+---
+
+## #11  uid=d06a4709  gold=SUPPORTED  predicted=REFUTED
+
+```
+Claim: From an Andrey Zvyagintsev drama, the actual events upon which the drama is based took place in the American city of Granby, Colorado in 1864.
+Final verdict: REFUTED (confidence 0.46)
+Sub-claims: 2
+
+Sub-claim 0 [lookup]: An Andrey Zvyagintsev drama is based on actual events.
+  Verdict: NEI (confidence 0.42)
+  Reasoning: Passages 7 and 8 provide conflicting information about whether the film is based on actual events, making it impossible to determine the claim. [NLI-bidir: NEI→REFUTED on max_contra=1.00] [calibrator: p=0.42]
+  [Boys_Town_-LRB-film-RRB-::10] Boys_Town_-LRB-film-RRB-: Although the story is largely fictional , it is based upon a real man and a real place .
+  [American_Horror_Story::2] American_Horror_Story: Some plot elements of each season are loosely inspired by true events .
+  [Leviathan_-LRB-2014_film-RRB-::0] Leviathan_-LRB-2014_film-RRB-: Leviathan -LRB- , Leviafan -RRB- is a 2014 Russian drama film directed by Andrey Zvyagintsev , co-written by Zvyagintsev and Oleg Negin , and starring Aleksei Serebryakov , Elena Lyadova , and Vladimi...
+
+Sub-claim 1 [composition]: The actual events of the drama took place in Granby, Colorado, USA in 1864.
+  depends_on: [0]
+  Verdict: REFUTED (confidence 0.50)
+  Reasoning: The evidence does not provide specific information about the location or events of the drama in Granby, Colorado, USA in 1864. [NLI-bidir: NEI→REFUTED on max_contra=1.00] [calibrator: p=0.50]
+  [Song_of_the_South::2] Song_of_the_South: The film takes place in the southern United States during the Reconstruction Era , a period of American history shortly after the end of the American Civil War and the abolition of slavery .
+  [Confederate_States_of_America::0] Confederate_States_of_America: The Confederate States of America -LRB- CSA or C.S. -RRB- , commonly referred to as the Confederacy , was a self-proclaimed nation of 11 secessionist slave-holding states of the United States , existi...
+  [Battle_of_Blair_Mountain::0] Battle_of_Blair_Mountain: The Battle of Blair Mountain was the largest labor uprising in United States history and one of the largest , best-organized , and most well-armed uprisings since the American Civil War .
+```
+
+---
+
+## #12  uid=7492999e  gold=SUPPORTED  predicted=NEI
+
+```
+Claim: The well preserved helmet discovered in 1939 with the helmet similarly designed as the  Pioneer Helmet,  is widely believed to have been the helmet of Gadkaris of East Anglia.
+Final verdict: NEI (confidence 0.43)
+Sub-claims: 2
+
+Sub-claim 0 [lookup]: The well preserved helmet discovered in 1939 has a similar design to the Pioneer Helmet.
+  Verdict: NEI (confidence 0.37)
+  Reasoning: Passages 2-9 describe the Pioneer Helmet and its discovery, but do not provide information about a well-preserved helmet from 1939 with a similar design. [calibrator: p=0.37]
+  [Smart_-LRB-marque-RRB-::7] Smart_-LRB-marque-RRB-: Several variants on the original design have been introduced , with the original being the `` Fortwo '' .
+  [Pioneer_Helmet::0] Pioneer_Helmet: The Pioneer Helmet -LRB- also known as Wollaston Helmet or Northamptonshire Helmet -RRB- is a 7th-century Anglo-Saxon boar-crested helm found by archaeologists from Northamptonshire Archaeology at a q...
+  [Coppergate_Helmet::1] Coppergate_Helmet: It is remarkably well preserved and , together with the Benty Grange , Pioneer , Shorwell , Sutton Hoo , and Staffordshire helmets , is one of only six Anglo-Saxon helmets discovered to date .
+
+Sub-claim 1 [composition]: The well preserved helmet discovered in 1939 is believed to have been the helmet of Gadkaris of East Anglia.
+  depends_on: [0]
+  Verdict: NEI (confidence 0.49)
+  Reasoning: None of the evidence passages provide information about the helmet being the helmet of Gadkaris of East Anglia. [NLI-bidir: NEI→REFUTED on max_contra=1.00] [calibrator: p=0.49]
+  [Coppergate_Helmet::1] Coppergate_Helmet: It is remarkably well preserved and , together with the Benty Grange , Pioneer , Shorwell , Sutton Hoo , and Staffordshire helmets , is one of only six Anglo-Saxon helmets discovered to date .
+  [Haverhill,_Massachusetts::10] Haverhill,_Massachusetts: The city was also known for the manufacture of hats .
+  [Sutton_Hoo_helmet::2] Sutton_Hoo_helmet: The helmet is `` the most iconic object '' from one `` of the most spectacular archaeological discoveries ever made , '' and one of the most important Anglo-Saxon artefacts ever found .
+```
+
+---
+
+## #13  uid=7efedd25  gold=REFUTED  predicted=REFUTED
+
+```
+Claim: Dev made Parade (Dev song) which is compared to her hit single. The hit single is a follow up to a Far East Movements song from the album Free Wired.
+Final verdict: REFUTED (confidence 0.53)
+Sub-claims: 3
+
+Sub-claim 0 [lookup]: Dev made Parade.
+  Verdict: NEI (confidence 0.44)
+  Reasoning: None of the evidence directly mentions Dev making a song or an album. [calibrator: p=0.44]
+  [Parade_-LRB-Dev_song-RRB-::0] Parade_-LRB-Dev_song-RRB-: `` Parade '' is a song performed by American recording artist Dev , produced by NanosauR .
+  [Parade_-LRB-Prince_album-RRB-::0] Parade_-LRB-Prince_album-RRB-: Parade is the eighth studio album by American recording artist Prince , and the final to feature his backing band The Revolution ; in addition to being the soundtrack album to the 1986 film Under the...
+  [Parade_-LRB-Dev_song-RRB-::4] Parade_-LRB-Dev_song-RRB-: `` Parade '' is a electropop rapped song which has been compared to Dev 's previous hits like Bass Down Low , Fireball and In My Trunk .
+
+Sub-claim 1 [comparison]: Parade is compared to a hit single.
+  depends_on: [0]
+  Verdict: NEI (confidence 0.41)
+  Reasoning: The evidence does not clearly support or refute the claim that 'Parade' is compared to a hit single. [NLI-bidir: NEI→SUPPORTED on max_entail=0.96] [calibrator: p=0.41]
+  [Parade_-LRB-Dev_song-RRB-::4] Parade_-LRB-Dev_song-RRB-: `` Parade '' is a electropop rapped song which has been compared to Dev 's previous hits like Bass Down Low , Fireball and In My Trunk .
+  [Single_-LRB-music-RRB-::11] Single_-LRB-music-RRB-: Despite being referred to as a single , singles can include up to as many as three tracks on them .
+  [Blue_-LRB-Da_Ba_Dee-RRB-::2] Blue_-LRB-Da_Ba_Dee-RRB-: The song is the group 's most popular single , reaching number one in many countries such as Ireland , the United Kingdom , the Netherlands , France , Sweden , Switzerland , New Zealand , Finland , No...
+
+Sub-claim 2 [lookup]: The hit single is a follow up to a Far East Movements song from the album Free Wired.
+  Verdict: REFUTED (confidence 0.75)
+  Reasoning: The evidence does not clearly specify which song is being referred to or if it is a follow-up to a Far East Movements song from the album Free Wired. [NLI-bidir: NEI→REFUTED on max_contra=0.97] [calibrator: p=0.75]
+  [Like_a_G6::1] Like_a_G6: It is the lead single from Far East Movement 's third studio album Free Wired , and production was handled by The Cataracs .
+  [Heading_Out_to_the_Highway::1] Heading_Out_to_the_Highway: It was released as a single later that year .
+  [Jupiter_-LRB-Swallow_the_Moon-RRB-::4] Jupiter_-LRB-Swallow_the_Moon-RRB-: The single is credited as the `` radio version '' .
+```
+
+---
+
+## #14  uid=4f472fee  gold=REFUTED  predicted=REFUTED
+
+```
+Claim: The actresses Katharine Hepburn, Joan Bennett and Frances Dee appeared with the mother of Robert Lowery Hanks in the film that Charles F. Miller debuted in.
+Final verdict: REFUTED (confidence 0.58)
+Sub-claims: 5
+
+Sub-claim 0 [lookup]: Katharine Hepburn appeared with the mother of Robert Lowery Hanks in a film.
+  Verdict: NEI (confidence 0.42)
+  Reasoning: None of the evidence passages explicitly mention Katharine Hepburn appearing with the mother of Robert Lowery Hanks in a film. [NLI-bidir: NEI→REFUTED on max_contra=1.00] [calibrator: p=0.42]
+  [On_Golden_Pond_-LRB-1981_film-RRB-::5] On_Golden_Pond_-LRB-1981_film-RRB-: Co-star Katharine Hepburn won the BAFTA Award for Best Actress in a Leading Role and the Academy Award for Best Actress as did Thompson for his script , and there were a further seven Oscar nomination...
+  [The_Aviator_-LRB-2004_film-RRB-::1] The_Aviator_-LRB-2004_film-RRB-: It stars Leonardo DiCaprio as Howard Hughes , Cate Blanchett as Katharine Hepburn and Kate Beckinsale as Ava Gardner .
+  [Cate_Blanchett::3] Cate_Blanchett: Her portrayal of Katharine Hepburn in Martin Scorsese 's 2004 film The Aviator brought her critical acclaim and many accolades , including the Academy Award for Best Actress in a Supporting Role , mak...
+
+Sub-claim 1 [lookup]: Joan Bennett appeared with the mother of Robert Lowery Hanks in a film.
+  depends_on: [0]
+  Verdict: REFUTED (confidence 0.70)
+  Reasoning: None of the evidence passages explicitly mention Joan Bennett appearing with the mother of Robert Lowery Hanks in a film. [NLI-bidir: NEI→REFUTED on max_contra=1.00] [calibrator: p=0.70]
+  [Father_of_the_Bride_-LRB-1950_film-RRB-::1] Father_of_the_Bride_-LRB-1950_film-RRB-: The movie stars Spencer Tracy in the titular role , Joan Bennett , Elizabeth Taylor , Don Taylor , Billie Burke , and Leo G. Carroll .
+  [Catch_Me_If_You_Can::2] Catch_Me_If_You_Can: The film was directed by Steven Spielberg and stars Leonardo DiCaprio and Tom Hanks , with Christopher Walken , Martin Sheen , and Nathalie Baye in supporting roles .
+  [Little_Women_-LRB-1933_film-RRB-::0] Little_Women_-LRB-1933_film-RRB-: Little Women is a 1933 American pre-Code drama film , directed by George Cukor and starring Katharine Hepburn , Joan Bennett , Frances Dee , and Jean Parker .
+
+Sub-claim 2 [lookup]: Frances Dee appeared with the mother of Robert Lowery Hanks in a film.
+  depends_on: [0]
+  Verdict: REFUTED (confidence 0.71)
+  Reasoning: None of the evidence passages mention Frances Dee or Robert Lowery Hanks. [NLI-bidir: NEI→REFUTED on max_contra=0.99] [calibrator: p=0.71]
+  [Little_Women_-LRB-1933_film-RRB-::0] Little_Women_-LRB-1933_film-RRB-: Little Women is a 1933 American pre-Code drama film , directed by George Cukor and starring Katharine Hepburn , Joan Bennett , Frances Dee , and Jean Parker .
+  [Peggy_Sue_Got_Married::0] Peggy_Sue_Got_Married: Peggy Sue Got Married is a 1986 American comedy-drama film directed by Francis Ford Coppola starring Kathleen Turner as a woman on the verge of a divorce , who finds herself transported back to the da...
+  [Saturday_Night_Fever::0] Saturday_Night_Fever: Saturday Night Fever is a 1977 American musical-drama film directed by John Badham and starring John Travolta as Tony Manero , a working-class young man who spends his weekends dancing and drinking at...
+
+Sub-claim 3 [lookup]: Charles F. Miller debuted in a film.
+  Verdict: SUPPORTED (confidence 0.68)
+  Reasoning: Passage 1 directly states Charles F. Miller was an American film actor, implying he debuted in a film. [NLI veto: max_contra=0.97 >= 0.95] [calibrator: p=0.68]
+  [Charles_F._Miller::0] Charles_F._Miller: Charles F. Miller -LRB- June 6 , 1878 - November 25 , 1952 -RRB- was an American film actor .
+  [Deadpool_-LRB-film-RRB-::0] Deadpool_-LRB-film-RRB-: Deadpool is a 2016 American superhero film directed by Tim Miller and written by Rhett Reese and Paul Wernick , based on the Marvel Comics character of the same name .
+  [Dick_Miller::1] Dick_Miller: Miller 's main roles have been in films such as Gremlins , Gremlins 2 : The New Batch , The Explorers , Piranha , The Howling , A Bucket of Blood , The Little Shop of Horrors , Chopping Mall , Night o...
+
+Sub-claim 4 [composition]: The film in which Katharine Hepburn, Joan Bennett, and Frances Dee appeared also had Charles F. Miller as a debutant.
+  depends_on: [0, 1, 2, 3]
+  Verdict: NEI (confidence 0.37)
+  Reasoning: Passages 1, 4, and 8 provide information about the film Little Women and its cast, but do not mention Charles F. Miller or his debut role. [NLI-bidir: NEI→REFUTED on max_contra=1.00] [calibrator: p=0.37]
+  [Little_Women_-LRB-1933_film-RRB-::0] Little_Women_-LRB-1933_film-RRB-: Little Women is a 1933 American pre-Code drama film , directed by George Cukor and starring Katharine Hepburn , Joan Bennett , Frances Dee , and Jean Parker .
+  [Charles_F._Miller::0] Charles_F._Miller: Charles F. Miller -LRB- June 6 , 1878 - November 25 , 1952 -RRB- was an American film actor .
+  [Cate_Blanchett::3] Cate_Blanchett: Her portrayal of Katharine Hepburn in Martin Scorsese 's 2004 film The Aviator brought her critical acclaim and many accolades , including the Academy Award for Best Actress in a Supporting Role , mak...
+```
+
+---
+
+## #15  uid=52bf0528  gold=SUPPORTED  predicted=SUPPORTED
+
+```
+Claim: The genus Honeysuckle has more flowering species than the genus that Billbergiopsis is part of.
+Final verdict: SUPPORTED (confidence 0.64)
+Sub-claims: 1
+
+Sub-claim 0 [comparison]: The genus Honeysuckle has more flowering species than Billbergiopsis.
+  Verdict: SUPPORTED (confidence 0.64)
+  Reasoning: The evidence does not provide a clear comparison between the number of species in Honeysuckle and Billbergiopsis. [calibrator: p=0.64]
+  [Graptopetalum::3] Graptopetalum: There are around 19 species in this genus .
+  [Honeysuckle::3] Honeysuckle: Approximately 180 species of honeysuckle have been identified .
+  [Phacelia::8] Phacelia: Many species are cultivated as garden plants and honey plants .
+```
+
+---
+
+## #16  uid=084daa99  gold=REFUTED  predicted=REFUTED
+
+```
+Claim: The work was first performed at the Opéra-Comique in Paris in 1846 with a leading tenor. The leading tenor sang in the premiere of an opera featuring the music of Daniel Auber, who had previously contributed to the one-act ballet Les Rendezvous in 1933.
+Final verdict: REFUTED (confidence 0.62)
+Sub-claims: 3
+
+Sub-claim 0 [temporal]: The work was first performed at the Opéra-Comique in Paris in 1846.
+  Verdict: SUPPORTED (confidence 0.74)
+  Reasoning: Passage 1 clearly states the work was first performed at the Opéra-Comique in Paris on 6 December 1846. [NLI veto: max_contra=1.00 >= 0.95] [calibrator: p=0.74]
+  [La_damnation_de_Faust::2] La_damnation_de_Faust: It was first performed at the Opéra-Comique in Paris on 6 December 1846 .
+  [Louise_-LRB-opera-RRB-::3] Louise_-LRB-opera-RRB-: The opera depicts Parisian working-class life .
+  [Manon::1] Manon: It was first performed at the Opéra-Comique in Paris on 19 January 1884 , with sets designed by Eugène Carpezat -LRB- Act I -RRB- , Auguste-Alfred Rubé and Philippe Chaperon -LRB- Acts II and III -RRB...
+
+Sub-claim 1 [composition]: The leading tenor sang in the premiere of an opera featuring the music of Daniel Auber.
+  depends_on: [0]
+  Verdict: NEI (confidence 0.41)
+  Reasoning: Passage 7 provides the name of the tenor who sang in the premiere of the opera, but it does not specify the composer or the opera title. [calibrator: p=0.41]
+  [Benjamin_Burnley::7] Benjamin_Burnley: The singer has the range of a tenor and occasionally utilizes death growls in his singing .
+  [L'enfant_prodigue_-LRB-Auber-RRB-::0] L'enfant_prodigue_-LRB-Auber-RRB-: L'enfant prodigue -LRB- The Prodigal Son -RRB- is a grand opera in five acts composed by Daniel Auber to a French libretto by Eugène Scribe based on the Parable of the Prodigal Son in Chapter 15 of th...
+  [Andrea_Bocelli::0] Andrea_Bocelli: Andrea Bocelli , -LRB- -LSB- anˈdrɛːa boˈtʃɛlli -RSB- ; born 22 September 1958 -RRB- is an Italian classical crossover tenor , recording artist , and singer-songwriter .
+
+Sub-claim 2 [lookup]: Daniel Auber had previously contributed to the one-act ballet Les Rendezvous in 1933.
+  Verdict: REFUTED (confidence 0.73)
+  Reasoning: Passage 7 is the only one that mentions Daniel Auber contributing to Les Rendezvous in 1933, but it does not confirm the claim that it was his first contribution. [NLI-bidir: NEI→REFUTED on max_contra=1.00] [calibrator: p=0.73]
+  [Les_Rendezvous::0] Les_Rendezvous: Les Rendezvous is a plotless one-act ballet created in 1933 , with choreography by Frederick Ashton to the music of Daniel Auber -LRB- the ballet music from his opera L'enfant prodigue -RRB- arranged...
+  [Ballet_Shoes_-LRB-film-RRB-::5] Ballet_Shoes_-LRB-film-RRB-: A previous adaptation of Ballet Shoes was produced in serial
+  [Les_Rendezvous::13] Les_Rendezvous: Les Rendezvous was Ashton 's `` first substantial classical composition and an exultant statement of his idiosyncratic approach to academic ballet . ''
+```
+
+---
+
+## #17  uid=2d1c50f0  gold=REFUTED  predicted=NEI
+
+```
+Claim: The female star of Suburbicon also played the role of an emotionally troubled woman in the early 2000s Oscar winning movie.
+Final verdict: NEI (confidence 0.46)
+Sub-claims: 4
+
+Sub-claim 0 [lookup]: The female star of Suburbicon is a known person.
+  Verdict: NEI (confidence 0.43)
+  Reasoning: None of the evidence passages specifically mention the female star of Suburbicon. [calibrator: p=0.43]
+  [Suburbicon::0] Suburbicon: Suburbicon is an upcoming 2017 American crime comedy film directed by George Clooney and written by Joel and Ethan Coen .
+  [Lady_Gaga::0] Lady_Gaga: Stefani Joanne Angelina Germanotta -LRB- -LSB- ˈstɛfəniː_dʒɜrməˈnɒtə -RSB- ; born March 28 , 1986 -RRB- , known professionally as Lady Gaga , is an American singer , songwriter , and actress .
+  [Judy_Greer::0] Judy_Greer: Judy Greer -LRB- born Judith Therese Evans ; July 20 , 1975 -RRB- is an American actress , model and author , known for several television and film roles .
+
+Sub-claim 1 [lookup]: That person played an emotionally troubled woman in the early 2000s.
+  Verdict: NEI (confidence 0.50)
+  Reasoning: Passage 7 mentions she played the role of Persephone in The Matrix Reloaded and The Matrix Revolutions, an emotionally troubled woman in 2003, which aligns with the claim. [NLI-weak: max_entail=0.00 < 0.7] [calibrator: p=0.50]
+  [Marilyn_Monroe::27] Marilyn_Monroe: She struggled with substance abuse , depression , and anxiety .
+  [Vivien_Leigh::9] Vivien_Leigh: Later in life , she performed as a character actress in a few films .
+  [Julianne_Moore::1] Julianne_Moore: She is particularly known for her portrayals of emotionally troubled women in both independent and Hollywood films , and has received many accolades , including the 2014 Academy Award for Best Actress...
+
+Sub-claim 2 [lookup]: That emotionally troubled woman won an Oscar.
+  depends_on: [1]
+  Verdict: NEI (confidence 0.49)
+  Reasoning: Passage 6 clearly states she won the Academy Award for Best Actress for her performance as a depressed widow. [NLI-weak: max_entail=0.00 < 0.7] [calibrator: p=0.49]
+  [Julianne_Moore::1] Julianne_Moore: She is particularly known for her portrayals of emotionally troubled women in both independent and Hollywood films , and has received many accolades , including the 2014 Academy Award for Best Actress...
+  [Brie_Larson::12] Brie_Larson: She won several awards for her portrayal of a troubled mother kidnap victim in the film , including the Academy Award , BAFTA Award , Critic 's Choice Award , Golden Globe Award , Screen Actors Guild...
+  [Daenerys_Targaryen::22] Daenerys_Targaryen: She has also earned numerous other nominations and accolades for her portrayal .
+
+Sub-claim 3 [composition]: The female star of Suburbicon also played the role of an emotionally troubled woman in the early 2000s Oscar winning movie.
+  depends_on: [0, 1, 2]
+  Verdict: NEI (confidence 0.42)
+  Reasoning: Passage 4 mentions Piper Laurie as the female star of Suburbicon, but does not provide information about her role in the early 2000s Oscar-winning movie. [calibrator: p=0.42]
+  [Julianne_Moore::1] Julianne_Moore: She is particularly known for her portrayals of emotionally troubled women in both independent and Hollywood films , and has received many accolades , including the 2014 Academy Award for Best Actress...
+  [Brie_Larson::12] Brie_Larson: She won several awards for her portrayal of a troubled mother kidnap victim in the film , including the Academy Award , BAFTA Award , Critic 's Choice Award , Golden Globe Award , Screen Actors Guild...
+  [Suburbicon::0] Suburbicon: Suburbicon is an upcoming 2017 American crime comedy film directed by George Clooney and written by Joel and Ethan Coen .
+```
+
+---
+
+## #18  uid=db103f80  gold=REFUTED  predicted=NEI
+
+```
+Claim: Superdrag and Collective Soul are both rock bands.
+Final verdict: NEI (confidence 0.59)
+Sub-claims: 2
+
+Sub-claim 0 [lookup]: Superdrag is a rock band.
+  Verdict: NEI (confidence 0.37)
+  Reasoning: Passage 1 directly states Superdrag was an American alternative rock band, which supports the claim that Superdrag is a rock band. [NLI veto: max_contra=1.00 >= 0.95] [calibrator: p=0.37]
+  [Superdrag::0] Superdrag: Superdrag was an American alternative rock band from Knoxville , Tennessee , United States .
+  [Band_-LRB-rock_and_pop-RRB-::1] Band_-LRB-rock_and_pop-RRB-: For the video game series , see Rock Band .
+  [Band_-LRB-rock_and_pop-RRB-::6] Band_-LRB-rock_and_pop-RRB-: A rock band or pop band is a small musical ensemble which performs rock music , pop music or a related genre .
+
+Sub-claim 1 [lookup]: Collective Soul is a rock band.
+  Verdict: SUPPORTED (confidence 0.80)
+  Reasoning: Passage 1 directly states Collective Soul is an American rock band. [calibrator: p=0.80]
+  [Collective_Soul::0] Collective_Soul: Collective Soul is an American rock band originally from Stockbridge , Georgia .
+  [Rock_and_roll::0] Rock_and_roll: Rock and roll -LRB- often written as rock & roll or rock 'n' roll -RRB- is a genre of popular music that originated and evolved in the United States during the late 1940s and early 1950s , from Africa...
+  [Aerosmith::28] Aerosmith: Aerosmith is the best-selling American hard rock band of all time , having sold more than 150 million records worldwide , including over 70 million records in the United States alone .
+```
+
+---
+
+## #19  uid=be60cfa0  gold=REFUTED  predicted=NEI
+
+```
+Claim: The work of philosophy and social criticism known as the "Dialectic of Enlightenment" was written, in part, by Theodor W. Adorno, a philosopher, sociologist, and composer know for his critical theory of society.
+Final verdict: NEI (confidence 0.54)
+Sub-claims: 5
+
+Sub-claim 0 [lookup]: The work of philosophy and social criticism known as the 'Dialectic of Enlightenment' was written, in part, by Theodor W. Adorno.
+  Verdict: SUPPORTED (confidence 0.59)
+  Reasoning: Passage 1 clearly states that Dialectic of Enlightenment was written by Frankfurt School philosophers Max Horkheimer and Theodor W. Adorno. [NLI veto: max_contra=0.99 >= 0.95] [calibrator: p=0.59]
+  [Dialectic_of_Enlightenment::0] Dialectic_of_Enlightenment: Dialectic of Enlightenment -LRB- Dialektik der Aufklärung -RRB- is a work of philosophy and social criticism written by Frankfurt School philosophers Max Horkheimer and Theodor W. Adorno and first pub...
+  [Adult_animation::3] Adult_animation: Works in this genre may explore philosophical , political , or social issues .
+  [Theodor_W._Adorno::0] Theodor_W._Adorno: Theodor W. Adorno -LRB- -LSB- əˈdɔrnoʊ -RSB- -LSB- aˈdɔʀno -RSB- ; born Theodor Ludwig Wiesengrund ; September 11 , 1903 -- August 6 , 1969 -RRB- was a German philosopher , sociologist , and composer...
+
+Sub-claim 1 [other]: Theodor W. Adorno was a philosopher.
+  Verdict: SUPPORTED (confidence 0.62)
+  Reasoning: Passage 1 directly states that Theodor W. Adorno was a German philosopher, but the other passages do not provide enough information to confirm or refute the claim that he was a philosopher. [calibrator: p=0.62]
+  [Theodor_W._Adorno::0] Theodor_W._Adorno: Theodor W. Adorno -LRB- -LSB- əˈdɔrnoʊ -RSB- -LSB- aˈdɔʀno -RSB- ; born Theodor Ludwig Wiesengrund ; September 11 , 1903 -- August 6 , 1969 -RRB- was a German philosopher , sociologist , and composer...
+  [Culture_Industry_Reconsidered::0] Culture_Industry_Reconsidered: Culture Industry Reconsidered -LRB- Résumé über Kulturindustrie -RRB- , was written in 1963 by Theodor W. Adorno , a German philosopher who belonged to the Frankfurt School of social theory .
+  [Dialectic_of_Enlightenment::0] Dialectic_of_Enlightenment: Dialectic of Enlightenment -LRB- Dialektik der Aufklärung -RRB- is a work of philosophy and social criticism written by Frankfurt School philosophers Max Horkheimer and Theodor W. Adorno and first pub...
+
+Sub-claim 2 [other]: Theodor W. Adorno was a sociologist.
+  Verdict: SUPPORTED (confidence 0.52)
+  Reasoning: Passage 1 describes Adorno as a sociologist, but the other passages do not provide enough information to confirm or refute the claim about him being a sociologist. [calibrator: p=0.52]
+  [Theodor_W._Adorno::0] Theodor_W._Adorno: Theodor W. Adorno -LRB- -LSB- əˈdɔrnoʊ -RSB- -LSB- aˈdɔʀno -RSB- ; born Theodor Ludwig Wiesengrund ; September 11 , 1903 -- August 6 , 1969 -RRB- was a German philosopher , sociologist , and composer...
+  [Karl_Marx::0] Karl_Marx: Karl Marx -LRB- -LSB- mɑrks -RSB- -LSB- ˈkaɐ̯l ˈmaɐ̯ks -RSB- ; 5 May 1818 -- 14 March 1883 -RRB- was a Prussian-born philosopher , economist , sociologist , journalist , and revolutionary socialist .
+  [Culture_Industry_Reconsidered::0] Culture_Industry_Reconsidered: Culture Industry Reconsidered -LRB- Résumé über Kulturindustrie -RRB- , was written in 1963 by Theodor W. Adorno , a German philosopher who belonged to the Frankfurt School of social theory .
+
+Sub-claim 3 [other]: Theodor W. Adorno was a composer.
+  Verdict: NEI (confidence 0.40)
+  Reasoning: Passage 1 explicitly states that Theodor W. Adorno was a composer, but the evidence does not clearly support or refute the claim that he was a composer. [NLI-bidir: NEI→REFUTED on max_contra=1.00] [calibrator: p=0.40]
+  [Theodor_W._Adorno::0] Theodor_W._Adorno: Theodor W. Adorno -LRB- -LSB- əˈdɔrnoʊ -RSB- -LSB- aˈdɔʀno -RSB- ; born Theodor Ludwig Wiesengrund ; September 11 , 1903 -- August 6 , 1969 -RRB- was a German philosopher , sociologist , and composer...
+  [Henry_VIII_of_England::20] Henry_VIII_of_England: He was an author and composer .
+  [Theodor_W._Adorno::9] Theodor_W._Adorno: As a classically trained pianist whose sympathies with the twelve-tone technique of Arnold Schoenberg resulted in his studying composition with Alban Berg of the Second Viennese School , Adorno 's com...
+
+Sub-claim 4 [other]: Theodor W. Adorno was known for his critical theory of society.
+  Verdict: SUPPORTED (confidence 0.55)
+  Reasoning: Passage 1 provides information about Adorno's background and association with the Frankfurt School, but does not specifically state that he was known for his critical theory of society. [calibrator: p=0.55]
+  [Theodor_W._Adorno::0] Theodor_W._Adorno: Theodor W. Adorno -LRB- -LSB- əˈdɔrnoʊ -RSB- -LSB- aˈdɔʀno -RSB- ; born Theodor Ludwig Wiesengrund ; September 11 , 1903 -- August 6 , 1969 -RRB- was a German philosopher , sociologist , and composer...
+  [Theodor_W._Adorno::3] Theodor_W._Adorno: He was a leading member of the Frankfurt School of critical theory , whose work has come to be associated with thinkers such as Ernst Bloch , Walter Benjamin , Max Horkheimer and Herbert Marcuse , for...
+  [Culture_Industry_Reconsidered::0] Culture_Industry_Reconsidered: Culture Industry Reconsidered -LRB- Résumé über Kulturindustrie -RRB- , was written in 1963 by Theodor W. Adorno , a German philosopher who belonged to the Frankfurt School of social theory .
+```
+
+---
+
+## #20  uid=3c75f830  gold=REFUTED  predicted=REFUTED
+
+```
+Claim: A British film from 2000 features James Bond actor Daniel Craig. That film stars the actor who played Inspector Banks in "DCI Banks."
+Final verdict: REFUTED (confidence 0.54)
+Sub-claims: 2
+
+Sub-claim 0 [lookup]: A British film from 2000 features James Bond actor Daniel Craig.
+  Verdict: REFUTED (confidence 0.59)
+  Reasoning: Passages 4, 8, and 10 provide information about Daniel Craig's performances in James Bond films, but none of them explicitly state that a British film from 2000 features Daniel Craig as James Bond. [NLI-bidir: NEI→REFUTED on max_contra=1.00] [calibrator: p=0.59]
+  [Defiance_-LRB-2008_film-RRB-::2] Defiance_-LRB-2008_film-RRB-: The film stars Daniel Craig as Tuvia Bielski , Liev Schreiber as Zus Bielski , Jamie Bell as Asael Bielski , and George MacKay as Aron Bielski .
+  [Flashbacks_of_a_Fool::1] Flashbacks_of_a_Fool: The film was directed by Baillie Walsh , and stars Daniel Craig , Harry Eden , Claire Forlani , Felicity Jones , Emilia Fox , Eve , Jodhi May , Helen McCrory and Miriam Karlin .
+  [Quantum_of_Solace::1] Quantum_of_Solace: It stars Daniel Craig , Olga Kurylenko , Mathieu Amalric , Gemma Arterton , Jeffrey Wright and Judi Dench .
+
+Sub-claim 1 [composition]: That film stars the actor who played Inspector Banks in DCI Banks.
+  depends_on: [0]
+  Verdict: NEI (confidence 0.49)
+  Reasoning: Passage 1 provides information about Stephen Tompkinson's role in DCI Banks, but does not mention any actor who played Inspector Banks. [calibrator: p=0.49]
+  [Stephen_Tompkinson::0] Stephen_Tompkinson: Stephen Paul Tompkinson -LRB- born 15 October 1965 -RRB- is an English actor , known for his television roles as Damien Day in Drop the Dead Donkey -LRB- 1990 -- 98 -RRB- , Father Peter Clifford in Ba...
+  [Inside_Man::2] Inside_Man: It stars Denzel Washington as Detective Keith Frazier , the NYPD 's hostage negotiator ; Clive Owen as Dalton Russell , the mastermind who orchestrates the heist ; and Jodie Foster as Madeleine White...
+  [Batman_Begins::0] Batman_Begins: Batman Begins is a 2005 British-American superhero film based on the DC Comics character Batman , co-written and directed by Christopher Nolan and starring Christian Bale , Michael Caine , Liam Neeson...
+```
+
+---
+
+## #21  uid=9ed8ecdf  gold=REFUTED  predicted=NEI
+
+```
+Claim: Vernon Kay hosted the ITV shows Celebrities Under Pressure and All Star Family Fortunes.
+Final verdict: NEI (confidence 0.45)
+Sub-claims: 2
+
+Sub-claim 0 [lookup]: Vernon Kay hosted Celebrities Under Pressure.
+  Verdict: NEI (confidence 0.47)
+  Reasoning: Passages 1-6 do not specifically mention Vernon Kay hosting Celebrities Under Pressure. Passage 7 describes the show but does not name the host. [NLI-bidir: NEI→REFUTED on max_contra=1.00] [calibrator: p=0.47]
+  [Vernon_Kay::0] Vernon_Kay: Vernon Charles Kay -LRB- born 28 April 1974 -RRB- is an English television presenter , radio DJ and former model best known for his television roles with ITV , presenting shows such as All Star Family...
+  [Splash!_-LRB-UK_series_1-RRB-::3] Splash!_-LRB-UK_series_1-RRB-: Gabby Logan and Vernon Kay hosted the show , with Andy Banks , Jo Brand and Leon Taylor as judges , and commentary by Alan March .
+  [Celebrities_Under_Pressure::0] Celebrities_Under_Pressure: Celebrities Under Pressure is a British game show that aired on ITV from 13 September 2003 to 7 August 2004 .
+
+Sub-claim 1 [lookup]: Vernon Kay hosted All Star Family Fortunes.
+  Verdict: NEI (confidence 0.43)
+  Reasoning: Passage 1 clearly states that Vernon Charles Kay hosted All Star Family Fortunes (2006 -- present). [NLI-weak: max_entail=0.02 < 0.7] [calibrator: p=0.43]
+  [Vernon_Kay::0] Vernon_Kay: Vernon Charles Kay -LRB- born 28 April 1974 -RRB- is an English television presenter , radio DJ and former model best known for his television roles with ITV , presenting shows such as All Star Family...
+  [America's_Got_Talent::0] America's_Got_Talent: America 's Got Talent -LRB- sometimes abbreviated as AGT -RRB- is an American reality television series on the NBC television network , and part of the global Got Talent franchise .
+  [Splash!_-LRB-UK_series_1-RRB-::3] Splash!_-LRB-UK_series_1-RRB-: Gabby Logan and Vernon Kay hosted the show , with Andy Banks , Jo Brand and Leon Taylor as judges , and commentary by Alan March .
+```
+
+---
+
+## #22  uid=2aac64ea  gold=SUPPORTED  predicted=REFUTED
+
+```
+Claim: Taylor Nichols was part of the ensemble cast of the 1995 American romantic comedy and psychological horror film Headless Body in Topless Bar.
+Final verdict: REFUTED (confidence 0.56)
+Sub-claims: 1
+
+Sub-claim 0 [lookup]: Taylor Nichols was part of the ensemble cast of Headless Body in Topless Bar.
+  Verdict: REFUTED (confidence 0.56)
+  Reasoning: None of the evidence passages explicitly mention Taylor Nichols or the film Headless Body in Topless Bar. [NLI-bidir: NEI→REFUTED on max_contra=1.00] [calibrator: p=0.56]
+  [Headless_Body_in_Topless_Bar::0] Headless_Body_in_Topless_Bar: Headless Body in Topless Bar is a 1995 American black comedy and psychological horror film directed by James Bruce and written by Peter Koper .
+  [Taylor_Nichols::0] Taylor_Nichols: Cecil Taylor Nichols -LRB- born March 3 , 1959 in Louisville , Kentucky -RRB- is an American actor best known for roles in the Whit Stillman films Metropolitan , Barcelona , The Last Days of Disco , a...
+  [Headless_Body_in_Topless_Bar::1] Headless_Body_in_Topless_Bar: The ensemble cast includes Raymond J. Barry , Rustam Branaman , Jennifer McDonald , Taylor Nichols , and David Selby .
+```
+
+---
+
+## #23  uid=7cc165ba  gold=SUPPORTED  predicted=NEI
+
+```
+Claim: The convicted spy imprisoned in the city of Indianapolis was the master access list for the Timberwind project.
+Final verdict: NEI (confidence 0.44)
+Sub-claims: 1
+
+Sub-claim 0 [other]: The convicted spy imprisoned in Indianapolis was the master access list for Timberwind.
+  Verdict: NEI (confidence 0.44)
+  Reasoning: The evidence does not specifically mention the convicted spy being imprisoned in Indianapolis or provide information about the master access list for Timberwind. [calibrator: p=0.44]
+  [Project_Timberwind::4] Project_Timberwind: Convicted spy Stewart Nozette was found to be on the master access list for the TIMBER WIND project .
+  [Stewart_Nozette::1] Stewart_Nozette: He is also a convicted felon for attempted espionage and fraud against the United States .
+  [Project_Timberwind::0] Project_Timberwind: Project Timberwind aimed to develop nuclear thermal rockets .
+```
+
+---
+
+## #24  uid=771d62e8  gold=REFUTED  predicted=NEI
+
+```
+Claim: Tritonia and Phyteuma are both names for a plant genus.
+Final verdict: NEI (confidence 0.42)
+Sub-claims: 2
+
+Sub-claim 0 [lookup]: Tritonia is a name for a plant genus.
+  Verdict: NEI (confidence 0.43)
+  Reasoning: Passage 1 directly states that Tritonia is a genus of flowering plants, which supports the claim. [NLI-weak: max_entail=0.00 < 0.7] [calibrator: p=0.43]
+  [Tritonia_-LRB-plant-RRB-::0] Tritonia_-LRB-plant-RRB-: Tritonia -LRB- flame freesia -RRB- is a genus of flowering plants in the iris family first described as a genus in 1802 .
+  [Zygotritonia::2] Zygotritonia: The genus name is derived from the word zygomorphic -LRB- meaning bilabiate -RRB- , and the apparent resemblance to some species in the genus Tritonia .
+  [Tritonia_-LRB-plant-RRB-::5] Tritonia_-LRB-plant-RRB-: Tritonia are small bulbous plants up to 8 cm , that appear in great numbers in spring .
+
+Sub-claim 1 [lookup]: Phyteuma is a name for a plant genus.
+  Verdict: NEI (confidence 0.41)
+  Reasoning: The evidence does not specifically address whether Phyteuma is a name for a plant genus. [calibrator: p=0.41]
+  [Phyteuma::0] Phyteuma: Phyteuma is a genus of flowering plants in the family Campanulaceae , native to Europe and Morocco .
+  [Pueraria::6] Pueraria: The genus is polyphyletic , with different species being related to species in Glycine -LRB- which includes soybean -RRB- , Amphicarpaea , Nogra , Teyleria , Neonotonia , Pseudovigna , Pseudeminia , P...
+  [Ixia::9] Ixia: The genus name is derived from the Ancient Greek ἰξία -LRB- ixia -RRB- -LRB- = χαμαιλέων λευκός , -LRB- chamaeleon leukos -RRB- -RRB- , the pine thistle , Carlina gummifera , an unrelated plant in the...
+```
+
+---
+
+## #25  uid=5050d897  gold=REFUTED  predicted=NEI
+
+```
+Claim: The skirmish in 1863, which used a route, took place during the American Civil War while the Battle of Tarawa did not take place in the same war. This route runs through Round Top Branch, Pennsylvania.
+Final verdict: NEI (confidence 0.48)
+Sub-claims: 4
+
+Sub-claim 0 [lookup]: The skirmish in 1863 used a route.
+  Verdict: NEI (confidence 0.55)
+  Reasoning: None of the evidence passages explicitly mention a skirmish in 1863 and its route. [NLI-bidir: NEI→REFUTED on max_contra=1.00] [calibrator: p=0.55]
+  [Battle_of_Blair_Mountain::0] Battle_of_Blair_Mountain: The Battle of Blair Mountain was the largest labor uprising in United States history and one of the largest , best-organized , and most well-armed uprisings since the American Civil War .
+  [Wilderness_Road::0] Wilderness_Road: The Wilderness Road was one of two principal routes used by colonial and early national era settlers to reach Kentucky from the East .
+  [New_York_and_New_Jersey_campaign::20] New_York_and_New_Jersey_campaign: Northern New Jersey was the scene of skirmishing between the opposing forces for the rest of the war .
+
+Sub-claim 1 [temporal]: The skirmish in 1863 took place during the American Civil War.
+  depends_on: [0]
+  Verdict: NEI (confidence 0.46)
+  Reasoning: Passages 1, 9, and 10 clearly indicate the American Civil War took place from 1861 to 1865, and the skirmish in 1863 fits within this timeframe. [NLI veto: max_contra=1.00 >= 0.95] [calibrator: p=0.46]
+  [American_Civil_War::0] American_Civil_War: The American Civil War was fought in the United States from 1861 to 1865 .
+  [New_York_and_New_Jersey_campaign::20] New_York_and_New_Jersey_campaign: Northern New Jersey was the scene of skirmishing between the opposing forces for the rest of the war .
+  [Confederate_States_of_America::0] Confederate_States_of_America: The Confederate States of America -LRB- CSA or C.S. -RRB- , commonly referred to as the Confederacy , was a self-proclaimed nation of 11 secessionist slave-holding states of the United States , existi...
+
+Sub-claim 2 [negation]: The Battle of Tarawa did not take place during the American Civil War.
+  Verdict: NEI (confidence 0.43)
+  Reasoning: Passage 1 clearly states the Battle of Tarawa took place in the Pacific Theater of World War II, not during the American Civil War. [calibrator: p=0.43]
+  [Battle_of_Tarawa::0] Battle_of_Tarawa: The Battle of Tarawa was a battle in the Pacific Theater of World War II that was fought on 20 -- 23 November 1943 .
+  [War_of_1812::30] War_of_1812: The conflict has not been commemorated on nearly the same level in the modern-day United States , though it is still taught as an important part of early American history , and Dolley Madison and Andr...
+  [Battle_of_Tarawa::5] Battle_of_Tarawa: The Battle of Tarawa was the first American offensive in the critical central Pacific region .
+
+Sub-claim 3 [lookup]: The route runs through Round Top Branch, Pennsylvania.
+  Verdict: NEI (confidence 0.48)
+  Reasoning: None of the evidence passages directly mention the route running through Round Top Branch, Pennsylvania. [NLI-bidir: NEI→REFUTED on max_contra=1.00] [calibrator: p=0.48]
+  [Round_Top_Branch::1] Round_Top_Branch: The branch ran southward from the terminus of the railroad 's main line -LRB- its junction with the Hanover Junction , Hanover and Gettysburg Railroad north of Meade School -RRB- , west of the school...
+  [Round_Top_Branch::0] Round_Top_Branch: The Round Top Branch was an extension of the Gettysburg and Harrisburg Railroad from the Gettysburg borough across the Gettysburg Battlefield to Round Top , Pennsylvania .
+  [Pennsylvania_Route_134::4] Pennsylvania_Route_134: North of here , the route passes through Round Top and serves Gettysburg National Military Park before reaching its northern terminus .
+```
+
+---
+
+## #26  uid=e8314074  gold=REFUTED  predicted=NEI
+
+```
+Claim: The Minardi M189 was a Formula One car that was replaced by a newer model. A Milan based company for who James Edward Arnold was one it's last presidents in North America, made the tires for the newer version.
+Final verdict: NEI (confidence 0.53)
+Sub-claims: 4
+
+Sub-claim 0 [lookup]: The Minardi M189 was a Formula One car.
+  Verdict: SUPPORTED (confidence 0.79)
+  Reasoning: Passage 1 directly states the Minardi M189 was a Formula One car designed by Minardi. [NLI-weak: max_entail=0.58 < 0.7] [calibrator: p=0.79]
+  [Minardi_M189::0] Minardi_M189: The Minardi M189 was a Formula One car , designed for Minardi by Nigel Cowperthwaite for use in the season .
+  [Sebastian_Vettel::0] Sebastian_Vettel: Sebastian Vettel -LRB- -LSB- zeˈbasti̯an ˈfɛtl̩ -RSB- ; born 3 July 1987 -RRB- is a German racing driver currently driving in Formula One for Scuderia Ferrari .
+  [Eddie_Irvine::1] Eddie_Irvine: He was a Formula One driver between 1993 and 2002 , and runner-up in the 1999 World Drivers ' Championship , driving for Scuderia Ferrari .
+
+Sub-claim 1 [composition]: The Minardi M189 was replaced by a newer model.
+  depends_on: [0]
+  Verdict: NEI (confidence 0.41)
+  Reasoning: Passages 1-9 do not specifically address the replacement of the Minardi M189, focusing instead on various unrelated vehicles and models. [calibrator: p=0.41]
+  [Minardi_M189::0] Minardi_M189: The Minardi M189 was a Formula One car , designed for Minardi by Nigel Cowperthwaite for use in the season .
+  [Minardi_M189::2] Minardi_M189: Updated as the M189B for the season , it was used for the first two races of the year before being replaced by the Minardi M190 .
+  [Northrop_P-61_Black_Widow::11] Northrop_P-61_Black_Widow: It replaced earlier British-designed night-fighter aircraft that had been updated to incorporate radar when it became available .
+
+Sub-claim 2 [composition]: A Milan-based company made the tires for the newer version of the Minardi M189.
+  depends_on: [0]
+  Verdict: NEI (confidence 0.45)
+  Reasoning: The evidence does not provide information about which company made the tires for the Minardi M189. [NLI-bidir: NEI→REFUTED on max_contra=1.00] [calibrator: p=0.45]
+  [Minardi_M189::0] Minardi_M189: The Minardi M189 was a Formula One car , designed for Minardi by Nigel Cowperthwaite for use in the season .
+  [Pirelli::0] Pirelli: Pirelli & C. S.p.A. is a multinational company based in Milan , Italy , formerly listed on the Milan Stock Exchange since 1922 , but now an overseas subsidiary of Chinese state-owned enterprise ChemCh...
+  [Minardi_M190::0] Minardi_M190: The Minardi M190 was a Formula One car designed by Aldo Costa and Tomasso Carletti and built by Minardi for the 1990 Formula One season .
+
+Sub-claim 3 [lookup]: James Edward Arnold was the last president of the Minardi M189 in North America.
+  depends_on: [0]
+  Verdict: NEI (confidence 0.48)
+  Reasoning: None of the evidence passages provide information about James Edward Arnold or the Minardi M189. [NLI-bidir: NEI→REFUTED on max_contra=0.99] [calibrator: p=0.48]
+  [Barack_Obama::0] Barack_Obama: Barack Hussein Obama II -LRB- -LSB- bəˈrɑːk_huːˈseɪn_oʊˈbɑːmə -RSB- ; born August 4 , 1961 -RRB- is an American politician who served as the 44th President of the United States from 2009 to 2017 .
+  [Minardi_M189::0] Minardi_M189: The Minardi M189 was a Formula One car , designed for Minardi by Nigel Cowperthwaite for use in the season .
+  [James_Edward_Arnold::0] James_Edward_Arnold: James Edward `` Jim '' Arnold -LRB- May 7 , 1939 -- October 4 , 2007 -RRB- was a prominent American businessman .
+```
+
+---
+
+## #27  uid=2512f227  gold=REFUTED  predicted=NEI
+
+```
+Claim: Chuck Brodsky wrote a song about baseball that also spoke of the spy who served during World War II.
+Final verdict: NEI (confidence 0.43)
+Sub-claims: 2
+
+Sub-claim 0 [lookup]: Chuck Brodsky wrote a song about baseball.
+  Verdict: NEI (confidence 0.46)
+  Reasoning: Passages 1-9 do not provide specific information about the content or subject of Chuck Brodsky's song. [NLI-bidir: NEI→SUPPORTED on max_entail=0.97] [calibrator: p=0.46]
+  [Chuck_Brodsky::0] Chuck_Brodsky: Chuck Brodsky -LRB- born May 20 , 1960 in Philadelphia , Pennsylvania -RRB- is an American musician and singer-songwriter currently living in Asheville , North Carolina .
+  [Who_Owns_My_Heart::4] Who_Owns_My_Heart: The song was written about the feelings a club 's environment can lead someone to believe .
+  [Aloha_ʻOe::1] Aloha_ʻOe: The story of the origin of the song has several variations .
+
+Sub-claim 1 [composition]: Chuck Brodsky's song also spoke of a spy who served during World War II.
+  depends_on: [0]
+  Verdict: NEI (confidence 0.39)
+  Reasoning: None of the evidence directly mentions Chuck Brodsky or his song, nor does it provide information about a spy who served during World War II. [NLI-bidir: NEI→REFUTED on max_contra=0.99] [calibrator: p=0.39]
+  [Moe_Berg::0] Moe_Berg: Morris `` Moe '' Berg -LRB- March 2 , 1902 -- May 29 , 1972 -RRB- , was an American catcher and coach in Major League Baseball who later served as a spy for the Office of Strategic Services during Wor...
+  [Hugh_Hefner::5] Hugh_Hefner: He is a World War II veteran .
+  [Chuck_Brodsky::0] Chuck_Brodsky: Chuck Brodsky -LRB- born May 20 , 1960 in Philadelphia , Pennsylvania -RRB- is an American musician and singer-songwriter currently living in Asheville , North Carolina .
+```
+
+---
+
+## #28  uid=65d9118e  gold=SUPPORTED  predicted=NEI
+
+```
+Claim: The University that a performer of American Sign Language literature is in is a history professor at a 99 acre campus.
+Final verdict: NEI (confidence 0.42)
+Sub-claims: 3
+
+Sub-claim 0 [lookup]: A performer of American Sign Language literature is in a specific university.
+  Verdict: NEI (confidence 0.40)
+  Reasoning: None of the evidence passages explicitly mention a performer of ASL literature being in a specific university. [calibrator: p=0.40]
+  [American_Sign_Language_literature::2] American_Sign_Language_literature: Other notable performers of ASL literature include Ben Bahan , Peter Cook , Ella Mae Lentz , Sam Supalla , and Clayton Valli .
+  [University_of_Texas_at_Austin::0] University_of_Texas_at_Austin: The University of Texas at Austin , informally UT Austin , UT , University of Texas , or Texas in sports contexts , is a public research university and the flagship institution of the University of Te...
+  [American_Sign_Language_literature::0] American_Sign_Language_literature: American Sign Language literature -LRB- or ASL literature -RRB- refers to stories , poetry , dramatic productions , folk tales , and even songs in American Sign Language .
+
+Sub-claim 1 [composition]: That university has a history professor.
+  depends_on: [0]
+  Verdict: NEI (confidence 0.42)
+  Reasoning: None of the evidence passages explicitly state that a history professor is employed at the university. [calibrator: p=0.42]
+  [Harvard_University::0] Harvard_University: Harvard University is a private Ivy League research university in Cambridge , Massachusetts , established in 1636 , whose history , influence , and wealth have made it one of the world 's most prestig...
+  [University_of_Washington::0] University_of_Washington: The University of Washington , commonly referred to as simply Washington , UW , or informally `` U-Dub , '' is a public research university whose largest and original campus is in Seattle , Washington...
+  [George_McGovern::6] George_McGovern: After the war he gained degrees from Dakota Wesleyan University and Northwestern University , culminating in a PhD , and was a history professor .
+
+Sub-claim 2 [lookup]: That history professor's university campus is 99 acres.
+  depends_on: [1]
+  Verdict: NEI (confidence 0.43)
+  Reasoning: Passage 1 provides information about Gallaudet University's campus size, but the claim is about a history professor's university, which is not specified in the evidence. [NLI-bidir: NEI→REFUTED on max_contra=1.00] [calibrator: p=0.43]
+  [Gallaudet_University::0] Gallaudet_University: Gallaudet University -LSB- ˌɡæləˈdɛt -RSB- is a federally-chartered private university for the education of the Deaf and hard of hearing located in Washington , D.C. , on a 99 acre campus .
+  [Camlaren_Mine::1] Camlaren_Mine: It consists of a property totaling about 981 hectares .
+  [Greater_Boston::26] Greater_Boston: Harvard University in Cambridge is the oldest institution of higher learning in the United States , with the largest financial endowment of any university , and whose Law School has spawned a contempo...
+```
+
+---
+
+## #29  uid=e6113be3  gold=REFUTED  predicted=NEI
+
+```
+Claim: This global energy and commodity trading company is larger than the company that Tan Chin Hwee holds position of Chief Executive Officer. It is larger as an oil trader. It was formed in Rotterdam.
+Final verdict: NEI (confidence 0.42)
+Sub-claims: 3
+
+Sub-claim 0 [comparison]: This global energy and commodity trading company is larger than Tan Chin Hwee's company.
+  Verdict: NEI (confidence 0.40)
+  Reasoning: The evidence does not provide specific information about the size of the global energy and commodity trading company or Tan Chin Hwee's company. [NLI-bidir: NEI→REFUTED on max_contra=1.00] [calibrator: p=0.40]
+  [Vitol::7] Vitol: With revenues of $ 152 billion in 2016 , it is the largest independent energy trader in the world , and would rank eighth on the Fortune Global 500 list .
+  [Conglomerate_-LRB-company-RRB-::2] Conglomerate_-LRB-company-RRB-: Conglomerates are often large and multinational .
+  [Tan_Chin_Hwee::0] Tan_Chin_Hwee: Tan Chin Hwee -LRB- born 1971 -RRB- is the Chief Executive Officer in Asia-Pacific for Trafigura Group , the first Singaporean and Asian to be named in such a senior position in the firm .
+
+Sub-claim 1 [composition]: This global energy and commodity trading company is larger as an oil trader.
+  depends_on: [0]
+  Verdict: NEI (confidence 0.37)
+  Reasoning: The evidence does not specifically address the size of the company as an oil trader. [calibrator: p=0.37]
+  [Conglomerate_-LRB-company-RRB-::2] Conglomerate_-LRB-company-RRB-: Conglomerates are often large and multinational .
+  [Vitol::0] Vitol: The Vitol Group is a global energy and commodity trading company that was founded in Rotterdam in 1966 by Henk Viëtor and Jacques Detiger .
+  [Linux_Format::1] Linux_Format: It is also exported to many countries worldwide .
+
+Sub-claim 2 [lookup]: This global energy and commodity trading company was formed in Rotterdam.
+  Verdict: NEI (confidence 0.47)
+  Reasoning: None of the evidence passages explicitly mention the Vitol Group or its founding location. [NLI-bidir: NEI→REFUTED on max_contra=0.97] [calibrator: p=0.47]
+  [Vitol::0] Vitol: The Vitol Group is a global energy and commodity trading company that was founded in Rotterdam in 1966 by Henk Viëtor and Jacques Detiger .
+  [Landry's,_Inc.::2] Landry's,_Inc.: The company also owns and operates numerous international locations .
+  [Fjällräven::4] Fjällräven: The company has a strong market presence in the Nordic countries .
+```
+
+---
+
+## #30  uid=f1c12b28  gold=SUPPORTED  predicted=NEI
+
+```
+Claim: Ten years of continuous service must be performed to receive the ribbon created by the first United States Secretary of Defense.
+Final verdict: NEI (confidence 0.40)
+Sub-claims: 2
+
+Sub-claim 0 [lookup]: Ten years of continuous service is required to receive the ribbon.
+  Verdict: NEI (confidence 0.40)
+  Reasoning: The evidence does not clearly support or refute the claim about the specific requirement of ten years of continuous service for the ribbon. [NLI-bidir: NEI→REFUTED on max_contra=0.99] [calibrator: p=0.40]
+  [Marine_Corps_Reserve_Ribbon::5] Marine_Corps_Reserve_Ribbon: The ten years of service may be cumulative over a twelve-year period .
+  [Marine_Corps_Reserve_Ribbon::4] Marine_Corps_Reserve_Ribbon: To be awarded the Marine Corps Reserve Ribbon , a Marine Reservist must have performed ten years of reserve duty in an `` active drill status '' , implying satisfactory attendance at weekend drills an...
+  [Vancouver::13] Vancouver: for five consecutive years .
+
+Sub-claim 1 [lookup]: The ribbon is created by the first United States Secretary of Defense.
+  Verdict: NEI (confidence 0.40)
+  Reasoning: None of the evidence passages directly address who created the ribbon or its association with the United States Secretary of Defense. [NLI-bidir: NEI→REFUTED on max_contra=1.00] [calibrator: p=0.40]
+  [James_Forrestal::0] James_Forrestal: James Vincent Forrestal -LRB- February 15 , 1892 -- May 22 , 1949 -RRB- was the last Cabinet-level United States Secretary of the Navy and the first United States Secretary of Defense .
+  [Marine_Corps_Reserve_Ribbon::1] Marine_Corps_Reserve_Ribbon: The ribbon was first created by Secretary of the Navy James Forrestal and recognizes those members of the Marine Corps Reserve who performed ten years of honorable reserve service .
+  [George_Washington::0] George_Washington: George Washington -LRB- -LSB- ˈdʒɔɹdʒ_ˈwɒʃɪŋtən -RSB- -- , 1799 -RRB- was an American politician and soldier who served as the first President of the United States from 1789 to 1797 and was one of the...
+```
+
+---
+
+## #31  uid=319c87a3  gold=REFUTED  predicted=NEI
+
+```
+Claim: You're Next movie was filmed first before "The Guest" .
+Final verdict: NEI (confidence 0.42)
+Sub-claims: 2
+
+Sub-claim 0 [temporal]: You're Next was filmed first.
+  Verdict: NEI (confidence 0.41)
+  Reasoning: The evidence does not clearly support or refute the claim that 'You're Next' was filmed first. [calibrator: p=0.41]
+  [You're_Next::0] You're_Next: You 're Next is a 2011 American slasher film directed by Adam Wingard , written by Simon Barrett and starring Sharni Vinson , Nicholas Tucci , Wendy Glenn , A. J. Bowen and Joe Swanberg .
+  [Batman-COLON-_Mask_of_the_Phantasm::7] Batman-COLON-_Mask_of_the_Phantasm: The film was originally thought of as a direct-to-video release .
+  [The_Godfather::8] The_Godfather: Filming was done on location and completed earlier than scheduled .
+
+Sub-claim 1 [temporal]: The Guest was filmed later.
+  depends_on: [0]
+  Verdict: NEI (confidence 0.44)
+  Reasoning: Passages 5 and 6 clearly indicate that filming took place in 2010 and 2002, respectively, which supports the claim that The Guest was filmed later than 2014. [NLI veto: max_contra=1.00 >= 0.95] [calibrator: p=0.44]
+  [The_Guest_-LRB-film-RRB-::0] The_Guest_-LRB-film-RRB-: The Guest is a 2014 American action horror-thriller film directed and edited by Adam Wingard and written by Simon Barrett , both of whom previously collaborated on a previous film , You 're Next -LRB-...
+  [The_Godfather::8] The_Godfather: Filming was done on location and completed earlier than scheduled .
+  [Lawless_-LRB-film-RRB-::6] Lawless_-LRB-film-RRB-: The film was in development for about three years before being produced .
+```
+
+---
+
+## #32  uid=59dd08a1  gold=SUPPORTED  predicted=NEI
+
+```
+Claim: John Safran, host of Sunday Night Safran, has the english first name Yehoshua.
+Final verdict: NEI (confidence 0.43)
+Sub-claims: 2
+
+Sub-claim 0 [lookup]: John Safran's first name is Yehoshua.
+  Verdict: NEI (confidence 0.48)
+  Reasoning: None of the evidence passages provide information about John Safran's first name. [NLI-bidir: NEI→REFUTED on max_contra=1.00] [calibrator: p=0.48]
+  [John_Safran::0] John_Safran: John Michael Safran -LRB- ; born 13 August 1972 -RRB- is an Australian radio personality , satirist , documentary maker and author , known for combining humour with religious , political and ethnic is...
+  [John_Safran::4] John_Safran: Safran is known for his television stunts , which include placing a fatwa on Australian television host Rove McManus , sneaking nine young men into an exclusive Melbourne nightclub by disguising them...
+  [MS_Dhoni::0] MS_Dhoni: Mahendra Singh Dhoni -LRB- ; commonly known as MS Dhoni ; born 7 July 1981 -RRB- is an Indian cricketer who captained the Indian team in limited-overs formats from 2007 to 2016 and in Test cricket fro...
+
+Sub-claim 1 [lookup]: Sunday Night Safran is hosted by John Safran.
+  Verdict: NEI (confidence 0.39)
+  Reasoning: Passages 1-9 do not provide information about the host of Sunday Night Safran. [NLI-bidir: NEI→REFUTED on max_contra=0.99] [calibrator: p=0.39]
+  [John_Safran::0] John_Safran: John Michael Safran -LRB- ; born 13 August 1972 -RRB- is an Australian radio personality , satirist , documentary maker and author , known for combining humour with religious , political and ethnic is...
+  [John_Safran::4] John_Safran: Safran is known for his television stunts , which include placing a fatwa on Australian television host Rove McManus , sneaking nine young men into an exclusive Melbourne nightclub by disguising them...
+  [Craig_Melville::1] Craig_Melville: He is best known for his collaborations with comedians John Safran , Lawrence Leung and The Chaser .
+```
+
+---
+
+## #33  uid=73427872  gold=REFUTED  predicted=SUPPORTED
+
+```
+Claim: Grand Admiral a naval rank in one of the highest in the several European navies that use this system of Military ranks.
+Final verdict: SUPPORTED (confidence 0.82)
+Sub-claims: 1
+
+Sub-claim 0 [lookup]: Grand Admiral is a naval rank in one of the highest in several European navies.
+  Verdict: SUPPORTED (confidence 0.82)
+  Reasoning: The evidence does not specifically address the rank of Grand Admiral in several European navies. [calibrator: p=0.82]
+  [Grand_admiral::0] Grand_admiral: Grand admiral is a historic naval rank , the highest rank in the several European navies that used it .
+  [Bangladesh::24] Bangladesh: The region was home to many principalities that had inland naval prowess .
+  [Grand_admiral::2] Grand_admiral: A comparable rank in other navies is that of fleet admiral .
+```
+
+---
+
+## #34  uid=875d0a69  gold=SUPPORTED  predicted=NEI
+
+```
+Claim: Ian Hunter from Mott the Hoople was born before the band member that released the album Dixie Chicken. That band member had the song "Ride Like the Wind" dedicated to him and his wife.
+Final verdict: NEI (confidence 0.38)
+Sub-claims: 2
+
+Sub-claim 0 [comparison]: Ian Hunter from Mott the Hoople was born before the band member that released the album Dixie Chicken.
+  Verdict: NEI (confidence 0.38)
+  Reasoning: The evidence does not provide information about the birth dates of band members or the release dates of albums. [calibrator: p=0.38]
+  [Ian_Hunter_-LRB-singer-RRB-::0] Ian_Hunter_-LRB-singer-RRB-: Ian Hunter Patterson -LRB- born 3 June 1939 -RRB- , known as Ian Hunter , is an English singer-songwriter who is best known as the lead singer of the English rock band Mott the Hoople , from its incep...
+  [Dixie_Chicken_-LRB-album-RRB-::0] Dixie_Chicken_-LRB-album-RRB-: Dixie Chicken is the third studio album by the American rock band Little Feat , released in 1973 .
+  [Judas_Priest::0] Judas_Priest: Judas Priest are an English heavy metal band formed in Birmingham , England , in 1969 .
+
+Sub-claim 1 [composition]: The band member that released the album Dixie Chicken had the song 'Ride Like the Wind' dedicated to him and his wife.
+  depends_on: [0]
+  Verdict: NEI (confidence 0.39)
+  Reasoning: None of the evidence passages directly mention the band member who released the album Dixie Chicken or the song 'Ride Like the Wind'. [calibrator: p=0.39]
+  [Dixie_Chicken_-LRB-album-RRB-::0] Dixie_Chicken_-LRB-album-RRB-: Dixie Chicken is the third studio album by the American rock band Little Feat , released in 1973 .
+  [Ride_Like_the_Wind::0] Ride_Like_the_Wind: `` Ride Like the Wind '' is a song written and recorded by American singer-songwriter Christopher Cross .
+  [Can't_Stop_Thinking_About_You::1] Can't_Stop_Thinking_About_You: A love song in the style of a soul/R & B ballad , it was written by Harrison in December 1973 , towards the end of his marriage to Pattie Boyd and while he was having an affair with Maureen Starkey ,...
+```
+
+---
+
+## #35  uid=ecbb4641  gold=REFUTED  predicted=REFUTED
+
+```
+Claim: An American novelist and playwright wrote The Long Christmas Dinner. Him and the author of How Green Was My Valley both have the profession as novelist in common.
+Final verdict: REFUTED (confidence 0.58)
+Sub-claims: 3
+
+Sub-claim 0 [lookup]: An American novelist and playwright wrote The Long Christmas Dinner.
+  Verdict: SUPPORTED (confidence 0.62)
+  Reasoning: None of the evidence passages explicitly state who wrote 'The Long Christmas Dinner'. [calibrator: p=0.62]
+  [The_Long_Christmas_Dinner::0] The_Long_Christmas_Dinner: The Long Christmas Dinner is a play in one act written by American novelist and playwright Thornton Wilder in 1931 .
+  [Ranulph_Fiennes::1] Ranulph_Fiennes: He is also a prolific writer and poet .
+  [The_Long_Christmas_Dinner::1] The_Long_Christmas_Dinner: In its first published form , it was included in the volume The Long Christmas Dinner and Other Plays in One Act .
+
+Sub-claim 1 [lookup]: The author of How Green Was My Valley is also a novelist.
+  Verdict: NEI (confidence 0.45)
+  Reasoning: None of the evidence passages explicitly states or supports that the author of How Green Was My Valley is also a novelist. [NLI-bidir: NEI→REFUTED on max_contra=1.00] [calibrator: p=0.45]
+  [How_Green_Was_My_Valley::0] How_Green_Was_My_Valley: How Green Was My Valley is a 1939 novel by Richard Llewellyn , narrated by Huw Morgan , the main character , about his Welsh family and the mining community in which they live .
+  [How_Green_Was_My_Valley_-LRB-TV_drama_serial-RRB-::0] How_Green_Was_My_Valley_-LRB-TV_drama_serial-RRB-: How Green Was My Valley is a BBC Television serial based on the novel by Richard Llewellyn , and features one of the last performances by Stanley Baker .
+  [Salman_Rushdie::0] Salman_Rushdie: Ahmed Salman Rushdie , FRSL -LRB- -LSB- sælˈmɑːn_ˈrʊʃdi -RSB- अहमद सलमान रुशदी , ; born 19 June 1947 -RRB- is a British Indian novelist and essayist .
+
+Sub-claim 2 [composition]: The American novelist and playwright who wrote The Long Christmas Dinner and the novelist of How Green Was My Valley both have the profession of novelist in common.
+  depends_on: [0, 1]
+  Verdict: REFUTED (confidence 0.67)
+  Reasoning: The evidence does not provide information about the professions of the authors of 'The Long Christmas Dinner' and 'How Green Was My Valley'. [NLI-bidir: NEI→REFUTED on max_contra=1.00] [calibrator: p=0.67]
+  [How_Green_Was_My_Valley::0] How_Green_Was_My_Valley: How Green Was My Valley is a 1939 novel by Richard Llewellyn , narrated by Huw Morgan , the main character , about his Welsh family and the mining community in which they live .
+  [The_Long_Christmas_Dinner::0] The_Long_Christmas_Dinner: The Long Christmas Dinner is a play in one act written by American novelist and playwright Thornton Wilder in 1931 .
+  [How_Green_Was_My_Valley_-LRB-TV_drama_serial-RRB-::0] How_Green_Was_My_Valley_-LRB-TV_drama_serial-RRB-: How Green Was My Valley is a BBC Television serial based on the novel by Richard Llewellyn , and features one of the last performances by Stanley Baker .
+```
+
+---
+
+## #36  uid=de694631  gold=REFUTED  predicted=NEI
+
+```
+Claim: This actress starred with  Sylvester Stallone in  Stop! Or My Mom Will Shoot. She also starred on  the TV series "Golden Girls". Her daughter on this show was born in 1922.
+Final verdict: NEI (confidence 0.48)
+Sub-claims: 3
+
+Sub-claim 0 [lookup]: This actress starred with Sylvester Stallone in Stop! Or My Mom Will Shoot.
+  Verdict: NEI (confidence 0.42)
+  Reasoning: Passages 1-9 do not provide information about the actress starring with Sylvester Stallone in 'Stop! Or My Mom Will Shoot'. [NLI-bidir: NEI→REFUTED on max_contra=0.96] [calibrator: p=0.42]
+  [Angelina_Jolie::0] Angelina_Jolie: Angelina Jolie Pitt -LRB- -LSB- dʒoʊˈliː -RSB- ; née Voight ; born June 4 , 1975 -RRB- is an American actress , filmmaker , philanthropist and humanitarian .
+  [Sylvester_Stallone::0] Sylvester_Stallone: Michael Sylvester Gardenzio Stallone -LRB- -LSB- stəˈloʊn -RSB- -LSB- stalˈloːne -RSB- ; born July 6 , 1946 -RRB- is an American actor , filmmaker , and screenwriter .
+  [Stop!_Or_My_Mom_Will_Shoot::2] Stop!_Or_My_Mom_Will_Shoot: The film stars Sylvester Stallone and Estelle Getty .
+
+Sub-claim 1 [lookup]: This actress starred on the TV series 'Golden Girls'.
+  Verdict: NEI (confidence 0.44)
+  Reasoning: Passage 2 clearly states she starred as Rose Nylund on The Golden Girls. [NLI veto: max_contra=1.00 >= 0.95] [calibrator: p=0.44]
+  [The_Golden_Girls::0] The_Golden_Girls: The Golden Girls is an American sitcom created by Susan Harris that originally aired on NBC from September 14 , 1985 , to May 9 , 1992 , with a total of 180 half-hour episodes spanning over seven seas...
+  [Betty_White::4] Betty_White: She is known for her Emmy Award-winning roles as Sue Ann Nivens on The Mary Tyler Moore Show -LRB- 197377 -RRB- and Rose Nylund on The Golden Girls -LRB- 198592 -RRB- .
+  [Ladies_Man_-LRB-1999_TV_series-RRB-::2] Ladies_Man_-LRB-1999_TV_series-RRB-: The series co-starred Betty White and is perhaps most memorable for reuniting White and her Golden Girls co-stars Rue McClanahan and Estelle Getty in one of the later episodes .
+
+Sub-claim 2 [composition]: This actress's daughter on 'Golden Girls' was born in 1922.
+  depends_on: [0, 1]
+  Verdict: SUPPORTED (confidence 0.58)
+  Reasoning: Passage 5 mentions Rue McClanahan as the actress who played Sophia Petrillo on The Golden Girls, but it does not provide the birth year of her daughter. [calibrator: p=0.58]
+  [Betty_White::0] Betty_White: Betty Marion White Ludden -LRB- known professionally as Betty White ; born January 17 , 1922 -RRB- is an American actress , with the longest television career of a female entertainer .
+  [Betty_White::4] Betty_White: She is known for her Emmy Award-winning roles as Sue Ann Nivens on The Mary Tyler Moore Show -LRB- 197377 -RRB- and Rose Nylund on The Golden Girls -LRB- 198592 -RRB- .
+  [The_Golden_Girls::0] The_Golden_Girls: The Golden Girls is an American sitcom created by Susan Harris that originally aired on NBC from September 14 , 1985 , to May 9 , 1992 , with a total of 180 half-hour episodes spanning over seven seas...
+```
+
+---
+
+## #37  uid=631928e7  gold=REFUTED  predicted=SUPPORTED
+
+```
+Claim: The home of a race is also the venue for the FIA Formula One Canadian Grand Prix. It is home to the first formula one race won by a black driver. The race featured Formula One drivers from Canada for the first time since 2006.
+Final verdict: SUPPORTED (confidence 0.78)
+Sub-claims: 3
+
+Sub-claim 0 [lookup]: The home of a race is also the venue for the FIA Formula One Canadian Grand Prix.
+  Verdict: SUPPORTED (confidence 0.83)
+  Reasoning: Passages 1-9 do not provide specific information about the venue of the FIA Formula One Canadian Grand Prix. [NLI-bidir: NEI→REFUTED on max_contra=1.00] [calibrator: p=0.83]
+  [Circuit_Gilles_Villeneuve::1] Circuit_Gilles_Villeneuve: It is the venue for the FIA Formula One Canadian Grand Prix .
+  [Circuit_Gilles_Villeneuve::8] Circuit_Gilles_Villeneuve: The Canadian Grand Prix of Formula One racing , which had taken place for 30 years at Circuit Gilles Villeneuve , was dropped from the 2009 Formula One calendar and replaced with the inaugural Abu Dha...
+  [Montreal::29] Montreal: Currently , the city hosts the Canadian Grand Prix of Formula One , the Montreal International Jazz Festival and the Just for Laughs festival .
+
+Sub-claim 1 [composition]: The first Formula One race won by a black driver took place at the home of a race.
+  depends_on: [0]
+  Verdict: SUPPORTED (confidence 0.73)
+  Reasoning: Passages 6 and 7 provide information about the first Formula One race won by a black driver (Lewis Hamilton) and its location (Monaco), but there is no direct evidence of Hamilton winning the race at Monaco. [calibrator: p=0.73]
+  [2007_Canadian_Grand_Prix::3] 2007_Canadian_Grand_Prix: It was Hamilton 's first win in Formula One and the first Formula One race won by a black driver .
+  [Lewis_Hamilton::11] Lewis_Hamilton: Coming from a mixed background , with a black father and white mother , Hamilton is the first black driver to race in Formula One .
+  [2008_Formula_One_season::9] 2008_Formula_One_season: In winning the title , Hamilton became the youngest driver ever to win the title -LRB- a record since supplanted by Sebastian Vettel 's winning of the 2010 Drivers ' title -RRB- and the first black dr...
+
+Sub-claim 2 [composition]: Formula One drivers from Canada participated in the FIA Formula One Canadian Grand Prix for the first time since 2006.
+  depends_on: [0]
+  Verdict: SUPPORTED (confidence 0.77)
+  Reasoning: The evidence does not provide specific information about Formula One drivers from Canada participating in the FIA Formula One Canadian Grand Prix since 2006. [NLI-bidir: NEI→SUPPORTED on max_entail=0.96] [calibrator: p=0.77]
+  [Circuit_Gilles_Villeneuve::1] Circuit_Gilles_Villeneuve: It is the venue for the FIA Formula One Canadian Grand Prix .
+  [2008_Formula_One_season::7] 2008_Formula_One_season: Lewis Hamilton won the Drivers ' title by a point -- by overtaking Toyota 's Timo Glock on the final corner of the final lap of the final grand prix of the season to claim the required 5th-place finis...
+  [Formula_Three::1] Formula_Three: The various championships held in Europe , Australia , South America and Asia form an important step for many prospective Formula One drivers .
+```
+
+---
+
+## #38  uid=b4ebbe29  gold=SUPPORTED  predicted=REFUTED
+
+```
+Claim: Republic New York Corporation was the holding company for the Republic National Bank of New York and the Safra Republic Bank. Republic New York Corporation was sold shortly after its chairman's death to HSBC Bank USA in 2013, the US subsidiary of the British multinational banking and financial services holding company, HSBC Holdings PLC, which traces its origin to a hong in Hong Kong.
+Final verdict: REFUTED (confidence 0.61)
+Sub-claims: 4
+
+Sub-claim 0 [composition]: Republic New York Corporation was the holding company for the Republic National Bank of New York and the Safra Republic Bank.
+  Verdict: SUPPORTED (confidence 0.87)
+  Reasoning: Passage 1 directly states that Republic New York Corporation was the holding company for the Republic National Bank of New York and the Safra Republic Bank, which contradicts Passage 9 stating Joseph Safra controls and owns independently the Safra Group of banks and financial institutions. [calibrator: p=0.87]
+  [Republic_New_York::0] Republic_New_York: Republic New York Corporation was the holding company for the Republic National Bank of New York and the Safra Republic Bank .
+  [The_Smart_Set::2] The_Smart_Set: Its headquarters was in New York City .
+  [Republic_New_York::15] Republic_New_York: 1973 : Republic New York Corporation was established as a one-bank holding company for Republic National Bank .
+
+Sub-claim 1 [temporal]: Republic New York Corporation was sold shortly after its chairman's death to HSBC Bank USA in 2013.
+  depends_on: [0]
+  Verdict: SUPPORTED (confidence 0.67)
+  Reasoning: Passages 2-9 do not provide information about when Republic New York Corporation was sold or to whom, focusing instead on its history and structure. [NLI-bidir: NEI→REFUTED on max_contra=0.99] [calibrator: p=0.67]
+  [Republic_New_York::2] Republic_New_York: Republic New York Corporation was sold shortly after its chairman 's death to HSBC Bank USA , the US subsidiary of HSBC of the UK .
+  [Republic_New_York::0] Republic_New_York: Republic New York Corporation was the holding company for the Republic National Bank of New York and the Safra Republic Bank .
+  [The_Smart_Set::2] The_Smart_Set: Its headquarters was in New York City .
+
+Sub-claim 2 [lookup]: HSBC Bank USA is the US subsidiary of HSBC Holdings PLC.
+  Verdict: NEI (confidence 0.36)
+  Reasoning: The evidence does not provide information specifically about HSBC Bank USA being the US subsidiary of HSBC Holdings PLC. [NLI-bidir: NEI→REFUTED on max_contra=0.99] [calibrator: p=0.36]
+  [HSBC::0] HSBC: HSBC Holdings PLC is a British multinational banking and financial services holding company headquartered in London , United Kingdom .
+  [The_Shops_at_Columbus_Circle::4] The_Shops_at_Columbus_Circle: It is owned by The Related Companies .
+  [Hisense::2] Hisense: It is a state-owned enterprise with publicly traded subsidiaries .
+
+Sub-claim 3 [lookup]: HSBC Holdings PLC traces its origin to Hong Kong.
+  Verdict: REFUTED (confidence 0.52)
+  Reasoning: None of the evidence directly addresses the origin of HSBC Holdings PLC. [NLI-bidir: NEI→REFUTED on max_contra=1.00] [calibrator: p=0.52]
+  [HSBC::0] HSBC: HSBC Holdings PLC is a British multinational banking and financial services holding company headquartered in London , United Kingdom .
+  [HSBC::4] HSBC: The HSBC name is derived from the initials of the Hongkong and Shanghai Banking Corporation .
+  [Bank_of_England::0] Bank_of_England: The Bank of England , formally the Governor and Company of the Bank of England , is the central bank of the United Kingdom and the model on which most modern central banks have been based .
+```
+
+---
+
+## #39  uid=0b9c0cbe  gold=SUPPORTED  predicted=REFUTED
+
+```
+Claim: Scotland holds both this landmark and Cowie Castle The landmark is located in Catterline. The landmark is located in a mining village. Joan Eardley produced landscapes of the village.
+Final verdict: REFUTED (confidence 0.47)
+Sub-claims: 4
+
+Sub-claim 0 [lookup]: Scotland holds Cowie Castle.
+  Verdict: REFUTED (confidence 0.57)
+  Reasoning: Passages 2 and 6 provide information about Cowie Castle being in Scotland, but the other passages do not address the specific claim about Cowie Castle. [NLI-bidir: NEI→REFUTED on max_contra=1.00] [calibrator: p=0.57]
+  [United_Kingdom::0] United_Kingdom: The United Kingdom of Great Britain and Northern Ireland , commonly known as the United Kingdom -LRB- UK -RRB- or Britain , is a sovereign country in western Europe .
+  [Cowie_Castle::0] Cowie_Castle: Cowie Castle is a ruined fortress in Aberdeenshire , Scotland .
+  [A1_road_-LRB-Great_Britain-RRB-::1] A1_road_-LRB-Great_Britain-RRB-: It connects London , the capital of England and the United Kingdom , with Edinburgh , the capital of Scotland .
+
+Sub-claim 1 [lookup]: The landmark is located in Catterline.
+  Verdict: NEI (confidence 0.47)
+  Reasoning: None of the evidence directly addresses the location of the landmark in Catterline. [NLI-bidir: NEI→REFUTED on max_contra=0.96] [calibrator: p=0.47]
+  [Palace_of_Westminster::23] Palace_of_Westminster: The Elizabeth Tower , in particular , which is often referred to by the name of its main bell , Big Ben , is an iconic landmark of London and the United Kingdom in general , one of the most popular to...
+  [South_China_Sea::4] South_China_Sea: It is located
+  [Monticello::17] Monticello: It has been designated a National Historic Landmark .
+
+Sub-claim 2 [composition]: The landmark is located in a mining village.
+  depends_on: [0]
+  Verdict: NEI (confidence 0.41)
+  Reasoning: None of the evidence directly mentions the landmark being located in a mining village. [NLI-bidir: NEI→REFUTED on max_contra=1.00] [calibrator: p=0.41]
+  [Monticello::17] Monticello: It has been designated a National Historic Landmark .
+  [Mow_Cop::10] Mow_Cop: The village also has a long history of coal mining .
+  [Barton_Mine::8] Barton_Mine: They were mined in a geological feature forming the surrounding landscape , which hosts several other mines in the area .
+
+Sub-claim 3 [lookup]: Joan Eardley produced landscapes of the village.
+  depends_on: [2]
+  Verdict: NEI (confidence 0.45)
+  Reasoning: Passage 1 mentions Eardley's landscapes of the fishing village of Catterline, but passages 2-10 do not provide information about her producing landscapes of the village. [NLI-bidir: NEI→REFUTED on max_contra=0.99] [calibrator: p=0.45]
+  [Joan_Eardley::0] Joan_Eardley: Joan Kathleen Harding Eardley -LRB- 18 May 192116 August 1963 -RRB- was a British artist noted for her portraiture of street children in Glasgow and for her landscapes of the fishing village of Catter...
+  [Lake_Grove,_New_York::11] Lake_Grove,_New_York: The village also has a number of parks , recreational facilities , and a nature preserve for residents to enjoy .
+  [Kristian_Zahrtmann::5] Kristian_Zahrtmann: He also produced works of many other genres including landscapes , street scenes , folk scenes and portraits .
+```
+
+---
+
+## #40  uid=dee93d83  gold=SUPPORTED  predicted=NEI
+
+```
+Claim: Pleiospilos is a pink flowering plant, the genus closely related to the species Pueraria montana is not.
+Final verdict: NEI (confidence 0.43)
+Sub-claims: 2
+
+Sub-claim 0 [lookup]: Pleiospilos is a pink flowering plant.
+  Verdict: NEI (confidence 0.44)
+  Reasoning: Passages 1-9 do not specifically mention Pleiospilos as a pink flowering plant. [calibrator: p=0.44]
+  [Pleiospilos::0] Pleiospilos: Pleiospilos is a genus of succulent flowering plants of the Aizoaceae family , native to South Africa .
+  [Amaryllis::1] Amaryllis: It is a small genus of flowering bulbs , with two species .
+  [Pleiospilos::5] Pleiospilos: Pleiospilos species have two or four opposite , very fleshy , grey-green leaves growing from a short stem that may be underground .
+
+Sub-claim 1 [negation]: The genus Pleiospilos is not closely related to Pueraria montana.
+  depends_on: [0]
+  Verdict: NEI (confidence 0.41)
+  Reasoning: The evidence does not provide information about the relationship between Pleiospilos and Pueraria montana. [calibrator: p=0.41]
+  [Pleiospilos::0] Pleiospilos: Pleiospilos is a genus of succulent flowering plants of the Aizoaceae family , native to South Africa .
+  [Pueraria_montana::0] Pueraria_montana: Pueraria montana is a species of plant in the botanical family Fabaceae .
+  [Pleiospilos::5] Pleiospilos: Pleiospilos species have two or four opposite , very fleshy , grey-green leaves growing from a short stem that may be underground .
+```
+
+---
+
+## #41  uid=c1616810  gold=SUPPORTED  predicted=REFUTED
+
+```
+Claim: Before going to the London School of Theology, John Burges spent six years working for a company headquartered in the Dundee United.
+Final verdict: REFUTED (confidence 0.48)
+Sub-claims: 2
+
+Sub-claim 0 [lookup]: John Burges spent six years working for a company headquartered in Dundee United.
+  Verdict: NEI (confidence 0.46)
+  Reasoning: None of the evidence passages provide information about John Burges or his employment. [NLI-bidir: NEI→REFUTED on max_contra=1.00] [calibrator: p=0.46]
+  [Royal_Dutch_Shell::0] Royal_Dutch_Shell: Royal Dutch Shell plc , commonly known as Shell , is a British -- Dutch multinational oil and gas company headquartered in the Netherlands and incorporated in the United Kingdom .
+  [Rolls-Royce_Holdings::0] Rolls-Royce_Holdings: Rolls-Royce Holdings plc is a British multinational public limited company incorporated in February 2011 that owns Rolls-Royce , a business established in 1904 and today designs , manufactures and dis...
+  [Newcastle_United_F.C.::0] Newcastle_United_F.C.: Newcastle United Football Club is an English professional association football club based in Newcastle upon Tyne , that will play in the Premier League , the top tier of English football , after winni...
+
+Sub-claim 1 [composition]: Before going to the London School of Theology, John Burges worked for a company headquartered in Dundee United.
+  depends_on: [0]
+  Verdict: REFUTED (confidence 0.51)
+  Reasoning: Passage 5 is the only one that mentions John Burges working at the London School of Theology, but it does not provide information about his previous job or the location of that job. [NLI-bidir: NEI→REFUTED on max_contra=1.00] [calibrator: p=0.51]
+  [Royal_Dutch_Shell::0] Royal_Dutch_Shell: Royal Dutch Shell plc , commonly known as Shell , is a British -- Dutch multinational oil and gas company headquartered in the Netherlands and incorporated in the United Kingdom .
+  [Rolls-Royce_Holdings::11] Rolls-Royce_Holdings: Its headquarters are in London .
+  [Manchester_United_F.C.::0] Manchester_United_F.C.: Manchester United Football Club is a professional football club based in Old Trafford , Greater Manchester , England , that competes in the Premier League , the top flight of English football .
+```
+
+---
+
+## #42  uid=0bb462d4  gold=REFUTED  predicted=NEI
+
+```
+Claim: Petals on the Wind is a 2014 Lifetime movie sequel of the film which starred the "Mad Men" actress Kiernan Brennan Shipka.
+Final verdict: NEI (confidence 0.57)
+Sub-claims: 4
+
+Sub-claim 0 [lookup]: Petals on the Wind is a 2014 Lifetime movie.
+  Verdict: NEI (confidence 0.43)
+  Reasoning: Passages 1-10 provide details about the movie but do not explicitly state it was released in 2014. [NLI-bidir: NEI→REFUTED on max_contra=1.00] [calibrator: p=0.43]
+  [Petals_on_the_Wind_-LRB-film-RRB-::0] Petals_on_the_Wind_-LRB-film-RRB-: Petals on the Wind is a 2014 Lifetime movie sequel to the 2014 adaptation Flowers in the Attic , starring Heather Graham , Rose McIver , Wyatt Nash , Bailey Buntain and Ellen Burstyn .
+  [Flowers_in_the_Attic_-LRB-2014_film-RRB-::2] Flowers_in_the_Attic_-LRB-2014_film-RRB-: A sequel , Petals on the Wind , based on the novel of the same name , premiered on May 26 , 2014 , on Lifetime .
+  [Petals_on_the_Wind_-LRB-film-RRB-::2] Petals_on_the_Wind_-LRB-film-RRB-: The film premiered on Lifetime on May 26 , 2014 .
+
+Sub-claim 1 [composition]: Petals on the Wind is a sequel to a film.
+  depends_on: [0]
+  Verdict: SUPPORTED (confidence 0.56)
+  Reasoning: The evidence does not provide information about whether 'Petals on the Wind' is a sequel to a film. [NLI-bidir: NEI→REFUTED on max_contra=0.97] [calibrator: p=0.56]
+  [Petals_on_the_Wind_-LRB-film-RRB-::0] Petals_on_the_Wind_-LRB-film-RRB-: Petals on the Wind is a 2014 Lifetime movie sequel to the 2014 adaptation Flowers in the Attic , starring Heather Graham , Rose McIver , Wyatt Nash , Bailey Buntain and Ellen Burstyn .
+  [Flowers_in_the_Attic_-LRB-2014_film-RRB-::2] Flowers_in_the_Attic_-LRB-2014_film-RRB-: A sequel , Petals on the Wind , based on the novel of the same name , premiered on May 26 , 2014 , on Lifetime .
+  [Titanic_-LRB-1997_film-RRB-::0] Titanic_-LRB-1997_film-RRB-: Titanic is a 1997 American epic romance-disaster film directed , written , co-produced , and co-edited by James Cameron .
+
+Sub-claim 2 [lookup]: The film starring Kiernan Brennan Shipka was released in 2014.
+  Verdict: SUPPORTED (confidence 0.61)
+  Reasoning: Passages 2-9 do not provide information about the film starring Kiernan Brennan Shipka, only about the actor and some films. [calibrator: p=0.61]
+  [Guardians_of_the_Galaxy_-LRB-2008_team-RRB-::5] Guardians_of_the_Galaxy_-LRB-2008_team-RRB-: A feature film based on this team was released in 2014 .
+  [Kiernan_Shipka::0] Kiernan_Shipka: Kiernan Brennan Shipka -LRB- born November 10 , 1999 -RRB- is an American actress .
+  [Flowers_in_the_Attic_-LRB-2014_film-RRB-::0] Flowers_in_the_Attic_-LRB-2014_film-RRB-: Flowers in the Attic is a 2014 Lifetime movie , starring Kiernan Shipka , Ellen Burstyn , Mason Dye , and Heather Graham .
+
+Sub-claim 3 [composition]: Kiernan Brennan Shipka starred in the film released in 2014.
+  depends_on: [1, 2]
+  Verdict: SUPPORTED (confidence 0.68)
+  Reasoning: Passages 2, 6, 7, 8, 9, and 10 provide information about films released in 2014, but they do not specify which film Kiernan Shipka starred in. [calibrator: p=0.68]
+  [Kiernan_Shipka::0] Kiernan_Shipka: Kiernan Brennan Shipka -LRB- born November 10 , 1999 -RRB- is an American actress .
+  [Flowers_in_the_Attic_-LRB-2014_film-RRB-::0] Flowers_in_the_Attic_-LRB-2014_film-RRB-: Flowers in the Attic is a 2014 Lifetime movie , starring Kiernan Shipka , Ellen Burstyn , Mason Dye , and Heather Graham .
+  [Guardians_of_the_Galaxy_-LRB-2008_team-RRB-::5] Guardians_of_the_Galaxy_-LRB-2008_team-RRB-: A feature film based on this team was released in 2014 .
+```
+
+---
+
+## #43  uid=64816404  gold=SUPPORTED  predicted=NEI
+
+```
+Claim: The novelist Thomas Mann Prize Lübeck was German, not the author of Snow Falling on Cedars.
+Final verdict: NEI (confidence 0.49)
+Sub-claims: 2
+
+Sub-claim 0 [lookup]: The novelist Thomas Mann Prize Lübeck was German.
+  Verdict: NEI (confidence 0.45)
+  Reasoning: None of the evidence passages mention Thomas Mann Prize Lübeck or its location. [calibrator: p=0.45]
+  [Thomas_Mann::0] Thomas_Mann: Paul Thomas Mann -LRB- -LSB- paʊ̯l toːmas man -RSB- ; 6 June 1875 -- 12 August 1955 -RRB- was a German novelist , short story writer , social critic , philanthropist , essayist , and the 1929 Nobel Pr...
+  [Thomas_Mann::9] Thomas_Mann: Thomas Mann is one of the best-known exponents of the so-called Exilliteratur , literature written in German by those who opposed or fled the Hitler regime .
+  [Johann_Wolfgang_von_Goethe::0] Johann_Wolfgang_von_Goethe: Johann Wolfgang von Goethe -LRB- -LSB- ˈgɜːrtə -RSB- -LSB- ˈjoːhan ˈvɔlfɡaŋ fɔn ˈɡøːtə -RSB- ; 28 August 1749 -- 22 March 1832 -RRB- was a German writer and statesman .
+
+Sub-claim 1 [lookup]: The author of Snow Falling on Cedars was not German.
+  Verdict: SUPPORTED (confidence 0.53)
+  Reasoning: None of the evidence passages provide information about the author of Snow Falling on Cedars or their nationality. [NLI-bidir: NEI→REFUTED on max_contra=0.99] [calibrator: p=0.53]
+  [David_Guterson::1] David_Guterson: He is best known as the author of the book Snow Falling on Cedars .
+  [Snow_Falling_on_Cedars_-LRB-film-RRB-::0] Snow_Falling_on_Cedars_-LRB-film-RRB-: Snow Falling on Cedars is a film directed by Scott Hicks .
+  [Jon_Snow_-LRB-character-RRB-::0] Jon_Snow_-LRB-character-RRB-: Jon Snow is a fictional character in the A Song of Ice and Fire series of fantasy novels by American author George R. R. Martin , and its television adaptation Game of Thrones .
+```
+
+---
+
+## #44  uid=4a08ef34  gold=REFUTED  predicted=REFUTED
+
+```
+Claim: The actor who starred in East/West was also a director and occasional singer. He costarred with Anatoly Ravikovich in a comedy film.
+Final verdict: REFUTED (confidence 0.62)
+Sub-claims: 2
+
+Sub-claim 0 [lookup]: The actor who starred in East/West was also a director and occasional singer.
+  Verdict: NEI (confidence 0.42)
+  Reasoning: Passage 8 identifies Paul Franklin Dano, but passages 1-7 and 10 do not provide information about his acting, singing, or directing roles. [calibrator: p=0.42]
+  [East/West::0] East/West: East/West -LRB- Est-Ouest Восток-Запад -RRB- is a 1999 internationally co-produced film directed by Régis Wargnier , starring Sandrine Bonnaire -LRB- as Marie -RRB- , Oleg Menshikov -LRB- as Alexei -R...
+  [Otto_Preminger::7] Otto_Preminger: He also had a few acting roles .
+  [Lemmy::3] Lemmy: Alongside his music career , he also had many minor roles in film and television .
+
+Sub-claim 1 [composition]: The actor who starred in East/West costarred with Anatoly Ravikovich in a comedy film.
+  depends_on: [0]
+  Verdict: REFUTED (confidence 0.82)
+  Reasoning: Passage 2 provides information about the film East/West and its cast, but does not mention Anatoly Ravikovich or any comedy film he starred in. [NLI-bidir: NEI→REFUTED on max_contra=1.00] [calibrator: p=0.82]
+  [Richard_Burbage::4] Richard_Burbage: They were both actors in drama .
+  [East/West::0] East/West: East/West -LRB- Est-Ouest Восток-Запад -RRB- is a 1999 internationally co-produced film directed by Régis Wargnier , starring Sandrine Bonnaire -LRB- as Marie -RRB- , Oleg Menshikov -LRB- as Alexei -R...
+  [Frederic_Zelnik::1] Frederic_Zelnik: He also appeared on screen as an actor .
+```
+
+---
+
+## #45  uid=c19fe5ad  gold=REFUTED  predicted=REFUTED
+
+```
+Claim: There were 331 episodes of the TV series where Julianna Margulies had the role of Carol Hathaway.
+Final verdict: REFUTED (confidence 0.51)
+Sub-claims: 1
+
+Sub-claim 0 [lookup]: There were 331 episodes of the TV series where Julianna Margulies had the role of Carol Hathaway.
+  Verdict: REFUTED (confidence 0.51)
+  Reasoning: The evidence does not provide specific information about the number of episodes of the TV series where Julianna Margulies played Carol Hathaway. [NLI-bidir: NEI→REFUTED on max_contra=1.00] [calibrator: p=0.51]
+  [Julianna_Margulies::1] Julianna_Margulies: After several small television roles , Margulies achieved both critical and commercial success in her role as Carol Hathaway on NBC 's long-running medical drama ER , for which she won an Emmy Award .
+  [South_Park::14] South_Park: There have been a total of episodes over the course of the show 's 20 seasons .
+  [Julianna_Margulies::0] Julianna_Margulies: Julianna Margulies -LRB- -LSB- dʒuːliˈɑːnə_mɑːrgəˈliːs -RSB- -LRB- ` Mar-ga-lease ' -RRB- born June 8 , 1966 -RRB- is an American actress and producer .
+```
+
+---
+
+## #46  uid=9706b3ef  gold=SUPPORTED  predicted=REFUTED
+
+```
+Claim: Gwallog ap Lleenog  has long been considered a probable sixth-century king. In the early 7th century the city in Surinam he was king of the sub-Roman state  where St. John's Centre is located.
+Final verdict: REFUTED (confidence 0.55)
+Sub-claims: 2
+
+Sub-claim 0 [lookup]: Gwallog ap Lleenog has long been considered a probable sixth-century king.
+  Verdict: NEI (confidence 0.40)
+  Reasoning: The evidence does not provide specific information about Gwallog ap Lleenog being a probable sixth-century king. [NLI-bidir: NEI→REFUTED on max_contra=0.98] [calibrator: p=0.40]
+  [Gwallog_ap_Lleenog::1] Gwallog_ap_Lleenog: He has long been considered a probable sixth-century king of the sub-Roman state of Elmet in the Leeds area of modern Yorkshire , though some more recent scholarship would identify him more tentativel...
+  [Northern_and_Southern_dynasties::1] Northern_and_Southern_dynasties: It is sometimes considered as the latter part of a longer period known as the Six Dynasties -LRB- 220 to 589 -RRB- .
+  [Gwallog_ap_Lleenog::0] Gwallog_ap_Lleenog: Gwallog ap Lleenog -LRB- Old Welsh Guallauc , Middle Welsh Gwallawc ; his father 's name is spelled variously Lleinauc , Lleynna -LSB- u -RSB- c , Lleenawc , and Llennawc -RRB- was a hero of the Hen O...
+
+Sub-claim 1 [composition]: In the early 7th century, Gwallog ap Lleenog was king of the sub-Roman state where St. John's Centre is located.
+  depends_on: [0]
+  Verdict: REFUTED (confidence 0.71)
+  Reasoning: None of the evidence directly addresses the location of St. John's Centre or the reign of Gwallog ap Lleenog. [NLI-bidir: NEI→REFUTED on max_contra=0.95] [calibrator: p=0.71]
+  [Gwallog_ap_Lleenog::0] Gwallog_ap_Lleenog: Gwallog ap Lleenog -LRB- Old Welsh Guallauc , Middle Welsh Gwallawc ; his father 's name is spelled variously Lleinauc , Lleynna -LSB- u -RSB- c , Lleenawc , and Llennawc -RRB- was a hero of the Hen O...
+  [Flevoland::1] Flevoland: It is located in the centre of the country , where the former Zuiderzee was .
+  [Saint_John,_New_Brunswick::0] Saint_John,_New_Brunswick: Saint John -LRB- -LSB- sɛ̃.ʒɔn -RSB- -RRB- is the port city of the Bay of Fundy in the Canadian province of New Brunswick .
+```
+
+---
+
+## #47  uid=6cdacbc7  gold=REFUTED  predicted=REFUTED
+
+```
+Claim: 179 women in total competed at the Asian Games the year Lee Young-Sun achieved her personal record throw of 58.87 metres.
+Final verdict: REFUTED (confidence 0.57)
+Sub-claims: 2
+
+Sub-claim 0 [lookup]: Lee Young-Sun achieved her personal record throw of 58.87 metres.
+  Verdict: NEI (confidence 0.50)
+  Reasoning: The evidence does not provide information about Lee Young-Sun's personal record throw or any specific throw distance. [NLI-bidir: NEI→REFUTED on max_contra=0.96] [calibrator: p=0.50]
+  [Lee_Young-sun::1] Lee_Young-sun: Her personal best throw is 58.87 metres , achieved at the 2002 Asian Games in Busan .
+  [Track_and_field::6] Track_and_field: The jumping and throwing events are won by the athlete who achieves the greatest distance or height .
+  [Lee_Young-sun::0] Lee_Young-sun: Lee Young-Sun -LRB- born 21 February 1974 -RRB- is a retired female javelin thrower from South Korea .
+
+Sub-claim 1 [composition]: 179 women competed at the Asian Games in the year Lee Young-Sun achieved her personal record throw.
+  depends_on: [0]
+  Verdict: REFUTED (confidence 0.64)
+  Reasoning: The evidence does not provide specific information about the number of women competing or Lee Young-Sun's personal record throw at the Asian Games. [calibrator: p=0.64]
+  [1983_Summer_Universiade::1] 1983_Summer_Universiade: Over 2400 athletes from 73 countries participated .
+  [Svetlana_Radzivil::17] Svetlana_Radzivil: This is the Asian record , although she shares it with two athletes : Nadejda Dusanova and Yekaterina Yevseyeva .
+  [1982_Asian_Games::6] 1982_Asian_Games: The number of participating countries was the highest in Asian Games history .
+```
+
+---
+
+## #48  uid=229660e6  gold=SUPPORTED  predicted=REFUTED
+
+```
+Claim: Pavel Vízner and his partner were the defending champions of the 2007 Brasil Open – Doubles. USLTA's partner and Oliver Marach were both professional tennis players.
+Final verdict: REFUTED (confidence 0.60)
+Sub-claims: 4
+
+Sub-claim 0 [lookup]: Pavel Vízner was the defending champion of the 2007 Brasil Open – Doubles.
+  Verdict: REFUTED (confidence 0.73)
+  Reasoning: None of the evidence passages explicitly mention Pavel Vízner as the defending champion of the 2007 Brasil Open – Doubles. [NLI-bidir: NEI→REFUTED on max_contra=1.00] [calibrator: p=0.73]
+  [2007_Brasil_Open_–_Doubles::0] 2007_Brasil_Open_–_Doubles: Lukáš Dlouhý and Pavel Vízner were the defending champions , and won in the final 6 -- 2 , 7 -- 6 -LRB- 7 -- 4 -RRB- , against Albert Montañés and Rubén Ramírez Hidalgo .
+  [Simon_Aspelin::13] Simon_Aspelin: In the semifinal , they held off unseeded Julien Benneteau and Nicolas Mahut , before winning the final in two sets over the ninth seeds , Pavel Vízner and Lukáš Dlouhý .
+  [2000_Stockholm_Open_–_Doubles::3] 2000_Stockholm_Open_–_Doubles: Mark Knowles and Daniel Nestor won the title , defeating Petr Pála and Pavel Vízner 6 -- 3 , 6 -- 2 in the final .
+
+Sub-claim 1 [composition]: Pavel Vízner's partner was a professional tennis player.
+  depends_on: [0]
+  Verdict: NEI (confidence 0.36)
+  Reasoning: None of the evidence passages mention Pavel Vízner's partner or any professional tennis player. [NLI-bidir: NEI→REFUTED on max_contra=1.00] [calibrator: p=0.36]
+  [Danie_Visser::8] Danie_Visser: Visser won the Australian Open doubles crown again in 1993 , partnering Laurie Warder .
+  [2007_Brasil_Open_–_Doubles::0] 2007_Brasil_Open_–_Doubles: Lukáš Dlouhý and Pavel Vízner were the defending champions , and won in the final 6 -- 2 , 7 -- 6 -LRB- 7 -- 4 -RRB- , against Albert Montañés and Rubén Ramírez Hidalgo .
+  [2000_Stockholm_Open_–_Doubles::3] 2000_Stockholm_Open_–_Doubles: Mark Knowles and Daniel Nestor won the title , defeating Petr Pála and Pavel Vízner 6 -- 3 , 6 -- 2 in the final .
+
+Sub-claim 2 [lookup]: Oliver Marach was a professional tennis player.
+  Verdict: SUPPORTED (confidence 0.71)
+  Reasoning: Passage 1 is the only one that mentions Oliver Marach, but it describes him as a professional tennis player, not confirming or denying if he is a professional player. [calibrator: p=0.71]
+  [Oliver_Marach::0] Oliver_Marach: Oliver Marach -LRB- born 16 July 1980 -RRB- is an Austrian professional tennis player .
+  [Venus_Williams::0] Venus_Williams: Venus Ebony Starr Williams -LRB- born June 17 , 1980 -RRB- is an American professional tennis player who is generally regarded as one of the all-time greats of women 's tennis and who , along with you...
+  [The_Championships,_Wimbledon::0] The_Championships,_Wimbledon: The Championships , Wimbledon , commonly known simply as Wimbledon , is the oldest tennis tournament in the world , and is widely considered the most prestigious .
+
+Sub-claim 3 [composition]: USLTA's partner was a professional tennis player.
+  depends_on: [1]
+  Verdict: SUPPORTED (confidence 0.58)
+  Reasoning: None of the evidence passages mention USLTA or its partner. [calibrator: p=0.58]
+  [Venus_Williams::0] Venus_Williams: Venus Ebony Starr Williams -LRB- born June 17 , 1980 -RRB- is an American professional tennis player who is generally regarded as one of the all-time greats of women 's tennis and who , along with you...
+  [John_McEnroe::0] John_McEnroe: John Patrick McEnroe Jr. -LRB- born February 16 , 1959 -RRB- is an American former World No. 1 professional tennis player , often rated among the greatest players of all time in the sport , especially...
+  [Serena_Williams::0] Serena_Williams: Serena Jameka Williams -LRB- born September 26 , 1981 -RRB- is an American professional tennis player .
+```
+
+---
+
+## #49  uid=402de9ef  gold=SUPPORTED  predicted=NEI
+
+```
+Claim: The star of The Keeping Hours did not play Margo Dunne in a 2014 film set in Missouri.
+Final verdict: NEI (confidence 0.44)
+Sub-claims: 2
+
+Sub-claim 0 [negation]: The star of The Keeping Hours did not play Margo Dunne.
+  Verdict: NEI (confidence 0.46)
+  Reasoning: The evidence does not provide information about the star of The Keeping Hours or Margo Dunne. [NLI-bidir: NEI→REFUTED on max_contra=1.00] [calibrator: p=0.46]
+  [The_Keeping_Hours::0] The_Keeping_Hours: The Keeping Hours is an upcoming 2017 American supernatural horror romance film directed by Karen Moncrieff and written by Rebecca Sonnenshine .
+  [Practical_Magic::1] Practical_Magic: The film was directed by Griffin Dunne and stars Sandra Bullock , Nicole Kidman , Stockard Channing , Dianne Wiest , Aidan Quinn , and Goran Visnjic .
+  [The_Coastwatchers_-LRB-TV_movie-RRB-::4] The_Coastwatchers_-LRB-TV_movie-RRB-: It was the pilot for a TV series that did not eventuate .
+
+Sub-claim 1 [lookup]: Margo Dunne was played in a 2014 film set in Missouri.
+  Verdict: NEI (confidence 0.42)
+  Reasoning: Passage 7 explicitly states the film is set in Southwest Missouri, but does not mention Margo Dunne or the release year. [NLI-bidir: NEI→REFUTED on max_contra=1.00] [calibrator: p=0.42]
+  [Guardians_of_the_Galaxy_-LRB-2008_team-RRB-::5] Guardians_of_the_Galaxy_-LRB-2008_team-RRB-: A feature film based on this team was released in 2014 .
+  [A_Million_Ways_to_Die_in_the_West::3] A_Million_Ways_to_Die_in_the_West: The film was released on May 30 , 2014 .
+  [22_Jump_Street::0] 22_Jump_Street: 22 Jump Street is a 2014 American action comedy film directed by Phil Lord and Christopher Miller , written by Jonah Hill , Michael Bacall , Oren Uziel and Rodney Rothman and produced by and starring...
+```
+
+---
+
+## #50  uid=df2f6649  gold=SUPPORTED  predicted=REFUTED
+
+```
+Claim: The younger of the two brother boxers, Lucas Martin Matthysse and Walter Dario Matthysse, was born in July 22, 1982.
+Final verdict: REFUTED (confidence 0.48)
+Sub-claims: 3
+
+Sub-claim 0 [lookup]: Lucas Martin Matthysse was born in July 22, 1982.
+  Verdict: NEI (confidence 0.35)
+  Reasoning: Passages 1, 2, 3, 4, 5, 6, 7, 8, 9, and 10 do not provide information about Lucas Martin Matthysse's birth date. [NLI-bidir: NEI→REFUTED on max_contra=1.00] [calibrator: p=0.35]
+  [Lucas_Matthysse::0] Lucas_Matthysse: Lucas Martin Matthysse -LRB- born September 27 , 1982 -RRB- is an Argentine professional boxer .
+  [Walter_Matthysse::1] Walter_Matthysse: He is the elder brother of professional boxer Lucas Matthysse .
+  [Lucas_Matthysse::2] Lucas_Matthysse: His older brother is former professional boxer Walter Matthysse .
+
+Sub-claim 1 [lookup]: Walter Dario Matthysse was born in July 22, 1982.
+  Verdict: REFUTED (confidence 0.70)
+  Reasoning: Passages 1, 5, 6, 7, 9, and 10 do not provide information about Walter Dario Matthysse's birth date, while passage 4 and 8 provide incorrect birth dates for different individuals. [NLI-bidir: NEI→REFUTED on max_contra=1.00] [calibrator: p=0.70]
+  [Walter_Matthysse::0] Walter_Matthysse: Walter Dario Matthysse -LRB- born August 29 , 1978 -RRB- is an Argentine former professional boxer who competed from 2002 to 2009 , and challenged once for the IBF welterweight title in 2007 .
+  [Walter_Matthysse::1] Walter_Matthysse: He is the elder brother of professional boxer Lucas Matthysse .
+  [Tobey_Maguire::1] Tobey_Maguire: He began his career in the late 1980s .
+
+Sub-claim 2 [comparison]: Lucas Martin Matthysse is younger than Walter Dario Matthysse.
+  depends_on: [0, 1]
+  Verdict: NEI (confidence 0.39)
+  Reasoning: The evidence does not provide information about the ages or relationships of Lucas Martin Matthysse and Walter Dario Matthysse. [NLI-bidir: NEI→REFUTED on max_contra=1.00] [calibrator: p=0.39]
+  [Lucas_Matthysse::0] Lucas_Matthysse: Lucas Martin Matthysse -LRB- born September 27 , 1982 -RRB- is an Argentine professional boxer .
+  [Ultimate_Fantastic_Four::6] Ultimate_Fantastic_Four: The origin of their powers is different and the team is much younger .
+  [Walter_Matthysse::0] Walter_Matthysse: Walter Dario Matthysse -LRB- born August 29 , 1978 -RRB- is an Argentine former professional boxer who competed from 2002 to 2009 , and challenged once for the IBF welterweight title in 2007 .
+```
+
+---

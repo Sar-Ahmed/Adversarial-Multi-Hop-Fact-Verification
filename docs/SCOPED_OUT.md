@@ -68,6 +68,18 @@ Why not run: Phase 12 already produced 7 ablation rows from cached artifacts. Th
 
 **Fix path:** one-line change in `src/pipeline.py` to bypass the decomposer loop and run verifier once on the whole claim. Keep the decomposer's output as metadata in the chain's `sub_claims` field for the Phase 10 audit trail. Phase 15 final-report decision.
 
+## Phase 14 human eval — n=50 not 100, single rater not two
+
+**Documented deviation, not a future-work item.**
+
+**Why n=50:** A single rater at ~2-3 min/chain is ~4 hours for n=100; the bootstrap 95% CIs are already ±0.18 wide on each dimension at n=50, so the marginal information from the second 50 is small. Rationale stated in `docs/PHASE_14_human_eval.md` outcome section.
+
+**Why single rater:** Spec suggested a second rater on a 20-chain subset for Cohen's-kappa inter-rater agreement. Not done; only one developer on the project. Mitigation: `docs/HUMAN_EVAL_PROTOCOL.md` defines the rubric with anchored examples so a second rater could be slotted in later and the protocol is reproducible.
+
+**Why this matters:** the spec deliverable is partially met (50/100 chains, 1/2 raters). The cross-correlation results (reasoning r=0.24, faithfulness r=0.50, overall r=0.56 with verdict-correctness) are still informative and converge with Phase 11/12/13's evidence that the verifier is the bottleneck.
+
+**Fix path:** rope in a second engineer for ~1 hour on the existing 50 chains for a kappa estimate, or expand to n=100 with the same rater. Both are additive — the existing 50 ratings need not be redone.
+
 ## Larger eval set
 
 **Documented gap.**
