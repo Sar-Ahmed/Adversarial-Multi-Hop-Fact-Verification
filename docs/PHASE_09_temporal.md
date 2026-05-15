@@ -76,6 +76,29 @@ Why 10%? Below that, temporal-specific machinery yields <0.5 points of accuracy 
 - Do not implement a temporal module that, when uncertain, defaults to a verdict (V2's bug). When uncertain, emit a neutral signal — the calibrator decides.
 - Do not skip the gate. The gate is the whole point. If you find yourself wanting to "just implement it because it sounds important", stop and re-read the gate.
 
-## Outcome (filled at end of phase)
+## Outcome (Phase 09 closed 2026-05-15 — Path B, scoped out)
 
-> Append: which path was taken, temporal-error bucket size before and (if Path A) after, accuracy delta, decision rationale.
+**Decision: Path B. Temporal reasoning is scoped out of V3.**
+
+### Why
+
+Phase 13's error analysis (50 stratified failures from the production whole-claim configuration) found **temporal_error = 0 / 50 = 0%** of failures. The phase doc's binding rule:
+> If `temporal_error` is **< 10%**: scope out, document (Path B).
+
+We're at 0%. Path B is mandated.
+
+### What this means for the codebase
+
+- No `src/temporal/` module ships in V3. The Phase 02 placeholder is empty by design.
+- `configs/default.yaml` has no `temporal:` block (intentional — the YAML comment in Phase 02 spelled this out: an empty placeholder would replicate V2's silent-fallback bug).
+- A new `docs/SCOPED_OUT.md` collects this decision and is referenced from `docs/FINAL_REPORT.md` (Phase 15).
+
+### Caveat (documented honestly)
+
+Many failing claims *do* contain temporal expressions: years ("1982 Bavarian Championships"), film year qualifiers ("the 2012 sequel"), and "X-before-Y" comparisons. The point is that those failures aren't *because of* temporal handling — they're NEI-bias and entity-binding failures on claims that happen to be temporal. A working temporal extractor wouldn't fix them.
+
+This aligns with Phase 13's broader read: the verifier is the bottleneck, not retrieval or entity resolution or temporal handling.
+
+### If a future iteration wants to revisit
+
+Re-run Phase 13's categorization (`python -m src.analysis.categorize`) on the production output of that iteration. If the resulting `temporal_error` bucket is ≥ 10%, re-trigger Path A with the implementation plan from this doc. The gate doesn't have to fire only once.

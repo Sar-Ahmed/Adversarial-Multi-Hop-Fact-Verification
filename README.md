@@ -50,6 +50,8 @@ ClaimVerification-v3/
 | 10 — evidence chains | **closed** (2026-05-15) — 200/200 chains built, **validator passes 100%**, 10 stratified rendered examples. Chain shape: mean 2.76 sub-claims, 8.28 citations per chain, audit trail (LLM reasoning + NLI veto + calibrator prob) visible in every verification. End-to-end accuracy is **0.145** — 22 pts lower than Phase 07's whole-claim mode on the same n=200; Phase 11 will decide whole-claim vs decomposed mode. |
 | 11 — evaluation | **closed** (2026-05-15) — bootstrap CIs on every headline; production aggregator picked. HoVer-dev whole-claim: **0.360 [0.295, 0.425] acc, 0.233 macro-F1**; FEVER-dev calibrated: **0.427 acc, 0.67 NEI recall**. **Adversarial Δ = -0.020 [-0.060, 0.000] ≤ 0.05 spec target ✓**. Macro-F1 misses 0.40 spec target (0.233) — downstream of Phase 07 verifier limits. |
 | 12 — ablation | **closed** (2026-05-15) — 7 ablation rows from cached artifacts; full narrative in [docs/ABLATION_TABLE.md](docs/ABLATION_TABLE.md). Headline: **bidirectional NLI rule is V3's most valuable component (+33 pts vs no-NLI)**; decomposition costs 21 pts; calibrator helps FEVER (NEI 0→67%) and hurts HoVer (−8.5 pts). 3 expensive ablations deferred to Phase 15 follow-ups. |
-| 09 / 13–15 | not started; Phase 09 is gated by Phase 13. |
+| 13 — error analysis | **closed** (2026-05-15) — 50 stratified failures tagged. Buckets: **nei_miscalibration 56%**, partial_match_as_full 24%, entity_confusion 20%, **temporal_error 0%**. Three fix paths recorded in [docs/ERROR_ANALYSIS.md](docs/ERROR_ANALYSIS.md). |
+| 09 — temporal reasoning | **closed — scoped out** (2026-05-15) — Phase 13 gate fired Path B (temporal_error 0/50 < 10%). Decision + caveat in [docs/PHASE_09_temporal.md](docs/PHASE_09_temporal.md) and [docs/SCOPED_OUT.md](docs/SCOPED_OUT.md). |
+| 14–15 | not started. |
 
 Each phase has a binding doc in `docs/PHASE_NN_*.md` with goal, deliverables, exit criteria, and risks.
