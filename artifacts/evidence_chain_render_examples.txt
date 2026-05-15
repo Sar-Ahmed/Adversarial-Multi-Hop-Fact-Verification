@@ -1,0 +1,262 @@
+=== uid=3428360d  gold=REFUTED  predicted=SUPPORTED ===
+Claim: An American statistician and writer who analyzes baseball cited Leip's Atlas as the "preferred source for election results".
+Final verdict: SUPPORTED (confidence 0.62)
+Sub-claims: 2
+
+Sub-claim 0 [lookup]: An American statistician and writer analyzes baseball.
+  Verdict: SUPPORTED (confidence 0.54)
+  Reasoning: Passage 1 clearly states Nathaniel Read Silver analyzes baseball, which aligns with the claim. [calibrator: p=0.54]
+  [Nate_Silver::0] Nate_Silver: Nathaniel Read Silver -LRB- born January 13 , 1978 -RRB- is an American statistician and writer who analyzes baseball -LRB- see sabermetrics -RRB- and elections -LRB- see psephology -RRB- .
+  [Jack_Morris::6] Jack_Morris: He has also been an analyst for MLB broadcasts on Fox Sports 1 .
+  [Batting_-LRB-cricket-RRB-::21] Batting_-LRB-cricket-RRB-: The main statistic for batting is a player 's batting average .
+
+Sub-claim 1 [composition]: That statistician cited Leip's Atlas as the preferred source for election results.
+  depends_on: [0]
+  Verdict: SUPPORTED (confidence 0.71)
+  Reasoning: None of the evidence directly mentions a statistician citing Leip's Atlas as the preferred source for election results. [NLI-bidir: NEI→REFUTED on max_contra=0.97] [calibrator: p=0.71]
+  [Dave_Leip's_Atlas_of_U.S._Presidential_Elections::3] Dave_Leip's_Atlas_of_U.S._Presidential_Elections: Leip 's Atlas has been cited as a `` preferred source for election results '' by statistician and political pundit Nate Silver .
+  [Dave_Leip's_Atlas_of_U.S._Presidential_Elections::0] Dave_Leip's_Atlas_of_U.S._Presidential_Elections: Dave Leip 's Atlas of U.S. Presidential Elections is a web site that provides tables , graphs , and maps for presidential -LRB- 1789 -- present -RRB- , senatorial -LRB- 1990 and onwards -RRB- , and gu...
+  [Arminianism::9] Arminianism: These articles asserted that
+
+---
+
+=== uid=73427872  gold=REFUTED  predicted=SUPPORTED ===
+Claim: Grand Admiral a naval rank in one of the highest in the several European navies that use this system of Military ranks.
+Final verdict: SUPPORTED (confidence 0.82)
+Sub-claims: 1
+
+Sub-claim 0 [lookup]: Grand Admiral is a naval rank in one of the highest in several European navies.
+  Verdict: SUPPORTED (confidence 0.82)
+  Reasoning: The evidence does not specifically address the rank of Grand Admiral in several European navies. [calibrator: p=0.82]
+  [Grand_admiral::0] Grand_admiral: Grand admiral is a historic naval rank , the highest rank in the several European navies that used it .
+  [Bangladesh::24] Bangladesh: The region was home to many principalities that had inland naval prowess .
+  [Grand_admiral::2] Grand_admiral: A comparable rank in other navies is that of fleet admiral .
+
+---
+
+=== uid=631928e7  gold=REFUTED  predicted=SUPPORTED ===
+Claim: The home of a race is also the venue for the FIA Formula One Canadian Grand Prix. It is home to the first formula one race won by a black driver. The race featured Formula One drivers from Canada for the first time since 2006.
+Final verdict: SUPPORTED (confidence 0.78)
+Sub-claims: 3
+
+Sub-claim 0 [lookup]: The home of a race is also the venue for the FIA Formula One Canadian Grand Prix.
+  Verdict: SUPPORTED (confidence 0.83)
+  Reasoning: Passages 1-9 do not provide specific information about the venue of the FIA Formula One Canadian Grand Prix. [NLI-bidir: NEI→REFUTED on max_contra=1.00] [calibrator: p=0.83]
+  [Circuit_Gilles_Villeneuve::1] Circuit_Gilles_Villeneuve: It is the venue for the FIA Formula One Canadian Grand Prix .
+  [Circuit_Gilles_Villeneuve::8] Circuit_Gilles_Villeneuve: The Canadian Grand Prix of Formula One racing , which had taken place for 30 years at Circuit Gilles Villeneuve , was dropped from the 2009 Formula One calendar and replaced with the inaugural Abu Dha...
+  [Montreal::29] Montreal: Currently , the city hosts the Canadian Grand Prix of Formula One , the Montreal International Jazz Festival and the Just for Laughs festival .
+
+Sub-claim 1 [composition]: The first Formula One race won by a black driver took place at the home of a race.
+  depends_on: [0]
+  Verdict: SUPPORTED (confidence 0.73)
+  Reasoning: Passages 6 and 7 provide information about the first Formula One race won by a black driver (Lewis Hamilton) and its location (Monaco), but there is no direct evidence of Hamilton winning the race at Monaco. [calibrator: p=0.73]
+  [2007_Canadian_Grand_Prix::3] 2007_Canadian_Grand_Prix: It was Hamilton 's first win in Formula One and the first Formula One race won by a black driver .
+  [Lewis_Hamilton::11] Lewis_Hamilton: Coming from a mixed background , with a black father and white mother , Hamilton is the first black driver to race in Formula One .
+  [2008_Formula_One_season::9] 2008_Formula_One_season: In winning the title , Hamilton became the youngest driver ever to win the title -LRB- a record since supplanted by Sebastian Vettel 's winning of the 2010 Drivers ' title -RRB- and the first black dr...
+
+Sub-claim 2 [composition]: Formula One drivers from Canada participated in the FIA Formula One Canadian Grand Prix for the first time since 2006.
+  depends_on: [0]
+  Verdict: SUPPORTED (confidence 0.77)
+  Reasoning: The evidence does not provide specific information about Formula One drivers from Canada participating in the FIA Formula One Canadian Grand Prix since 2006. [NLI-bidir: NEI→SUPPORTED on max_entail=0.96] [calibrator: p=0.77]
+  [Circuit_Gilles_Villeneuve::1] Circuit_Gilles_Villeneuve: It is the venue for the FIA Formula One Canadian Grand Prix .
+  [2008_Formula_One_season::7] 2008_Formula_One_season: Lewis Hamilton won the Drivers ' title by a point -- by overtaking Toyota 's Timo Glock on the final corner of the final lap of the final grand prix of the season to claim the required 5th-place finis...
+  [Formula_Three::1] Formula_Three: The various championships held in Europe , Australia , South America and Asia form an important step for many prospective Formula One drivers .
+
+---
+
+=== uid=27818aa7  gold=SUPPORTED  predicted=REFUTED ===
+Claim: Mixed martial arts promotion that was purchased by WSOF Canada in 2001 used to feature the man Joe Lauzon is tied with in having the most post-fight bonus awards, as a competitor is World Extreme Cagefighting.
+Final verdict: REFUTED (confidence 0.58)
+Sub-claims: 3
+
+Sub-claim 0 [lookup]: Mixed martial arts promotion purchased by WSOF Canada in 2001.
+  Verdict: REFUTED (confidence 0.68)
+  Reasoning: None of the evidence directly mentions WSOF Canada or its purchase in 2001. [NLI-bidir: NEI→REFUTED on max_contra=1.00] [calibrator: p=0.68]
+  [Australian_Youth_Olympic_Festival::1] Australian_Youth_Olympic_Festival: The first event was held in 2001 .
+  [Ultimate_Fighting_Championship::1] Ultimate_Fighting_Championship: It is the largest MMA promotion in the world and features the top-ranked fighters of the sport .
+  [World_Extreme_Cagefighting::0] World_Extreme_Cagefighting: World Extreme Cagefighting -LRB- WEC -RRB- was an American mixed martial arts -LRB- MMA -RRB- promotion founded in 2001 .
+
+Sub-claim 1 [comparison]: Joe Lauzon is tied with a competitor in having the most post-fight bonus awards.
+  Verdict: SUPPORTED (confidence 0.54)
+  Reasoning: The evidence does not specifically mention Joe Lauzon or his post-fight bonus awards. [calibrator: p=0.54]
+  [Nate_Diaz::7] Nate_Diaz: Diaz is also tied with Joe Lauzon for the most UFC bonus awards , with 15 in total .
+  [Joe_Lauzon::1] Joe_Lauzon: He is tied with Nate Diaz as having the most post-fight bonus awards in UFC history .
+  [Anderson_Silva::2] Anderson_Silva: He has 13 post-fight bonuses , the second most in UFC history .
+
+Sub-claim 2 [composition]: That competitor is World Extreme Cagefighting.
+  depends_on: [1]
+  Verdict: SUPPORTED (confidence 0.51)
+  Reasoning: None of the evidence passages explicitly mention World Extreme Cagefighting or a competitor. [calibrator: p=0.51]
+  [World_Extreme_Cagefighting::0] World_Extreme_Cagefighting: World Extreme Cagefighting -LRB- WEC -RRB- was an American mixed martial arts -LRB- MMA -RRB- promotion founded in 2001 .
+  [The_Challenge-COLON-_Rivals_III::3] The_Challenge-COLON-_Rivals_III: competing .
+  [The_Challenge_XXX-COLON-_Dirty_30::2] The_Challenge_XXX-COLON-_Dirty_30: competing .
+
+---
+
+=== uid=e0a5abda  gold=REFUTED  predicted=REFUTED ===
+Claim: She's So Huge is the name of the song by a band featured in the 2001 American teen crime comedy film directed by Francine McDougall. A man played instruments in this band. This man also starred in "Someone's Knocking at the Door".
+Final verdict: REFUTED (confidence 0.58)
+Sub-claims: 4
+
+Sub-claim 0 [lookup]: She's So Huge is the name of a song.
+  Verdict: NEI (confidence 0.43)
+  Reasoning: The evidence does not provide enough information to confirm or refute the claim that 'She's So Huge' is the name of a song. [calibrator: p=0.43]
+  [Leslie_Dowdall::1] Leslie_Dowdall: She was the singer in
+  [Fifteen_-LRB-song-RRB-::0] Fifteen_-LRB-song-RRB-: `` Fifteen '' is a country pop song performed by American singer-songwriter Taylor Swift .
+  [The_Flys_-LRB-American_band-RRB-::11] The_Flys_-LRB-American_band-RRB-: A second single , `` She 's So Huge '' , peaked at No. 32 on Modern Rock Charts .
+
+Sub-claim 1 [lookup]: A band is featured in the 2001 American teen crime comedy film directed by Francine McDougall.
+  Verdict: REFUTED (confidence 0.60)
+  Reasoning: None of the evidence directly mentions a band or a film released in 2001 directed by Francine McDougall. [NLI-bidir: NEI→REFUTED on max_contra=1.00] [calibrator: p=0.60]
+  [King_Crimson::3] King_Crimson: The band has earned a large cult following .
+  [Snoop_Dogg's_Doggystyle::1] Snoop_Dogg's_Doggystyle: It was released in 2001 .
+  [The_Libertines::5] The_Libertines: The band gained some notoriety in the early 2000s .
+
+Sub-claim 2 [composition]: A man played instruments in the band mentioned.
+  depends_on: [0]
+  Verdict: SUPPORTED (confidence 0.64)
+  Reasoning: Passages 2, 5, and 8 clearly mention the man playing instruments in the band. [NLI-weak: max_entail=0.00 < 0.7] [calibrator: p=0.64]
+  [The_Dear_Hunter::2] The_Dear_Hunter: The band 's sound features a wide variety of instruments and styles .
+  [Marcus_Mumford::1] Marcus_Mumford: He also plays a number of instruments with the group , including guitar , drums and mandolin .
+  [Charles_Manson::18] Charles_Manson: Various musicians have covered some of his songs .
+
+Sub-claim 3 [composition]: The man also starred in 'Someone's Knocking at the Door'.
+  depends_on: [1]
+  Verdict: SUPPORTED (confidence 0.65)
+  Reasoning: None of the evidence passages explicitly mention 'Someone's Knocking at the Door' or provide information about which actors starred in it. [NLI-bidir: NEI→SUPPORTED on max_entail=0.99] [calibrator: p=0.65]
+  [Frederic_Zelnik::1] Frederic_Zelnik: He also appeared on screen as an actor .
+  [Jerry_Lewis::0] Jerry_Lewis: Jerry Lewis -LRB- born Joseph Levitch ; March 16 , 1926 -RRB- is an American actor , comedian , singer , film producer , film director , screenwriter and humanitarian .
+  [Cary_Grant::0] Cary_Grant: Cary Grant -LRB- born Archibald Alec Leach ; January 18 , 1904 -- November 29 , 1986 -RRB- was a British-American actor , known as one of classic Hollywood 's definitive leading men .
+
+---
+
+=== uid=0b9c0cbe  gold=SUPPORTED  predicted=REFUTED ===
+Claim: Scotland holds both this landmark and Cowie Castle The landmark is located in Catterline. The landmark is located in a mining village. Joan Eardley produced landscapes of the village.
+Final verdict: REFUTED (confidence 0.47)
+Sub-claims: 4
+
+Sub-claim 0 [lookup]: Scotland holds Cowie Castle.
+  Verdict: REFUTED (confidence 0.57)
+  Reasoning: Passages 2 and 6 provide information about Cowie Castle being in Scotland, but the other passages do not address the specific claim about Cowie Castle. [NLI-bidir: NEI→REFUTED on max_contra=1.00] [calibrator: p=0.57]
+  [United_Kingdom::0] United_Kingdom: The United Kingdom of Great Britain and Northern Ireland , commonly known as the United Kingdom -LRB- UK -RRB- or Britain , is a sovereign country in western Europe .
+  [Cowie_Castle::0] Cowie_Castle: Cowie Castle is a ruined fortress in Aberdeenshire , Scotland .
+  [A1_road_-LRB-Great_Britain-RRB-::1] A1_road_-LRB-Great_Britain-RRB-: It connects London , the capital of England and the United Kingdom , with Edinburgh , the capital of Scotland .
+
+Sub-claim 1 [lookup]: The landmark is located in Catterline.
+  Verdict: NEI (confidence 0.47)
+  Reasoning: None of the evidence directly addresses the location of the landmark in Catterline. [NLI-bidir: NEI→REFUTED on max_contra=0.96] [calibrator: p=0.47]
+  [Palace_of_Westminster::23] Palace_of_Westminster: The Elizabeth Tower , in particular , which is often referred to by the name of its main bell , Big Ben , is an iconic landmark of London and the United Kingdom in general , one of the most popular to...
+  [South_China_Sea::4] South_China_Sea: It is located
+  [Monticello::17] Monticello: It has been designated a National Historic Landmark .
+
+Sub-claim 2 [composition]: The landmark is located in a mining village.
+  depends_on: [0]
+  Verdict: NEI (confidence 0.41)
+  Reasoning: None of the evidence directly mentions the landmark being located in a mining village. [NLI-bidir: NEI→REFUTED on max_contra=1.00] [calibrator: p=0.41]
+  [Monticello::17] Monticello: It has been designated a National Historic Landmark .
+  [Mow_Cop::10] Mow_Cop: The village also has a long history of coal mining .
+  [Barton_Mine::8] Barton_Mine: They were mined in a geological feature forming the surrounding landscape , which hosts several other mines in the area .
+
+Sub-claim 3 [lookup]: Joan Eardley produced landscapes of the village.
+  depends_on: [2]
+  Verdict: NEI (confidence 0.45)
+  Reasoning: Passage 1 mentions Eardley's landscapes of the fishing village of Catterline, but passages 2-10 do not provide information about her producing landscapes of the village. [NLI-bidir: NEI→REFUTED on max_contra=0.99] [calibrator: p=0.45]
+  [Joan_Eardley::0] Joan_Eardley: Joan Kathleen Harding Eardley -LRB- 18 May 192116 August 1963 -RRB- was a British artist noted for her portraiture of street children in Glasgow and for her landscapes of the fishing village of Catter...
+  [Lake_Grove,_New_York::11] Lake_Grove,_New_York: The village also has a number of parks , recreational facilities , and a nature preserve for residents to enjoy .
+  [Kristian_Zahrtmann::5] Kristian_Zahrtmann: He also produced works of many other genres including landscapes , street scenes , folk scenes and portraits .
+
+---
+
+=== uid=8ae5dcf4  gold=REFUTED  predicted=NEI ===
+Claim: Christopher Kelly is a journalist for a magazine headquartered in Downtown Austin, Texas. That magazine had an article by Skip Hollandsworth that was adapted into the film  Love's Deadly Triangle: The Texas Cadet Murder.
+Final verdict: NEI (confidence 0.48)
+Sub-claims: 4
+
+Sub-claim 0 [lookup]: Christopher Kelly is a journalist.
+  Verdict: NEI (confidence 0.52)
+  Reasoning: None of the evidence directly states that Christopher Kelly is a journalist. [calibrator: p=0.52]
+  [William_Ridley_Wills::6] William_Ridley_Wills: He was well known as a novelist , poet , and journalist .
+  [The_Daily_Telegraph::0] The_Daily_Telegraph: The Daily Telegraph , commonly referred to simply as The Telegraph , is a national British daily broadsheet newspaper published in London by Telegraph Media Group and distributed across the United Kin...
+  [George_Ruby::9] George_Ruby: He worked as a journalist in that city .
+
+Sub-claim 1 [composition]: Christopher Kelly works for a magazine headquartered in Downtown Austin, Texas.
+  depends_on: [0]
+  Verdict: SUPPORTED (confidence 0.63)
+  Reasoning: None of the evidence directly mentions Christopher Kelly or a magazine headquartered in Downtown Austin, Texas. [calibrator: p=0.63]
+  [Texas_Monthly::0] Texas_Monthly: Texas Monthly is a monthly American magazine headquartered in Downtown Austin , Texas .
+  [Kathy_Cronkite::16] Kathy_Cronkite: She currently lives in Austin , TX .
+  [Charles_Hirshberg::1] Charles_Hirshberg: He primarily writes for large-circulation magazines .
+
+Sub-claim 2 [lookup]: The magazine has an article by Skip Hollandsworth.
+  Verdict: NEI (confidence 0.40)
+  Reasoning: None of the evidence passages mention Skip Hollandsworth or an article in the magazine. [calibrator: p=0.40]
+  [AARP_The_Magazine::0] AARP_The_Magazine: AARP The Magazine is an American bi-monthly magazine , published by the American Association of Retired People , AARP , which focuses on aging issues .
+  [ESPN_The_Magazine::0] ESPN_The_Magazine: ESPN The Magazine is a fortnightly sports magazine published by the ESPN sports network in Bristol , Connecticut in the United States .
+  [America_-LRB-magazine-RRB-::3] America_-LRB-magazine-RRB-: The magazine is also available online .
+
+Sub-claim 3 [composition]: Skip Hollandsworth's article was adapted into the film Love's Deadly Triangle: The Texas Cadet Murder.
+  depends_on: [2]
+  Verdict: NEI (confidence 0.38)
+  Reasoning: Passage 1 only states it was adapted into a movie, but does not specify the title or the source. [NLI-bidir: NEI→REFUTED on max_contra=1.00] [calibrator: p=0.38]
+  [Plymouth_Fury::15] Plymouth_Fury: It was later adapted into a movie .
+  [Love's_Deadly_Triangle-COLON-_The_Texas_Cadet_Murder::0] Love's_Deadly_Triangle-COLON-_The_Texas_Cadet_Murder: Love 's Deadly Triangle : The Texas Cadet Murder -LRB- DVD title : Swearing Allegiance -RRB- is a 1997 American drama television film based on real life murder of Adrianne Jones by Diane Zamora in Tex...
+  [Love's_Deadly_Triangle-COLON-_The_Texas_Cadet_Murder::2] Love's_Deadly_Triangle-COLON-_The_Texas_Cadet_Murder: The film was adapted from `` The Killer Cadets '' , an article in Texas Monthly by Skip Hollandsworth , and aired on NBC .
+
+---
+
+=== uid=259c831a  gold=REFUTED  predicted=NEI ===
+Claim: The largest lake in New Hampshire sits nine vertical feet lower than Lake Kanasatka.
+Final verdict: NEI (confidence 0.35)
+Sub-claims: 1
+
+Sub-claim 0 [comparison]: The largest lake in New Hampshire sits nine vertical feet lower than Lake Kanasatka.
+  Verdict: NEI (confidence 0.35)
+  Reasoning: Passages 8 and 9 provide conflicting information about the relative elevations of the lakes, but there is not enough consistent information to determine the claim. [NLI-bidir: NEI→REFUTED on max_contra=0.99] [calibrator: p=0.35]
+  [Lake_Winnipesaukee::0] Lake_Winnipesaukee: Lake Winnipesaukee -LRB- -LSB- ˌwɪnɪpəˈsɔːki -RSB- -RRB- is the largest lake in the U.S. state of New Hampshire , located in the Lakes Region .
+  [Lake_Kanasatka::0] Lake_Kanasatka: Lake Kanasatka is a 371 acre lake located in Carroll County in the Lakes Region of central New Hampshire , United States , in the town of Moultonborough .
+  [Lakes_Region_-LRB-New_Hampshire-RRB-::0] Lakes_Region_-LRB-New_Hampshire-RRB-: The Lakes Region of New Hampshire is the mid-state region surrounding Lake Winnipesaukee , Winnisquam Lake , Squam Lake , and Newfound Lake .
+
+---
+
+=== uid=434311e3  gold=SUPPORTED  predicted=NEI ===
+Claim: Rebecca Sugar created the scifi television series which has "Off Colors" as the third episode to the fifth season.
+Final verdict: NEI (confidence 0.40)
+Sub-claims: 2
+
+Sub-claim 0 [lookup]: Rebecca Sugar created a scifi television series.
+  Verdict: NEI (confidence 0.40)
+  Reasoning: None of the evidence passages explicitly state that Rebecca Sugar created a science fiction television series. [NLI-bidir: NEI→REFUTED on max_contra=1.00] [calibrator: p=0.40]
+  [Steven_Universe::0] Steven_Universe: Steven Universe is an American animated television series created by Rebecca Sugar for Cartoon Network .
+  [Steven_Universe::3] Steven_Universe: Sugar developed the series while working as a writer and storyboard artist on Adventure Time , and it premiered on November 4 , 2013 as Cartoon Network 's first animated series to be solely created by...
+  [Stranger_Things::0] Stranger_Things: Stranger Things is an American science fiction-horror web television series created , written , directed and co-executive produced by the Duffer Brothers , as well as co-executive-produced by Shawn Le...
+
+Sub-claim 1 [lookup]: The scifi television series has 'Off Colors' as the third episode to the fifth season.
+  depends_on: [0]
+  Verdict: NEI (confidence 0.41)
+  Reasoning: None of the evidence passages provide information about the episode order of 'Off Colors' in the fifth season of any series. [calibrator: p=0.41]
+  [Brooklyn_Nine-Nine::9] Brooklyn_Nine-Nine: On May 12 , 2017 , the series was renewed for a fifth season .
+  [The_Blacklist_-LRB-TV_series-RRB-::15] The_Blacklist_-LRB-TV_series-RRB-: On May 11 , 2017 , the series was renewed for a fifth season , while the spin-off was canceled the following day .
+  [The_Originals_-LRB-TV_series-RRB-::4] The_Originals_-LRB-TV_series-RRB-: On May 10 , 2017 , The CW renewed the series for a fifth season .
+
+---
+
+=== uid=226500e6  gold=SUPPORTED  predicted=NEI ===
+Claim: The English professional football club Ronnie Simpson was involved in, The Celtic Football Club, was founded in 1887.
+Final verdict: NEI (confidence 0.42)
+Sub-claims: 2
+
+Sub-claim 0 [lookup]: The Celtic Football Club was founded in 1887.
+  Verdict: NEI (confidence 0.41)
+  Reasoning: Passages 1-9 do not provide specific founding year information for Celtic Football Club. [NLI-bidir: NEI→REFUTED on max_contra=0.99] [calibrator: p=0.41]
+  [Celtic_F.C.::0] Celtic_F.C.: The Celtic Football Club -LRB- -LSB- ˈsɛltɪk -RSB- -RRB- is a professional football club based in Glasgow , Scotland , which plays in the Scottish Premiership .
+  [Celtic_F.C.::3] Celtic_F.C.: Celtic established itself within Scottish football , winning six successive league titles during the first decade of the 20th century .
+  [Celtic_F.C.::1] Celtic_F.C.: The club was founded in 1887 with the purpose of alleviating poverty in the immigrant Irish population in the East End of Glasgow .
+
+Sub-claim 1 [other]: Ronnie Simpson was involved with The Celtic Football Club.
+  Verdict: NEI (confidence 0.43)
+  Reasoning: None of the evidence passages explicitly mention Ronnie Simpson or his involvement with The Celtic Football Club. [NLI-bidir: NEI→REFUTED on max_contra=0.99] [calibrator: p=0.43]
+  [Celtic_F.C.::0] Celtic_F.C.: The Celtic Football Club -LRB- -LSB- ˈsɛltɪk -RSB- -RRB- is a professional football club based in Glasgow , Scotland , which plays in the Scottish Premiership .
+  [Manchester_United_F.C.::20] Manchester_United_F.C.: Manchester United is one of the most widely supported football clubs in the world , and holds several rivalries with other clubs , most notably with Liverpool , Manchester City and Leeds United , and...
+  [Stalybridge_Celtic_F.C.::0] Stalybridge_Celtic_F.C.: Stalybridge Celtic Football Club is an English football club based in Stalybridge , Greater Manchester .
+
+---

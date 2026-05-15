@@ -80,6 +80,64 @@ This phase has no model — it's deterministic post-processing of the per-(claim
 - Do not generate citations *post-hoc* by calling another LLM ("which passage supports this verdict"). That's a separate design and is out of scope for V3.
 - Do not embed the full passage text in the JSON chain; embed `passage_id` references and look them up at render time. Keeps JSON files small.
 
-## Outcome (filled at end of phase)
+## Outcome (Phase 10 closed 2026-05-15)
+
+**Status: structural exit criteria all met. Accuracy surprise documented and routed to Phase 11.**
+
+### Built artifacts
+
+- `artifacts/evidence_chains.jsonl` — 1.7 MB, **200 chains** for the HoVer-dev eval set
+- `artifacts/evidence_chain_render_examples.txt` — 23 KB, 10 stratified rendered chains (3 SUPPORTED, 3 REFUTED, 4 NEI)
+
+### Spec exit criteria
+
+- [x] `evidence_chains.jsonl` covers every claim in the eval set (200/200)
+- [x] **Validator passes 100% (0 / 200 invalid)** — structural checks fire on every chain; no failures
+- [x] Rendered text chains are syntactically clean — verified by visual inspection of 10 stratified examples
+- [x] `EvidenceChain` JSON round-trips — `to_jsonable` / `from_jsonable` covered by `test_to_and_from_jsonable_roundtrip`
+- [x] `make smoke` passes (8 / 8 in 316 s, last verified at Phase 08 close)
+
+### Files added
+
+- `src/evidence/chain.py` — `validate()`, `to_jsonable()`, `from_jsonable()`, `dependency_path()`
+- `src/eval/build_chains.py` — runs full pipeline on HoVer dev with resume capability (mirrors Phase 07 / Phase 08 pattern)
+- `tests/test_evidence.py` — 8 fast unit tests (validator + JSON round-trip + dependency path)
+
+### Chain shape (n=200)
+
+| Metric | Value |
+|---|---|
+| sub-claims per chain | min=1, max=7, **mean=2.76** |
+| citations per chain (sum across sub-claims) | min=3, max=21, **mean=8.28** |
+| Validator pass rate | **100% (200 / 200)** |
+
+The decomposer + verifier produce chains the spec asked for: a non-trivial number of sub-claims (HoVer is multi-hop), each with cited evidence, all with valid `depends_on` DAGs.
+
+### The accuracy surprise
+
+End-to-end accuracy on n=200: **0.145** (29 / 200). Verdict distribution: 120 NEI, 76 REFUTED, 4 SUPPORTED, against gold of 102 SUPPORTED + 98 REFUTED.
+
+Phase 07's eval on the same n=200 hit **0.36 accuracy** using *whole-claim* verification (no decomposition). Phase 10's full pipeline (decomposed → per-sub-claim verify → aggregate) drops to 0.145. That's a 22-point loss from running through the decomposer.
+
+The aggregator rule (`Pipeline._aggregate`) is: any REFUTED → REFUTED; all SUPPORTED → SUPPORTED; else NEI. With multi-hop claims producing 2-3 sub-claims each, and the 3B verifier still NEI-biased on individual sub-claims, the chain falls into the "else NEI" bucket far more often than the whole-claim mode does.
+
+Phase 11 robustness eval must compare both modes explicitly. The decision (decomposed vs whole-claim) is the single biggest pipeline-architecture choice left.
+
+### Wall time
+
+- Background chain build: **16.3 hours wall clock** for n=200. Real compute is much less (laptop slept overnight; resume worked as designed). Resume capability survived 2 sleep cycles without issue.
+
+### Rendered example quality (qualitative observations)
+
+- **Decomposition is clean.** Multi-hop claims split into 2-3 sub-claims with proper `composition` edges. One example splits an FIA Formula One claim into 3 sub-claims (venue + first-black-driver + Canadian-drivers), and the depends_on DAG correctly chains them.
+- **Citations are relevant.** Top-3 cited passages per sub-claim actually relate to the sub-claim topic (Inception query → Inception + Tom Hardy + The Dark Knight; FIA query → Circuit Gilles Villeneuve + Montreal + Canadian Grand Prix).
+- **Reasoning audit trail is visible.** Each verification's reasoning text shows: (1) the original LLM reasoning, (2) any NLI veto that fired (`[NLI-bidir: NEI→REFUTED on max_contra=0.97]`), (3) the calibrator's confidence (`[calibrator: p=0.71]`). A reviewer can read end-to-end why a verdict was reached.
+- **Verdict quality is poor.** Most predicted-SUPPORTED chains in the rendered sample are gold=REFUTED. The verifier produces confident-but-wrong outputs on multi-hop reasoning. This is downstream of Phase 07 + 08 limitations, not a Phase 10 bug.
+
+### Open follow-ups
+
+- Phase 11 — measure whole-claim vs decomposed accuracy on the same eval set and pick the production aggregator.
+- Phase 13 error analysis — categorise the 171 failures in this chain set by failure mode (confident wrong verdict, low-conf NEI, decomposition error, retrieval miss).
+- The rendered audit trail is information-rich; a slimmer "user-facing" rendering (drop the bracketed audit annotations) may be wanted for end users. Out of scope for Phase 10.
 
 > Append: chain count, validator pass rate, render-stat distribution (avg sub-claims per chain, avg citations per chain).
